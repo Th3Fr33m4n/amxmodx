@@ -1,0 +1,121 @@
+===== Information about the build process: =====
+Build was run at 2020-06-02 14:18:44 on host 'viking60'
+
+Build was done on  Linux-2.6.39-400.308.1.el6uek.i686 using i686
+Build was done using cmake 2.8.12 
+
+===== Compiler flags used (from the 'sql/' subdirectory): =====
+# compile C with /usr/bin/cc
+# compile CXX with /usr/bin/c++
+C_FLAGS =  -fPIC -Wall -Wextra -Wformat-security -Wvla -Wwrite-strings -Wdeclaration-after-statement -O3 -g -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing -fno-expensive-optimizations -DDBUG_OFF -I/export/home/pb2/build/sb_0-39489236-1591097239.64/release/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/extra/rapidjson/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/release/libbinlogevents/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/libbinlogevents/export -isystem /export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/zlib -isystem /export/home/pb2/build/sb_0-39489236-1591097239.64/release/zlib -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/sql/conn_handler -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/libbinlogevents/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/sql -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/sql/auth -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/regex -I/export/home/pb2/build/sb_0-39489236-1591097239.64/dep1/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/release/sql -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/extra/lz4 -isystem /export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/include/boost_1_59_0/patches -isystem /usr/global/share/boost_1_59_0    -DHAVE_STATIC_OPENSSL -DHAVE_OPENSSL
+C_DEFINES = -DBOOST_GEOMETRY_SQRT_CHECK_FINITENESS -DHAVE_CONFIG_H -DHAVE_REPLICATION -DHAVE_TLSv13 -DMYSQL_SERVER -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE
+CXX_FLAGS =  -fPIC -Wall -Wextra -Wformat-security -Wvla -Woverloaded-virtual -Wno-unused-parameter -O3 -g -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing -fno-expensive-optimizations -DDBUG_OFF -I/export/home/pb2/build/sb_0-39489236-1591097239.64/release/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/extra/rapidjson/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/release/libbinlogevents/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/libbinlogevents/export -isystem /export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/zlib -isystem /export/home/pb2/build/sb_0-39489236-1591097239.64/release/zlib -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/sql/conn_handler -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/libbinlogevents/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/sql -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/sql/auth -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/regex -I/export/home/pb2/build/sb_0-39489236-1591097239.64/dep1/include -I/export/home/pb2/build/sb_0-39489236-1591097239.64/release/sql -I/export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/extra/lz4 -isystem /export/home/pb2/build/sb_0-39489236-1591097239.64/mysql-5.7.31/include/boost_1_59_0/patches -isystem /usr/global/share/boost_1_59_0    -DHAVE_STATIC_OPENSSL -DHAVE_OPENSSL
+CXX_DEFINES = -DBOOST_GEOMETRY_SQRT_CHECK_FINITENESS -DHAVE_CONFIG_H -DHAVE_REPLICATION -DHAVE_TLSv13 -DMYSQL_SERVER -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE
+
+Pointer size: 4
+
+===== Feature flags used: =====
+-- Cache values
+BOOST_INCLUDE_DIR:PATH=/usr/global/share/boost_1_59_0
+BUILD_TESTING:BOOL=ON
+BUNDLE_MECAB:BOOL=ON
+CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
+CMAKE_BUILD_TYPE:STRING=RelWithDebInfo
+CMAKE_INSTALL_PREFIX:PATH=/usr/local/mysql
+COMMUNITY_BUILD:BOOL=ON
+CRYPTO_LIBRARY:FILEPATH=/export/home/pb2/build/sb_0-39489236-1591097239.64/dep1/lib/libcrypto.a
+CTAGS_EXECUTABLE:FILEPATH=/usr/bin/ctags
+DEB_CHANGELOG_TIMESTAMP:STRING=Tue, 02 Jun 2020 13:45:00 +0200
+DEB_CODENAME:STRING=
+DOWNLOAD_BOOST:BOOL=OFF
+DOWNLOAD_BOOST_TIMEOUT:STRING=600
+ENABLED_PROFILING:BOOL=ON
+ENABLE_DOWNLOADS:BOOL=OFF
+ENABLE_GCOV:BOOL=OFF
+ENABLE_GPROF:BOOL=OFF
+ENABLE_MEMCACHED_SASL:BOOL=OFF
+ENABLE_MEMCACHED_SASL_PWDB:BOOL=OFF
+EVENT__COVERAGE:BOOL=OFF
+EVENT__DISABLE_BENCHMARK:BOOL=OFF
+EVENT__DISABLE_CLOCK_GETTIME:BOOL=OFF
+EVENT__DISABLE_DEBUG_MODE:BOOL=OFF
+EVENT__DISABLE_GCC_WARNINGS:BOOL=OFF
+EVENT__DISABLE_MM_REPLACEMENT:BOOL=OFF
+EVENT__DISABLE_OPENSSL:BOOL=OFF
+EVENT__DISABLE_REGRESS:BOOL=OFF
+EVENT__DISABLE_SAMPLES:BOOL=OFF
+EVENT__DISABLE_TESTS:BOOL=OFF
+EVENT__DISABLE_THREAD_SUPPORT:BOOL=OFF
+EVENT__ENABLE_GCC_FUNCTION_SECTIONS:BOOL=OFF
+EVENT__ENABLE_GCC_HARDENING:BOOL=OFF
+EVENT__ENABLE_GCC_WARNINGS:BOOL=OFF
+EVENT__ENABLE_VERBOSE_DEBUG:BOOL=OFF
+EVENT__FORCE_KQUEUE_CHECK:BOOL=OFF
+EVENT__LIBRARY_TYPE:STRING=DEFAULT
+EXECUTABLE_OUTPUT_PATH:PATH=
+FEATURE_SET:STRING=community
+HAVE_LIBEVENT2:BOOL=1
+INSTALL_LAYOUT:STRING=STANDALONE
+INSTALL_PKGCONFIGDIR:PATH=
+LBER_SYSTEM_LIBRARY:FILEPATH=/usr/lib/liblber.so
+LDAP_SYSTEM_LIBRARY:FILEPATH=/usr/lib/libldap_r.so
+LIBRARY_OUTPUT_PATH:PATH=
+LOCAL_BOOST_DIR:FILEPATH=/usr/global/share/boost_1_59_0
+LOCAL_BOOST_ZIP:FILEPATH=LOCAL_BOOST_ZIP-NOTFOUND
+LOCAL_GMOCK_ZIP:FILEPATH=LOCAL_GMOCK_ZIP-NOTFOUND
+MECAB_INCLUDE_DIR:PATH=/export/home/pb2/build/sb_0-39489236-1591097239.64/mecab-0.996-el6-x86-32bit/include
+MECAB_LIBRARY:FILEPATH=/export/home/pb2/build/sb_0-39489236-1591097239.64/mecab-0.996-el6-x86-32bit/lib/libmecab.a
+MERGE_UNITTESTS:BOOL=ON
+MUTEXTYPE:STRING=event
+MYSQL_DATADIR:PATH=/usr/local/mysql/data
+MYSQL_KEYRINGDIR:PATH=/usr/local/mysql/keyring
+MYSQL_MAINTAINER_MODE:BOOL=OFF
+MY_PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+OPENSSL_INCLUDE_DIR:PATH=/export/home/pb2/build/sb_0-39489236-1591097239.64/dep1/include
+OPENSSL_LIBRARY:FILEPATH=/export/home/pb2/build/sb_0-39489236-1591097239.64/dep1/lib/libssl.a
+OPENSSL_ROOT_DIR:PATH=/export/home/pb2/build/sb_0-39489236-1591097239.64/dep1
+OPTIMIZER_TRACE:BOOL=ON
+REPRODUCIBLE_BUILD:BOOL=OFF
+RPC_INCLUDE_DIRS:PATH=/usr/include
+SASL_SYSTEM_LIBRARY:FILEPATH=/usr/lib/libsasl2.so
+TMPDIR:PATH=P_tmpdir
+WITH_ARCHIVE_STORAGE_ENGINE:BOOL=ON
+WITH_ASAN:BOOL=OFF
+WITH_ASAN_SCOPE:BOOL=OFF
+WITH_AUTHENTICATION_LDAP:BOOL=OFF
+WITH_BLACKHOLE_STORAGE_ENGINE:BOOL=ON
+WITH_BOOST:PATH=/usr/global/share
+WITH_CLIENT_PROTOCOL_TRACING:BOOL=ON
+WITH_DEBUG:BOOL=OFF
+WITH_DEFAULT_COMPILER_OPTIONS:BOOL=ON
+WITH_DEFAULT_FEATURE_SET:BOOL=ON
+WITH_EDITLINE:STRING=bundled
+WITH_EMBEDDED_SERVER:BOOL=ON
+WITH_EMBEDDED_SHARED_LIBRARY:BOOL=OFF
+WITH_EXTRA_CHARSETS:STRING=all
+WITH_FEDERATED_STORAGE_ENGINE:BOOL=ON
+WITH_INNODB_EXTRA_DEBUG:BOOL=OFF
+WITH_INNODB_MEMCACHED:BOOL=1
+WITH_LDAP:STRING=system
+WITH_LIBEVENT:STRING=bundled
+WITH_LIBWRAP:BOOL=OFF
+WITH_LZ4:STRING=bundled
+WITH_MECAB:STRING=/export/home/pb2/build/sb_0-39489236-1591097239.64/mecab-0.996-el6-x86-32bit
+WITH_MECAB_PATH:PATH=/export/home/pb2/build/sb_0-39489236-1591097239.64/mecab-0.996-el6-x86-32bit
+WITH_MSAN:BOOL=OFF
+WITH_NGRAM_PARSER:BOOL=ON
+WITH_NUMA:BOOL=ON
+WITH_PARTITION_STORAGE_ENGINE:BOOL=ON
+WITH_PIC:BOOL=ON
+WITH_RAPID:BOOL=ON
+WITH_SASL:STRING=system
+WITH_SSL_PATH:PATH=/export/home/pb2/build/sb_0-39489236-1591097239.64/dep1
+WITH_SYSTEMD:BOOL=OFF
+WITH_TEST_TRACE_PLUGIN:BOOL=OFF
+WITH_UBSAN:BOOL=OFF
+WITH_UNIT_TESTS:BOOL=ON
+WITH_VALGRIND:BOOL=OFF
+WITH_ZLIB:STRING=bundled
+XPLUGIN_LOG_PROTOBUF:STRING=1
+
+===== EOF =====
