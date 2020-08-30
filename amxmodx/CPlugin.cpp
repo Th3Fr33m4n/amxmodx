@@ -119,7 +119,7 @@ int CPluginMngr::loadPluginsFromFile(const char* filename, bool warn)
 		bool skip = false;
 		for (block_iter = m_BlockList.begin();
 			 block_iter != m_BlockList.end();
-			 block_iter++)
+			 ++block_iter)
 		{
 			if ((*block_iter)->compare(pluginName) == 0)
 			{
@@ -525,7 +525,7 @@ char *CPluginMngr::ReadIntoOrFromCache(const char *file, size_t &bufsize)
 	List<plcache_entry *>::iterator iter;
 	plcache_entry *pl;
 
-	for (iter=m_plcache.begin(); iter!=m_plcache.end(); iter++)
+	for (iter=m_plcache.begin(); iter!=m_plcache.end(); ++iter)
 	{
 		pl = (*iter);
 		if (pl->path.compare(file) == 0)
@@ -575,7 +575,7 @@ void CPluginMngr::InvalidateCache()
 	List<plcache_entry *>::iterator iter;
 	plcache_entry *pl;
 
-	for (iter=m_plcache.begin(); iter!=m_plcache.end(); iter++)
+	for (iter=m_plcache.begin(); iter!=m_plcache.end(); ++iter)
 	{
 		pl = (*iter);
 		delete [] pl->buffer;
@@ -591,7 +591,7 @@ void CPluginMngr::InvalidateFileInCache(const char *file, bool freebuf)
 	List<plcache_entry *>::iterator iter;
 	plcache_entry *pl;
 
-	for (iter=m_plcache.begin(); iter!=m_plcache.end(); iter++)
+	for (iter=m_plcache.begin(); iter!=m_plcache.end(); ++iter)
 	{
 		pl = (*iter);
 		if (pl->path.compare(file) == 0)

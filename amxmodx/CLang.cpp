@@ -171,7 +171,7 @@ CLangMngr::CLang::~CLang()
 void CLangMngr::CLang::Clear()
 {
 	THash<int, defentry>::iterator iter;
-	for (iter=m_LookUpTable.begin(); iter!=m_LookUpTable.end(); iter++)
+	for (iter=m_LookUpTable.begin(); iter!=m_LookUpTable.end(); ++iter)
 	{
 		if (iter->val.definition)
 		{
@@ -568,13 +568,13 @@ void CLangMngr::Clear()
 	
 	for (i = 0; i < m_Languages.length(); i++)
 	{
-		if (m_Languages[i])
+//		if (m_Languages[i])
 			delete m_Languages[i];
 	}
 
 	for (i = 0; i < KeyList.length(); i++)
 	{
-		if (KeyList[i])
+//		if (KeyList[i])
 			delete KeyList[i];
 	}
 

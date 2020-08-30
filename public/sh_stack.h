@@ -118,7 +118,7 @@
 
 		~CStack()
 		{
-			if (m_Elements)
+//			if (m_Elements)
 				delete [] m_Elements;
 		}
 		
@@ -126,7 +126,7 @@
 		{
 			if (m_AllocatedSize < other.m_AllocatedSize)
 			{
-				if (m_Elements)
+//				if (m_Elements)
 					delete [] m_Elements;
 				m_Elements = new T[other.m_AllocatedSize];
 				m_AllocatedSize = other.m_AllocatedSize;

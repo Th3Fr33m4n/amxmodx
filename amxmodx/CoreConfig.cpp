@@ -175,7 +175,7 @@ bool CoreConfig::ExecuteAutoConfig(CPluginMngr::CPlugin *plugin, AutoConfig *con
 
 			fprintf(fp, "\n\n");
 
-			for (auto iter = list->begin(); iter != list->end(); iter++)
+			for (auto iter = list->begin(); iter != list->end(); ++iter)
 			{
 				auto info = (*iter);
 

@@ -79,7 +79,7 @@
 		List(const List &src) : m_Head(_Initialize()), m_Size(0)
 		{
 			iterator iter;
-			for (iter=src.begin(); iter!=src.end(); iter++)
+			for (iter=src.begin(); iter!=src.end(); ++iter)
 				push_back( (*iter) );
 		}
 		~List()
@@ -277,7 +277,7 @@
 		iterator find(const U & equ)
 		{
 			iterator iter;
-			for (iter=begin(); iter!=end(); iter++)
+			for (iter=begin(); iter!=end(); ++iter)
 			{
 				if ( (*iter) == equ )
 					return iter;
@@ -288,7 +288,7 @@
 		{
 			clear();
 			iterator iter;
-			for (iter=src.begin(); iter!=src.end(); iter++)
+			for (iter=src.begin(); iter!=src.end(); ++iter)
 				push_back( (*iter) );
 			return *this;
 		}

@@ -134,7 +134,7 @@ size_t ClearLibraries(LibSource src)
 			iter = g_libraries.erase(iter);
 			count++;
 		} else {
-			iter++;
+			++iter;
 		}
 	}
 
@@ -157,7 +157,7 @@ size_t RemoveLibraries(void *parent)
 			iter = g_libraries.erase(iter);
 			count++;
 		} else {
-			iter++;
+			++iter;
 		}
 	}
 
@@ -169,7 +169,7 @@ bool FindLibrary(const char *name, LibType type)
 	List<Library *>::iterator iter;
 	Library *lib;
 
-	for (iter = g_libraries.begin(); iter != g_libraries.end(); iter++)
+	for (iter = g_libraries.begin(); iter != g_libraries.end(); ++iter)
 	{
 		lib = (*iter);
 		if (lib->type != type)
@@ -201,7 +201,7 @@ LibError RunLibCommand(const LibDecoder *enc)
 			expect = LibType_Class;
 
 		/** see if it exists */
-		for (; iter != end; iter++)
+		for (; iter != end; ++iter)
 		{
 			lib = (*iter);
 			if (lib->type != expect)
@@ -231,7 +231,7 @@ LibError RunLibCommand(const LibDecoder *enc)
 			expect = LibType_Class;
 
 		/** see if it exists */
-		for (; iter != end; iter++)
+		for (; iter != end; ++iter)
 		{
 			lib = (*iter);
 			if (lib->type != expect)

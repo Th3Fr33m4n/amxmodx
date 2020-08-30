@@ -108,13 +108,13 @@
 					while (iter != end)
 					{
 						delete (*iter);
-						iter++;
+						++iter;
 					}
 					delete m_Buckets[i];
 					m_Buckets[i] = NULL;
 				}
 			}
-			if (m_Buckets)
+//			if (m_Buckets)
 				delete [] m_Buckets;
 			m_Buckets = NULL;
 			m_numBuckets = 0;
@@ -134,7 +134,7 @@
 				m_items++;
 			} else {
 				typename List<THashNode *>::iterator iter;
-				for (iter=m_Buckets[place]->begin(); iter!=m_Buckets[place]->end(); iter++)
+				for (iter=m_Buckets[place]->begin(); iter!=m_Buckets[place]->end(); ++iter)
 				{
 					if (CompareAlt(ukey, (*iter)->key) == 0)
 						return (*iter)->val;
@@ -161,7 +161,7 @@
 				m_items++;
 			} else {
 				typename List<THashNode *>::iterator iter;
-				for (iter=m_Buckets[place]->begin(); iter!=m_Buckets[place]->end(); iter++)
+				for (iter=m_Buckets[place]->begin(); iter!=m_Buckets[place]->end(); ++iter)
 				{
 					if (Compare((*iter)->key, key) == 0)
 						return (*iter);
@@ -200,7 +200,7 @@
 					if (m_Buckets[i])
 					{
 						//go through the list of items
-						for (iter = m_Buckets[i]->begin(); iter != m_Buckets[i]->end(); iter++)
+						for (iter = m_Buckets[i]->begin(); iter != m_Buckets[i]->end(); ++iter)
 						{
 							pHashNode = (*iter);
 							//rehash it with the new bucket filter
@@ -320,7 +320,7 @@
 						end = true;
 				} else {
 					if (iter != hash->m_Buckets[curbucket]->end())
-						iter++;
+						++iter;
 					if (iter == hash->m_Buckets[curbucket]->end())
 					{
 						int oldbucket = curbucket;
@@ -419,7 +419,7 @@
 						end = true;
 				} else {
 					if (iter != hash->m_Buckets[curbucket]->end())
-						iter++;
+						++iter;
 					if (iter == hash->m_Buckets[curbucket]->end())
 					{
 						int oldbucket = curbucket;
@@ -475,7 +475,7 @@
 		{
 			iterator b = begin();
 			iterator e = end();
-			for (iterator iter = b; iter != e; iter++)
+			for (iterator iter = b; iter != e; ++iter)
 			{
 				if ( (*iter).key == u )
 					return iter;
@@ -487,7 +487,7 @@
 		{
 			iterator b = begin();
 			iterator e = end();
-			for (iterator iter = b; iter != e; iter++)
+			for (iterator iter = b; iter != e; ++iter)
 			{
 				if ( (*iter).key == u )
 					return iter;

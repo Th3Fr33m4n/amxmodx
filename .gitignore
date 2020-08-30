@@ -86,3 +86,4 @@ plugins/compile.dat
 plugins/compiled/
 
 build_deps/
+mysql-5.7/lib/libmysqld.a

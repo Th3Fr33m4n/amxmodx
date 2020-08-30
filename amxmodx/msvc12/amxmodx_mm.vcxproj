@@ -13,19 +13,20 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2BF64D1A-AC89-41B0-9D02-FB8CB610F850}</ProjectGuid>
     <RootNamespace>amxmodx</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='JITRelease|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='JITDebug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -119,7 +120,7 @@ md -p JIT 2&gt;NUL
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
-      <AdditionalIncludeDirectories>..\;..\..\public;..\..\public\memtools;..\..\third_party;..\..\third_party\zlib;..\..\third_party\hashing;..\..\third_party\utf8rewind;..\..\third_party;..\..\third_party\hashing;..\..\public\sdk;..\..\public\amtl;..\..\third_party;..\..\third_party\hashing;$(METAMOD)\metamod;$(HLSDK)\common;$(HLSDK)\engine;$(HLSDK)\dlls;$(HLSDK)\pm_shared;$(HLSDK)\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;..\..\public;..\..\public\memtools;..\..\third_party;..\..\third_party\zlib;..\..\third_party\hashing;..\..\third_party\utf8rewind;..\..\public\sdk;..\..\public\amtl;..\..\metamod-bu\metamod;..\..\hlsdk-bu\common;..\..\hlsdk-bu\engine;..\..\hlsdk-bu\dlls;..\..\hlsdk-bu\pm_shared;..\..\hlsdk-bu\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;UTF8PROC_EXPORTS;NDEBUG;_WINDOWS;_USRDLL;amxmodx_EXPORTS;JIT;ASM32;PAWN_CELL_SIZE=32;HAVE_STDINT_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <StringPooling>true</StringPooling>
@@ -135,6 +136,7 @@ md -p JIT 2&gt;NUL
       <CompileAs>Default</CompileAs>
       <ShowIncludes>false</ShowIncludes>
       <PrecompiledHeaderFile>amxmodx.h</PrecompiledHeaderFile>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -159,10 +161,10 @@ md -p JIT 2&gt;NUL
     <PreBuildEvent>
       <Command>cd ..
 md -p JIT 2&gt;NUL
-%NASM_PATH%nasm.exe -f win32 helpers-x86.asm -o JIT/helpers-x86.obj 
-%NASM_PATH%nasm.exe -f win32 natives-x86.asm -o JIT/natives-x86.obj 
-%NASM_PATH%nasm.exe -f win32 amxexecn.asm -o JIT/amxexecn.obj 
-%NASM_PATH%nasm.exe -O0 -f win32 amxjitsn.asm -o JIT/amxjitsn.obj</Command>
+C:\Users\User\AppData\Local\bin\NASM\nasm.exe -f win32 helpers-x86.asm -o JIT/helpers-x86.obj 
+C:\Users\User\AppData\Local\bin\NASM\nasm.exe -f win32 natives-x86.asm -o JIT/natives-x86.obj 
+C:\Users\User\AppData\Local\bin\NASM\nasm.exe -f win32 amxexecn.asm -o JIT/amxexecn.obj 
+C:\Users\User\AppData\Local\bin\NASM\nasm.exe -O0 -f win32 amxjitsn.asm -o JIT/amxjitsn.obj</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

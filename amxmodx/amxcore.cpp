@@ -99,7 +99,7 @@ static void list_setitem(proplist *item,cell id,char *name,cell value)
   assert(item!=NULL);
   if ((ptr=(char *)malloc(strlen(name)+1))==NULL)
     return;
-  if (item->name!=NULL)
+//  if (item->name!=NULL)
     free(item->name);
   strcpy(ptr,name);
   item->name=ptr;
@@ -114,7 +114,7 @@ static proplist *list_finditem(proplist *root,cell id,char *name,cell value,
 
   /* check whether to find by name or by value */
   assert(name!=NULL);
-  if (strlen(name)>0) {
+  if (name[0] != '\0') {
     /* find by name */
     while (item!=NULL && (item->id!=id || stricmp(item->name,name)!=0)) {
       prev=item;
@@ -344,7 +344,7 @@ static cell AMX_NATIVE_CALL getproperty(AMX *amx,cell *params)
   name=MakePackedString(cstr);
   item=list_finditem(&proproot,params[1],name,params[3],NULL);
   /* if list_finditem() found the value, store the name */
-  if (item!=NULL && item->value==params[3] && strlen(name)==0) {
+  if (item!=NULL && item->value==params[3] && name[0] != '\0') {
     int needed=(strlen(item->name)+sizeof(cell)-1)/sizeof(cell);     /* # of cells needed */
     if (verify_addr(amx,(cell)(params[4]+needed))!=AMX_ERR_NONE) {
       free(name);
@@ -373,7 +373,7 @@ static cell AMX_NATIVE_CALL setproperty(AMX *amx,cell *params)
     amx_RaiseError(amx,AMX_ERR_MEMORY);
   } else {
     prev=item->value;
-    if (strlen(name)==0) {
+    if (name[0] == '\0') {
       free(name);
       amx_GetAddr(amx,params[4],&cstr);
       name=MakePackedString(cstr);

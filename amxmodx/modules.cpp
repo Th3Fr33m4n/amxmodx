@@ -566,15 +566,15 @@ int unload_amxscript(AMX* amx, void** program)
 #endif
 
 	Debugger *pDebugger = (Debugger *)amx->userdata[UD_DEBUGGER];
-	if (pDebugger)
+//	if (pDebugger)
 		delete pDebugger;
 
 	Handler *pHandler = (Handler *)amx->userdata[UD_HANDLER];
-	if (pHandler)
+//	if (pHandler)
 		delete pHandler;
 
 	optimizer_s *opt = (optimizer_s *)amx->usertags[UT_OPTIMIZER];
-	if (opt)
+//	if (opt)
 		delete opt;
 
 	for (auto script : g_loadedscripts)
@@ -1021,7 +1021,7 @@ void detachReloadModules()
 
 			continue;
 		}
-		moduleIter++;
+		++moduleIter;
 	}
 }
 
