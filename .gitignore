@@ -87,3 +87,4 @@ plugins/compiled/
 
 build_deps/
 mysql-5.7/lib/libmysqld.a
+mysql-5.7/lib/mysqlserver.lib
