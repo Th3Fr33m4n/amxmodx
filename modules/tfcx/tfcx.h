@@ -84,7 +84,7 @@ void Client_AmmoPickup(void*);
 void Client_ScoreInfo(void*);
 void Client_ResetHUD(void*);
 
-bool ignoreBots (edict_t *pEnt, edict_t *pOther = NULL );
+bool ignoreBots (edict_t *pEnt, edict_t *pOther = nullptr );
 bool isModuleActive();
 bool util_strncmp( const char *sz1, const char *sz2, int size);
 

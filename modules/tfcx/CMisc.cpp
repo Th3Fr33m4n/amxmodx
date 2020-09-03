@@ -23,12 +23,12 @@
 void Grenades::put( edict_t* grenade, float time, int type, CPlayer* player  )
 {
   Obj* a = new Obj;
-  if ( a == 0 ) return;
+  if ( a == nullptr ) return;
   a->player = player;
   a->grenade = grenade;
   a->time = gpGlobals->time + time;
   a->type = type;
-  a->prev = 0;
+  a->prev = nullptr;
   a->next = head;
   if ( head ) head->prev = a;
   head = a;
@@ -82,14 +82,14 @@ void CPlayer::Disconnect(){
 		return;
 
 	rank->updatePosition( &life );
-	rank = 0;
+	rank = nullptr;
 }
 
 void CPlayer::PutInServer(){
 
 	ingame = true;
 
-	if ((int)tfcstats_rankbots->value == 0 && IsBot()) // ignoreBots() can't be used as bot's flags are not set yet.
+	if (static_cast<int>(tfcstats_rankbots->value) == 0 && IsBot()) // ignoreBots() can't be used as bot's flags are not set yet.
 		return;
 
 	restartStats();
@@ -97,9 +97,9 @@ void CPlayer::PutInServer(){
 	const char* name = STRING(pEdict->v.netname);
 	const char* unique = name;
 	bool isip = false;
-	switch((int)tfcstats_rank->value) {
+	switch(static_cast<int>(tfcstats_rank->value)) {
 	case 1: 
-		if ( (unique = GETPLAYERAUTHID(pEdict)) == 0 )
+		if ( (unique = GETPLAYERAUTHID(pEdict)) == nullptr )
 			unique = name; // failed to get authid
 		break;
 	case 2:
@@ -120,7 +120,7 @@ void CPlayer::Connect(const char* address ){
 			break;
 		}
 	}
-	rank = 0;
+	rank = nullptr;
 	clearStats = 0.0f;
 }
 
@@ -139,7 +139,7 @@ void CPlayer::Init( int pi, edict_t* pe )
     index = pi;
 	current = 0;
 	clearStats = 0.0f;
-	rank = 0;
+	rank = nullptr;
 	ingame = false;
 	bot = false;
 }
@@ -275,7 +275,7 @@ void CPlayer::saveShot(int weapon)
 }
 
 void CPlayer::killPlayer(){
-	pEdict->v.dmg_inflictor = NULL;
+	pEdict->v.dmg_inflictor = nullptr;
 	pEdict->v.health = 0;
 	pEdict->v.deadflag = DEAD_RESPAWNABLE;
 	pEdict->v.weaponmodel = 0;

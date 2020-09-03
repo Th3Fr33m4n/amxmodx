@@ -72,14 +72,14 @@ struct sUserMsg {
 	{ "AmmoX" , &gmsgAmmoX, Client_AmmoX , false },
 	{ "ScoreInfo" , &gmsgScoreInfo, Client_ScoreInfo, false},
 	{ "AmmoPickup" , &gmsgAmmoPickup, Client_AmmoPickup , false },
-	{ 0 , 0,0,false }
+	{ nullptr , nullptr,nullptr,false }
 };
 
-const char* get_localinfo( const char* name , const char* def = 0 )
+const char* get_localinfo( const char* name , const char* def = nullptr )
 {
-	const char* b = LOCALINFO( (char*)name );
-	if (((b==0)||(*b==0)) && def )
-		SET_LOCALINFO((char*)name,(char*)(b = def) );
+	const char* b = LOCALINFO( const_cast<char*>(name) );
+	if (((b==nullptr)||(*b==0)) && def )
+		SET_LOCALINFO(const_cast<char*>(name),const_cast<char*>(b = def) );
 	return b;
 }
 
@@ -107,7 +107,7 @@ int RegUserMsg_Post(const char *pszName, int iSize)
 
 void ServerActivate_Post( edict_t *pEdictList, int edictCount, int clientMax ){
 	
-	rankBots = (int)tfcstats_rankbots->value ? true:false;
+	rankBots = static_cast<int>(tfcstats_rankbots->value) ? true:false;
 
 	for( int i = 1; i <= gpGlobals->maxClients; ++i )
 		GET_PLAYER_POINTER_I(i)->Init( i , pEdictList + i );
@@ -122,7 +122,7 @@ void PlayerPreThink_Post( edict_t *pEntity ) {
 
 	if (pPlayer->clearStats && pPlayer->clearStats < gpGlobals->time && pPlayer->ingame){
 
-		if ( !ignoreBots(pEntity,NULL) ){
+		if ( !ignoreBots(pEntity, nullptr) ){
 			pPlayer->clearStats = 0.0f;
 			pPlayer->rank->updatePosition( &pPlayer->life );
 			pPlayer->restartStats(false);
@@ -139,7 +139,7 @@ void ServerDeactivate() {
 		if (pPlayer->rank) pPlayer->Disconnect();
 	}
 
-	if ( (g_rank.getRankNum() >= (int)tfcstats_maxsize->value) || ((int)tfcstats_reset->value == 1) ) {
+	if ( (g_rank.getRankNum() >= static_cast<int>(tfcstats_maxsize->value)) || (static_cast<int>(tfcstats_reset->value) == 1) ) {
 		CVAR_SET_FLOAT("tfcstats_reset",0.0);
 		g_rank.clear();
 	}
@@ -184,7 +184,7 @@ void ClientUserInfoChanged_Post( edict_t *pEntity, char *infobuffer ) {
 
 	if ( pPlayer->rank ){
 		if ( strcmp(oldname,name) != 0 ) {
-			if ((int)tfcstats_rank->value == 0)
+			if (static_cast<int>(tfcstats_rank->value) == 0)
 				pPlayer->rank = g_rank.findEntryInRank( name, name );
 			else
 				pPlayer->rank->setName( name );
@@ -204,7 +204,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 		mPlayer = GET_PLAYER_POINTER_I(mPlayerIndex);
 	} else {
 		mPlayerIndex = 0;
-		mPlayer = NULL;
+		mPlayer = nullptr;
 	}
 	mState = 0;
 	if ( msg_type < 0 || msg_type >= MAX_REG_MSGS )
@@ -215,37 +215,37 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 }
 
 void MessageEnd_Post(void) {
-	if (endfunction) (*endfunction)(NULL);
+	if (endfunction) (*endfunction)(nullptr);
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteByte_Post(int iValue) {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteChar_Post(int iValue) {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteShort_Post(int iValue) {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteLong_Post(int iValue) {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteAngle_Post(float flValue) {
-	if (function) (*function)((void *)&flValue);
+	if (function) (*function)(static_cast<void*>(&flValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteCoord_Post(float flValue) {
-	if (function) (*function)((void *)&flValue);
+	if (function) (*function)(static_cast<void*>(&flValue));
 	RETURN_META(MRES_IGNORED);
 }
 
@@ -255,7 +255,7 @@ void WriteString_Post(const char *sz) {
 }
 
 void WriteEntity_Post(int iValue) {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
@@ -365,25 +365,25 @@ void DispatchKeyValue(edict_t *pentKeyvalue, KeyValueData *pkvd)
 	{
 		if (pkvd->szKeyName && strncmp(pkvd->szKeyName,"team",4)==0)
 		{
-			if (strcmp(pkvd->szKeyName,"team1_allies")==0 && pkvd->szValue!=NULL)
+			if (strcmp(pkvd->szKeyName,"team1_allies")==0 && pkvd->szValue!= nullptr)
 			{
 				g_AlliesFlags[0]=atoi(pkvd->szValue);
 
 				RETURN_META(MRES_IGNORED);
 			}
-			else if (strcmp(pkvd->szKeyName,"team2_allies")==0 && pkvd->szValue!=NULL)
+			else if (strcmp(pkvd->szKeyName,"team2_allies")==0 && pkvd->szValue!= nullptr)
 			{
 				g_AlliesFlags[1]=atoi(pkvd->szValue);
 
 				RETURN_META(MRES_IGNORED);
 			}
-			else if (strcmp(pkvd->szKeyName,"team3_allies")==0 && pkvd->szValue!=NULL)
+			else if (strcmp(pkvd->szKeyName,"team3_allies")==0 && pkvd->szValue!= nullptr)
 			{
 				g_AlliesFlags[2]=atoi(pkvd->szValue);
 
 				RETURN_META(MRES_IGNORED);
 			}
-			else if (strcmp(pkvd->szKeyName,"team4_allies")==0 && pkvd->szValue!=NULL)
+			else if (strcmp(pkvd->szKeyName,"team4_allies")==0 && pkvd->szValue!= nullptr)
 			{
 				g_AlliesFlags[3]=atoi(pkvd->szValue);
 

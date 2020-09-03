@@ -33,14 +33,14 @@ traceVault traceData[] = {
 
 bool ignoreBots (edict_t *pEnt, edict_t *pOther)
 {
-	rankBots = (int)tfcstats_rankbots->value ? true : false;
+	rankBots = static_cast<int>(tfcstats_rankbots->value) ? true : false;
 	if ( !rankBots && ( pEnt->v.flags & FL_FAKECLIENT || ( pOther && pOther->v.flags & FL_FAKECLIENT ) ) )
 		return true;
 	return false;
 }
 
 bool isModuleActive(){
-	if (!(int)tfcstats_pause->value)
+	if (!static_cast<int>(tfcstats_pause->value))
 		return true;
 	return false;
 }

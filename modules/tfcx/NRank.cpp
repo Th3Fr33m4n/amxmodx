@@ -262,7 +262,7 @@ static cell AMX_NATIVE_CALL cwpn_dmg(AMX *amx, cell *params){ // wid,att,vic,dmg
 	CPlayer* pAtt = GET_PLAYER_POINTER_I(att);
 	CPlayer* pVic = GET_PLAYER_POINTER_I(vic);
 
-	pVic->pEdict->v.dmg_inflictor = NULL;
+	pVic->pEdict->v.dmg_inflictor = nullptr;
 	pAtt->saveHit( pVic , weapon , dmg, aim );
 
 	if ( !pAtt ) pAtt = pVic;
@@ -313,6 +313,6 @@ AMX_NATIVE_INFO stats_Natives[] = {
 	{ "custom_weapon_dmg", cwpn_dmg },
 	{ "custom_weapon_shot", cwpn_shot },
 
-	{ NULL, NULL }
+	{nullptr, NULL }
 };
 

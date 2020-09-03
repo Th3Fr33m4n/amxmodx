@@ -64,7 +64,7 @@ static cell AMX_NATIVE_CALL TFC_ClearModel(AMX *amx, cell *params) {
 
 	edict_t* pPlayer = MF_GetPlayerEdict(iIndex);
 	
-	if (pPlayer->pvPrivateData == NULL)
+	if (pPlayer->pvPrivateData == nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Player has no private data, cannot clear model!");
 		return 0;
@@ -72,11 +72,11 @@ static cell AMX_NATIVE_CALL TFC_ClearModel(AMX *amx, cell *params) {
 
 	// PD_REPLACE_MODEL is the string_t for the replacement model
 	// setting it to 0 will reset the model properly
-	*( (int*)pPlayer->pvPrivateData + PD_REPLACE_MODEL) = 0;
+	*( static_cast<int*>(pPlayer->pvPrivateData) + PD_REPLACE_MODEL) = 0;
 
 	// PD_REPLACE_SKIN is the integer setting for the skin, by default
 	// it is 0.
-	*( (int*)pPlayer->pvPrivateData + PD_REPLACE_SKIN) = 0;
+	*( static_cast<int*>(pPlayer->pvPrivateData) + PD_REPLACE_SKIN) = 0;
 
 	return 1;
 	
@@ -164,22 +164,22 @@ static cell AMX_NATIVE_CALL TFC_SetBAmmo(AMX *amx, cell *params) {
 
 	switch(params[2]){ // ammo
 	case TFC_AMMO_SHELLS:
-		*( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_SHELLS]) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_SHELLS]) = iValue;
 		break;
 	case TFC_AMMO_BULLETS:
-		*( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_BULLETS]) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_BULLETS]) = iValue;
 		break;
 	case TFC_AMMO_CELLS:
-		*( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_CELLS]) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_CELLS]) = iValue;
 		break;
 	case TFC_AMMO_ROCKETS:
-		*( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_ROCKETS]) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_ROCKETS]) = iValue;
 		break;
 	case TFC_AMMO_NADE1:
-		*( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_NADE1]) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_NADE1]) = iValue;
 		break;
 	case TFC_AMMO_NADE2:
-		*( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_NADE2]) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_NADE2]) = iValue;
 		break;
 	default : 
 		return 0;
@@ -197,22 +197,22 @@ static cell AMX_NATIVE_CALL TFC_GetBAmmo(AMX *amx, cell *params) {
 	
 	switch(params[2]){ // ammo
 	case TFC_AMMO_SHELLS:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_SHELLS]);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_SHELLS]);
 		break;
 	case TFC_AMMO_BULLETS:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_BULLETS]);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_BULLETS]);
 		break;
 	case TFC_AMMO_CELLS:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_CELLS]);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_CELLS]);
 		break;
 	case TFC_AMMO_ROCKETS:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_ROCKETS]);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_ROCKETS]);
 		break;
 	case TFC_AMMO_NADE1:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_NADE1]);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_NADE1]);
 		break;
 	case TFC_AMMO_NADE2:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + pdAmmo[TFC_AMMO_NADE2]);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_NADE2]);
 		break;
 	default : 
 		return 0;
@@ -235,25 +235,25 @@ static cell AMX_NATIVE_CALL TFC_GetWeaponBAmmo(AMX *amx, cell *params) {
 	case TFC_WPN_SUPERSHOTGUN:
 	case TFC_WPN_TRANQ:
 	case TFC_WPN_AC:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_SHELLS);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_SHELLS);
 		break;
 	case TFC_WPN_NG:
 	case TFC_WPN_SUPERNG:
 	case TFC_WPN_RAILGUN:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_BULLETS);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_BULLETS);
 		break;
 	case TFC_WPN_FLAMETHROWER:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_CELLS);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_CELLS);
 		break;
 	case TFC_WPN_GL:
 	case TFC_WPN_RPG:
 	case TFC_WPN_IC:
 	case TFC_WPN_PL:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_ROCKETS);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_ROCKETS);
 		break;
 	case TFC_WPN_CALTROP:
 	case TFC_WPN_NORMALGRENADE:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_NADE1);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_NADE1);
 		break;
 	case TFC_WPN_CONCUSSIONGRENADE: 
 	case TFC_WPN_NAILGRENADE: 
@@ -261,7 +261,7 @@ static cell AMX_NATIVE_CALL TFC_GetWeaponBAmmo(AMX *amx, cell *params) {
 	case TFC_WPN_NAPALMGRENADE:
 	case TFC_WPN_GASGRENADE:
 	case TFC_WPN_EMPGRENADE:
-		return *( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_NADE2);
+		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_NADE2);
 
 
 		break;
@@ -294,25 +294,25 @@ static cell AMX_NATIVE_CALL TFC_SetWeaponBAmmo(AMX *amx, cell *params) {
 	case TFC_WPN_SUPERSHOTGUN:
 	case TFC_WPN_TRANQ:
 	case TFC_WPN_AC:
-		*( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_SHELLS) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_SHELLS) = iValue;
 		break;
 	case TFC_WPN_NG:
 	case TFC_WPN_SUPERNG:
 	case TFC_WPN_RAILGUN:
-		*( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_BULLETS) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_BULLETS) = iValue;
 		break;
 	case TFC_WPN_FLAMETHROWER:
-		*( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_CELLS) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_CELLS) = iValue;
 		break;
 	case TFC_WPN_GL:
 	case TFC_WPN_RPG:
 	case TFC_WPN_IC:
 	case TFC_WPN_PL:
-		*( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_ROCKETS) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_ROCKETS) = iValue;
 		break;
 	case TFC_WPN_CALTROP:
 	case TFC_WPN_NORMALGRENADE:
-		*( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_NADE1) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_NADE1) = iValue;
 		break;
 	case TFC_WPN_CONCUSSIONGRENADE: 
 	case TFC_WPN_NAILGRENADE: 
@@ -320,7 +320,7 @@ static cell AMX_NATIVE_CALL TFC_SetWeaponBAmmo(AMX *amx, cell *params) {
 	case TFC_WPN_NAPALMGRENADE:
 	case TFC_WPN_GASGRENADE:
 	case TFC_WPN_EMPGRENADE:
-		*( (int*)pPlayer->pEdict->pvPrivateData + PD_AMMO_NADE2) = iValue;
+		*( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_NADE2) = iValue;
 		break;
 	default : 
 		return 0;
@@ -337,7 +337,7 @@ static cell AMX_NATIVE_CALL TFC_GetWeaponAmmo(AMX *amx, cell *params)
 	CHECK_NONPLAYER(index);
 	edict_t *weapon = INDEXENT(index);
 
-	return *((int *)weapon->pvPrivateData + PD_WEAPON_AMMO);
+	return *(static_cast<int*>(weapon->pvPrivateData) + PD_WEAPON_AMMO);
 }
 
 static cell AMX_NATIVE_CALL TFC_SetWeaponAmmo(AMX *amx, cell *params)
@@ -347,7 +347,7 @@ static cell AMX_NATIVE_CALL TFC_SetWeaponAmmo(AMX *amx, cell *params)
 	CHECK_NONPLAYER(index);
 	edict_t *weapon = INDEXENT(index);
 
-	*((int *)weapon->pvPrivateData + PD_WEAPON_AMMO) = params[2];
+	*(static_cast<int*>(weapon->pvPrivateData) + PD_WEAPON_AMMO) = params[2];
 
 	return 1;
 }
@@ -361,9 +361,9 @@ static cell AMX_NATIVE_CALL TFC_GetUserGoalItem(AMX *amx, cell *params)
 	edict_t *pPlayer = MF_GetPlayerEdict(index);
 	cell *team = MF_GetAmxAddr(amx, params[2]);
 
-	*team = *((int *)pPlayer->pvPrivateData + PD_GOALITEM_TEAM);
+	*team = *(static_cast<int*>(pPlayer->pvPrivateData) + PD_GOALITEM_TEAM);
 
-	return *((int *)pPlayer->pvPrivateData + PD_HAS_GOALITEM) & CARRYING_GOALITEM;
+	return *(static_cast<int*>(pPlayer->pvPrivateData) + PD_HAS_GOALITEM) & CARRYING_GOALITEM;
 }
 
 static cell AMX_NATIVE_CALL TFC_GetWpnName(AMX *amx, cell *params) { 
@@ -447,10 +447,10 @@ static cell AMX_NATIVE_CALL TFC_IsFeigning(AMX *amx, cell *params)
 	
 	return (pPlayer->pEdict->v.playerclass == TFC_PC_SPY && pPlayer->pEdict->v.deadflag == 5);
 };
-cvar_t *mp_teamplay=NULL;
+cvar_t *mp_teamplay= nullptr;
 static cell AMX_NATIVE_CALL TFC_IsTeamAlly(AMX *amx, cell *params)
 {
-	if (mp_teamplay==NULL)
+	if (mp_teamplay== nullptr)
 	{
 		mp_teamplay=CVAR_GET_POINTER("mp_teamplay");
 	}
@@ -528,5 +528,5 @@ AMX_NATIVE_INFO base_Natives[] = {
 	{"get_weaponname", TFC_GetWpnName},
 
 	//******************* 19 :)
-	{NULL,			NULL} 
+	{nullptr,			NULL} 
 };

@@ -19,6 +19,7 @@
 #include "CFlagManager.h"
 #include "nongpl_matches.h"
 #include "format.h"
+#include <cstring>
 
 extern CFlagManager FlagMan;
 ke::Vector<CAdminData *> DynamicAdmins;
