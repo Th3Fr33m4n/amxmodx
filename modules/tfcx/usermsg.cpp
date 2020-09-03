@@ -324,16 +324,15 @@ void Client_AmmoX(void* mValue){
 		if ( mPlayer->current == TFC_WPN_AC && mPlayer->weapons[mPlayer->current].ammo > *static_cast<int*>(mValue)  && iAmmo == weaponData[mPlayer->current].ammoSlot )
 			mPlayer->saveShot(mPlayer->current);
 	}
-	else if ( mPlayer->classId == TFC_PC_SNIPER ){
-		if ( (mPlayer->current == TFC_WPN_SNIPERRIFLE || mPlayer->current == TFC_WPN_AUTORIFLE) && mPlayer->weapons[mPlayer->current].ammo > *static_cast<int*>(mValue) && iAmmo == weaponData[mPlayer->current].ammoSlot )
+else if ( mPlayer->classId == TFC_PC_SNIPER ){
+		if ( (mPlayer->current == TFC_WPN_SNIPERRIFLE || mPlayer->current == TFC_WPN_AUTORIFLE) && mPlayer->weapons[mPlayer->current].ammo > *(int*)mValue && iAmmo == weaponData[mPlayer->current].ammoSlot )
 			mPlayer->saveShot(mPlayer->current);
 	}
 	//
 
     for(int i = 1; i < MAX_WEAPONS ; ++i) 
       if (iAmmo == weaponData[i].ammoSlot)
-        mPlayer->weapons[i].ammo = *static_cast<int*>(mValue);
-	default: ;
+        mPlayer->weapons[i].ammo = *(int*)mValue;
   }
 }
 
@@ -342,14 +341,13 @@ void Client_AmmoPickup(void* mValue){
   static int iSlot;
   switch (mState++){
   case 0:
-    iSlot = *static_cast<int*>(mValue);
+    iSlot = *(int*)mValue;
     break;
   case 1:
 	if (!mPlayer ) break;
     for(int i = 1; i < MAX_WEAPONS ; ++i)
       if (weaponData[i].ammoSlot == iSlot)
-        mPlayer->weapons[i].ammo += *static_cast<int*>(mValue);
-	default: ;
+        mPlayer->weapons[i].ammo += *(int*)mValue;
   }
 }
 
@@ -358,17 +356,16 @@ void Client_ScoreInfo(void* mValue){
   static int iClass;
   switch (mState++){
   case 0:
-    iIndex = *static_cast<int*>(mValue);
+    iIndex = *(int*)mValue;
     break;
   case 3:
-	  iClass = *static_cast<int*>(mValue);
+	  iClass = *(int*)mValue;
 	  break;
   case 4:
 	  if ( iIndex > 0 && iIndex <= gpGlobals->maxClients ){
-		  GET_PLAYER_POINTER_I( iIndex )->teamId = *static_cast<int*>(mValue);
+		  GET_PLAYER_POINTER_I( iIndex )->teamId = *(int*)mValue;
 		  GET_PLAYER_POINTER_I( iIndex )->classId = iClass;
 	  }
-	default: ;
+
   }
 }
-
