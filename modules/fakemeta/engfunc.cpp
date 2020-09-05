@@ -398,7 +398,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		cRet = MF_GetAmxAddr(amx,params[5]);
 		index=cRet[0];
 		TraceResult *tr;
-		if ((params[0] / sizeof(cell)) == 6)
+		if (params[0] / sizeof(cell) == 6)
 		{
 			cell *ptr = MF_GetAmxAddr(amx, params[6]);
 			if (*ptr == 0)
@@ -419,7 +419,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		cRet = MF_GetAmxAddr(amx,params[3]);
 		iparam1 = cRet[0];
 		CHECK_ENTITY(index);
-		if ((params[0] / sizeof(cell)) == 4)
+		if (params[0] / sizeof(cell) == 4)
 		{
 			cell *ptr = MF_GetAmxAddr(amx, params[4]);
 			if (*ptr == 0)
@@ -450,7 +450,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		iparam1=cRet[0];
 		cRet = MF_GetAmxAddr(amx,params[6]);
 		iparam2=cRet[0];
-		if ((params[0] / sizeof(cell)) == 7)
+		if (params[0] / sizeof(cell) == 7)
 		{
 			cell *ptr = MF_GetAmxAddr(amx, params[7]);
 			if (*ptr == 0)
@@ -480,7 +480,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		iparam2 = cRet[0];
 		cRet = MF_GetAmxAddr(amx,params[6]);
 		iparam3 = cRet[0];
-		if ((params[0] / sizeof(cell)) == 7)
+		if (params[0] / sizeof(cell) == 7)
 		{
 			cell *ptr = MF_GetAmxAddr(amx, params[7]);
 			if (*ptr == 0)
@@ -508,7 +508,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		iparam1 = cRet[0];
 		cRet = MF_GetAmxAddr(amx,params[5]);
 		iparam2 = cRet[0];
-		if ((params[0] / sizeof(cell)) == 6)
+		if (params[0] / sizeof(cell) == 6)
 		{
 			cell *ptr = MF_GetAmxAddr(amx, params[6]);
 			if (*ptr == 0)
@@ -537,8 +537,8 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		Vec2[2]=amx_ctof(cRet[2]);
 		temp = (char*)(*g_engfuncs.pfnTraceTexture)(TypeConversion.id_to_edict(index),Vec1,Vec2);
 		cRet = MF_GetAmxAddr(amx,params[6]);
-		MF_SetAmxString(amx, params[5], (temp == NULL) ? "NoTexture" : temp, cRet[0]);
-		return (temp != NULL);
+		MF_SetAmxString(amx, params[5], temp == NULL ? "NoTexture" : temp, cRet[0]);
+		return temp != NULL;
 
 		
 		// pfnTraceSphere
@@ -598,6 +598,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 	case	EngFunc_LightStyle:			// void )			(int style, const char* val);
 		cRet = MF_GetAmxAddr(amx,params[2]);
 		iparam1=cRet[0];
+		//different signedness: ‘int’ and ‘unsigned int’ [APG]RoboCop[CL]
 		if (iparam1 < 0 || iparam1 >= ARRAYSIZE(LightStyleBuffers))
 		{
 			MF_LogError(amx, AMX_ERR_NATIVE, "Invalid style %d", iparam1);
@@ -1077,7 +1078,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 			CHECK_ENTITY(index);
 		}
 
-		temp = (*g_engfuncs.pfnGetInfoKeyBuffer)((index == -1) ? NULL : TypeConversion.id_to_edict(index));
+		temp = (*g_engfuncs.pfnGetInfoKeyBuffer)(index == -1 ? NULL : TypeConversion.id_to_edict(index));
 		return reinterpret_cast<cell>(temp);
 	case EngFunc_AlertMessage:			// void )			(ALERT_TYPE atype, char *szFmt, ...);
 		cRet = MF_GetAmxAddr(amx, params[2]);

@@ -196,8 +196,8 @@ class EHANDLE
 {
 	private:
 
-		edict_t* m_pent;
-		int		 m_serialnumber;
+		edict_t* m_pent = nullptr;
+		int		 m_serialnumber = 0;
 
 	public:
 

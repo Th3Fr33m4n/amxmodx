@@ -15,18 +15,17 @@
 #include "amxxmodule.h"
 #include "tfcx.h"
 
-
 int damage;
 int TA; //Not required? [APG]RoboCop[CL]
 int weapon;
 int aim;
-CPlayer *pAttacker;
+CPlayer* pAttacker;
 edict_t* tempEnt;
 int tempInt;
 bool ignoreDamage = false;
 
-void Client_ResetHUD(void* mValue){
-	if ( mPlayer ){
+void Client_ResetHUD(void* mValue) {
+	if (mPlayer) {
 		mPlayer->clearStats = gpGlobals->time + 0.25f;
 	}
 }
@@ -39,26 +38,26 @@ void Client_WeaponList(void* mValue){
 
   switch (mState++) {
   case 0:
-    wpnName = (const char*)mValue;
-    break;
+	wpnName = (const char*)mValue;
+	break;
   case 1:
-    iSlot = *(int*)mValue;
-    break;
+	iSlot = *(int*)mValue;
+	break;
   case 7:
-    int iId = *(int*)mValue;
-    if ( (iId < 0 || iId >= MAX_WEAPONS ) || ( wpnList & (1<<iId) ) )
-      break;
+	int iId = *(int*)mValue;
+	if ( (iId < 0 || iId >= MAX_WEAPONS ) || ( wpnList & (1<<iId) ) )
+	  break;
 
-    wpnList |= (1<<iId);
-    weaponData[iId].ammoSlot = iSlot;
-    strcpy(weaponData[iId].fullName, wpnName );
+	wpnList |= (1<<iId);
+	weaponData[iId].ammoSlot = iSlot;
+	strcpy(weaponData[iId].fullName, wpnName );
 	weaponData[iId].name = weaponData[iId].fullName;
 
 	char* wpnPrefix = strstr( weaponData[iId].fullName ,"tf_weapon_");
 
 	if ( wpnPrefix )
 		weaponData[iId].name = wpnPrefix + 10;
-  } 
+  }
 }
 */
 
@@ -82,7 +81,7 @@ int get_pdata_ehandle(edict_t* pEntity, int offset)
 	{
 		pWorld = INDEXENT(0);
 	}
-		
+
 	int index = pEdict - pWorld;
 
 	if (index < 0 || index > gpGlobals->maxEntities)
@@ -105,55 +104,52 @@ int get_pdata_ehandle(edict_t* pEntity, int offset)
 	return index;
 }
 
-void Client_Damage(void* mValue){
-  switch (mState++) {
-  case 1: 
-    damage = *static_cast<int*>(mValue);
-    break;
-
-  case 2:
-	edict_t* enemy;
-    if ( !mPlayer || !damage )  
+void Client_Damage(void* mValue) {
+	switch (mState++) {
+	case 1:
+		damage = *static_cast<int*>(mValue);
 		break;
 
-	enemy = mPlayer->pEdict->v.dmg_inflictor;
-
-	if ( FNullEnt( enemy ) )
-		break;
-
-	if (enemy->v.flags & (FL_CLIENT | FL_FAKECLIENT) ) { // attacker is player and his active weapon
-
-		pAttacker = GET_PLAYER_POINTER(enemy);
-		
-		aim = pAttacker->aiming;
-		weapon = pAttacker->current;
-
-		switch(weapon){
-		case TFC_WPN_SPANNER:
-		case TFC_WPN_AXE:
-		case TFC_WPN_KNIFE:
-			pAttacker->saveShot(weapon); // melee , save shot too
+	case 2:
+		edict_t * enemy;
+		if (!mPlayer || !damage)
 			break;
 
-		case TFC_WPN_MEDIKIT:
-			if ( pAttacker->teamId == mPlayer->teamId ) // ???
-				ignoreDamage = true;
-			pAttacker->saveShot(weapon); // melee , save shot too
+		enemy = mPlayer->pEdict->v.dmg_inflictor;
+
+		if (FNullEnt(enemy))
 			break;
-		default: ;
+
+		if (enemy->v.flags & (FL_CLIENT | FL_FAKECLIENT)) { // attacker is player and his active weapon
+			pAttacker = GET_PLAYER_POINTER(enemy);
+
+			aim = pAttacker->aiming;
+			weapon = pAttacker->current;
+
+			switch (weapon) {
+			case TFC_WPN_SPANNER:
+			case TFC_WPN_AXE:
+			case TFC_WPN_KNIFE:
+				pAttacker->saveShot(weapon); // melee , save shot too
+				break;
+
+			case TFC_WPN_MEDIKIT:
+				if (pAttacker->teamId == mPlayer->teamId) // ???
+					ignoreDamage = true;
+				pAttacker->saveShot(weapon); // melee , save shot too
+				break;
+			default:;
+			}
+
+			pAttacker->saveHit(mPlayer, weapon, damage, aim);
 		}
-	
-		pAttacker->saveHit( mPlayer , weapon , damage, aim);
+		else if (!FNullEnt(enemy->v.owner)) {
+			if (enemy->v.owner->v.flags & (FL_CLIENT | FL_FAKECLIENT)) { // caltrop, empgrenade, gasgrenade, napalmgrenade
+				pAttacker = GET_PLAYER_POINTER(enemy->v.owner);
 
-	}
-	else if ( !FNullEnt( enemy->v.owner ) ){
-		if ( enemy->v.owner->v.flags & (FL_CLIENT | FL_FAKECLIENT)  ){ // caltrop, empgrenade, gasgrenade, napalmgrenade
+				const char* szClass = STRING(enemy->v.classname);
 
-			pAttacker = GET_PLAYER_POINTER(enemy->v.owner);
-
-			const char *szClass = STRING(enemy->v.classname);
-			
-			switch(szClass[10]){
+				switch (szClass[10]) {
 				case 'c':
 					weapon = TFC_WPN_CALTROP;
 					break;
@@ -165,7 +161,7 @@ void Client_Damage(void* mValue){
 					break;
 				case 'm':
 					weapon = TFC_WPN_MEDIKIT;
-					if ( pAttacker->teamId == mPlayer->teamId ) // ???
+					if (pAttacker->teamId == mPlayer->teamId) // ???
 						ignoreDamage = true;
 					pAttacker->saveShot(weapon);
 					break;
@@ -182,95 +178,94 @@ void Client_Damage(void* mValue){
 				case 'r':
 					weapon = TFC_WPN_FLAMETHROWER;
 					break;
-				default: ;
-			}
-			if ( !weapon ) {
-				switch(szClass[3]){
-				case 'e':
-					weapon = TFC_WPN_TIMER; // TFC_WPN_MEDKIT ??
-
-					tempInt = get_pdata_ehandle(mPlayer->pEdict, pdTimerOwner * 4); // function is char-based.
-
-					if (tempInt < 1 || tempInt > gpGlobals->maxClients)
-					{
-						break;
-					}
-
-					pAttacker = GET_PLAYER_POINTER_I(tempInt);
-
-					if (pAttacker->teamId == mPlayer->teamId) // ???
-					{
-						ignoreDamage = true;
-					}
-
-					pAttacker->saveShot(weapon); // ??? save shot too
-					break;
-				case 'f':
-					weapon = TFC_WPN_FLAMES; // tf_fire
-					break;
-				default: ;
+				default:;
 				}
+				if (!weapon) {
+					switch (szClass[3]) {
+					case 'e':
+						weapon = TFC_WPN_TIMER; // TFC_WPN_MEDKIT ??
+
+						tempInt = get_pdata_ehandle(mPlayer->pEdict, pdTimerOwner * 4); // function is char-based.
+
+						if (tempInt < 1 || tempInt > gpGlobals->maxClients)
+						{
+							break;
+						}
+
+						pAttacker = GET_PLAYER_POINTER_I(tempInt);
+
+						if (pAttacker->teamId == mPlayer->teamId) // ???
+						{
+							ignoreDamage = true;
+						}
+
+						pAttacker->saveShot(weapon); // ??? save shot too
+						break;
+					case 'f':
+						weapon = TFC_WPN_FLAMES; // tf_fire
+						break;
+					default:;
+					}
+				}
+
+				if (weapon)
+					pAttacker->saveHit(mPlayer, weapon, damage, aim);
+				//else
+				//	PRINT_CONSOLE("*** DMG! Att:%d Vic:%d unknown weapon %s\n",pAttacker->index,mPlayer->index,STRING(enemy->v.classname));
 			}
-
-			if ( weapon )
-				pAttacker->saveHit( mPlayer , weapon , damage, aim );
-			//else 
-			//	PRINT_CONSOLE("*** DMG! Att:%d Vic:%d unknown weapon %s\n",pAttacker->index,mPlayer->index,STRING(enemy->v.classname));
+			// nailgrenadenail->nailgrenade->player :))) I'm the best !
+			else if (!FNullEnt(enemy->v.owner->v.owner) && enemy->v.owner->v.owner->v.flags & (FL_CLIENT | FL_FAKECLIENT)) {
+				pAttacker = GET_PLAYER_POINTER(enemy->v.owner->v.owner);
+				weapon = TFC_WPN_NAILGRENADE;
+				pAttacker->saveHit(mPlayer, weapon, damage, aim);
+			}
 		}
-		// nailgrenadenail->nailgrenade->player :))) I'm the best !
-		else if ( !FNullEnt(enemy->v.owner->v.owner) && enemy->v.owner->v.owner->v.flags & (FL_CLIENT | FL_FAKECLIENT ) ){
-			pAttacker = GET_PLAYER_POINTER(enemy->v.owner->v.owner);
-			weapon = TFC_WPN_NAILGRENADE;
-			pAttacker->saveHit( mPlayer , weapon , damage, aim );
-		}
-	}
-    else { // nailgrenade , mirvgrenade , normalgrenade , rockets
-		if ( strstr("sentrygun",STRING(enemy->v.classname)) )
-		{
-			tempInt = get_pdata_ehandle(mPlayer->pEdict, pdSentryGunOwner * 4); // function is char-based.
-
-			if (tempInt < 1 || tempInt > gpGlobals->maxClients)
+		else { // nailgrenade , mirvgrenade , normalgrenade , rockets
+			if (strstr("sentrygun", STRING(enemy->v.classname)))
 			{
-				break;
-			}
+				tempInt = get_pdata_ehandle(mPlayer->pEdict, pdSentryGunOwner * 4); // function is char-based.
 
-			pAttacker = GET_PLAYER_POINTER_I(tempInt);
-			weapon = TFC_WPN_SENTRYGUN;
-			pAttacker->saveShot(weapon); // save shot too
-			pAttacker->saveHit( mPlayer , weapon , damage, aim );
-		}
-		else if( g_grenades.find(enemy , &pAttacker , &weapon ) ){
-			if ( weapon == TFC_WPN_RPG && pAttacker->classId == TFC_PC_PYRO ){
-				weapon = TFC_WPN_IC;
-				pAttacker->saveShot(weapon);
+				if (tempInt < 1 || tempInt > gpGlobals->maxClients)
+				{
+					break;
+				}
+
+				pAttacker = GET_PLAYER_POINTER_I(tempInt);
+				weapon = TFC_WPN_SENTRYGUN;
+				pAttacker->saveShot(weapon); // save shot too
+				pAttacker->saveHit(mPlayer, weapon, damage, aim);
 			}
-			
-			pAttacker->saveHit( mPlayer , weapon , damage, aim );
+			else if (g_grenades.find(enemy, &pAttacker, &weapon)) {
+				if (weapon == TFC_WPN_RPG && pAttacker->classId == TFC_PC_PYRO) {
+					weapon = TFC_WPN_IC;
+					pAttacker->saveShot(weapon);
+				}
+
+				pAttacker->saveHit(mPlayer, weapon, damage, aim);
+			}
 		}
+		break;
+	default:;
 	}
-	break;
-	default: ;
-  }
-  
 }
 
-void Client_Damage_End(void* mValue){
-	if ( !damage )
+void Client_Damage_End(void* mValue) {
+	if (!damage)
 		return;
 
-	if ( !pAttacker )
+	if (!pAttacker)
 		pAttacker = mPlayer;
 
-	if ( !ignoreDamage ){
+	if (!ignoreDamage) {
 		TA = 0;
-		if ( (mPlayer->teamId == pAttacker->teamId) && (mPlayer != pAttacker) )
+		if ((mPlayer->teamId == pAttacker->teamId) && (mPlayer != pAttacker))
 			TA = 1;
 		if (g_damage_info > 0)
 			MF_ExecuteForward(g_damage_info, pAttacker->index, mPlayer->index, damage, weapon, aim, TA);
-	
-		if( !mPlayer->IsAlive() ){
-			pAttacker->saveKill(mPlayer,weapon,( aim == 1 ) ? 1:0 ,TA);
-			
+
+		if (!mPlayer->IsAlive()) {
+			pAttacker->saveKill(mPlayer, weapon, (aim == 1) ? 1 : 0, TA);
+
 			if (g_death_info > 0)
 				MF_ExecuteForward(g_death_info, pAttacker->index, mPlayer->index, weapon, aim, TA);
 		}
@@ -281,91 +276,89 @@ void Client_Damage_End(void* mValue){
 	weapon = 0;
 	pAttacker = nullptr;
 	ignoreDamage = false;
-
 }
 
-void Client_CurWeapon(void* mValue){
-  
-  static int iState;
-  static int iId;
-  switch (mState++){
-  case 0: 
-    iState = *static_cast<int*>(mValue);
-    break;
-  case 1:
-    if (!iState) break; 
-    iId = *static_cast<int*>(mValue);
-    break;
-  case 2:
-	if (!mPlayer || !iState ) break;
-    int iClip = *static_cast<int*>(mValue);
-    
-	if ((iClip > -1) && (iClip < mPlayer->weapons[iId].clip)){
-		mPlayer->saveShot(iId);
+void Client_CurWeapon(void* mValue) {
+	static int iState;
+	static int iId;
+	switch (mState++) {
+	case 0:
+		iState = *static_cast<int*>(mValue);
+		break;
+	case 1:
+		if (!iState) break;
+		iId = *static_cast<int*>(mValue);
+		break;
+	case 2:
+		if (!mPlayer || !iState) break;
+		const int iClip = *static_cast<int*>(mValue);
+
+		if (iClip > -1 && iClip < mPlayer->weapons[iId].clip) {
+			mPlayer->saveShot(iId);
+		}
+
+		mPlayer->weapons[iId].clip = iClip;
+		mPlayer->current = iId;
 	}
-	
-    mPlayer->weapons[iId].clip = iClip;
-	mPlayer->current = iId;
-  }
 }
 
-void Client_AmmoX(void* mValue){
-  
-  static int iAmmo;
-  switch (mState++){
-  case 0:
-    iAmmo = *static_cast<int*>(mValue);
-    break;
-  case 1:
-	if (!mPlayer ) break;
+void Client_AmmoX(void* mValue) {
+	static int iAmmo;
+	switch (mState++) {
+	case 0:
+		iAmmo = *static_cast<int*>(mValue);
+		break;
+	case 1:
+		if (!mPlayer) break;
 
-	// SniperRifle, AC and AutoRifle ...
-	if ( mPlayer->classId == TFC_PC_HWGUY ){
-		if ( mPlayer->current == TFC_WPN_AC && mPlayer->weapons[mPlayer->current].ammo > *static_cast<int*>(mValue)  && iAmmo == weaponData[mPlayer->current].ammoSlot )
-			mPlayer->saveShot(mPlayer->current);
+		// SniperRifle, AC and AutoRifle ...
+		if (mPlayer->classId == TFC_PC_HWGUY) {
+			if (mPlayer->current == TFC_WPN_AC && mPlayer->weapons[mPlayer->current].ammo > * static_cast<int*>(mValue) && iAmmo == weaponData[mPlayer->current].ammoSlot)
+				mPlayer->saveShot(mPlayer->current);
+		}
+		else if (mPlayer->classId == TFC_PC_SNIPER) {
+			if ((mPlayer->current == TFC_WPN_SNIPERRIFLE || mPlayer->current == TFC_WPN_AUTORIFLE) && mPlayer->weapons[mPlayer->current].ammo > * (int*)mValue && iAmmo == weaponData[mPlayer->current].ammoSlot)
+				mPlayer->saveShot(mPlayer->current);
+		}
+		//
+
+		for (int i = 1; i < MAX_WEAPONS; ++i)
+			if (iAmmo == weaponData[i].ammoSlot)
+				mPlayer->weapons[i].ammo = *(int*)mValue;
+	default:;
 	}
-else if ( mPlayer->classId == TFC_PC_SNIPER ){
-		if ( (mPlayer->current == TFC_WPN_SNIPERRIFLE || mPlayer->current == TFC_WPN_AUTORIFLE) && mPlayer->weapons[mPlayer->current].ammo > *(int*)mValue && iAmmo == weaponData[mPlayer->current].ammoSlot )
-			mPlayer->saveShot(mPlayer->current);
+}
+
+void Client_AmmoPickup(void* mValue) {
+	static int iSlot;
+	switch (mState++) {
+	case 0:
+		iSlot = *(int*)mValue;
+		break;
+	case 1:
+		if (!mPlayer) break;
+		for (int i = 1; i < MAX_WEAPONS; ++i)
+			if (weaponData[i].ammoSlot == iSlot)
+				mPlayer->weapons[i].ammo += *(int*)mValue;
+	default:;
 	}
-	//
-
-    for(int i = 1; i < MAX_WEAPONS ; ++i) 
-      if (iAmmo == weaponData[i].ammoSlot)
-        mPlayer->weapons[i].ammo = *(int*)mValue;
-  }
 }
 
-void Client_AmmoPickup(void* mValue){
-  
-  static int iSlot;
-  switch (mState++){
-  case 0:
-    iSlot = *(int*)mValue;
-    break;
-  case 1:
-	if (!mPlayer ) break;
-    for(int i = 1; i < MAX_WEAPONS ; ++i)
-      if (weaponData[i].ammoSlot == iSlot)
-        mPlayer->weapons[i].ammo += *(int*)mValue;
-  }
-}
-
-void Client_ScoreInfo(void* mValue){
-  static int iIndex;
-  static int iClass;
-  switch (mState++){
-  case 0:
-    iIndex = *(int*)mValue;
-    break;
-  case 3:
-	  iClass = *(int*)mValue;
-	  break;
-  case 4:
-	  if ( iIndex > 0 && iIndex <= gpGlobals->maxClients ){
-		  GET_PLAYER_POINTER_I( iIndex )->teamId = *(int*)mValue;
-		  GET_PLAYER_POINTER_I( iIndex )->classId = iClass;
-	  }
-
-  }
+void Client_ScoreInfo(void* mValue) {
+	static int iIndex;
+	static int iClass;
+	switch (mState++) {
+	case 0:
+		iIndex = *(int*)mValue;
+		break;
+	case 3:
+		iClass = *(int*)mValue;
+		break;
+	case 4:
+		if (iIndex > 0 && iIndex <= gpGlobals->maxClients) {
+			GET_PLAYER_POINTER_I(iIndex)->teamId = *(int*)mValue;
+			GET_PLAYER_POINTER_I(iIndex)->classId = iClass;
+		}
+	default:;
+	}
 }

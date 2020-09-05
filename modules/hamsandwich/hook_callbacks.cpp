@@ -45,7 +45,11 @@ extern bool gDoForwards;
 // Pop off return values
 #define POP() delete ReturnStack.front(); ReturnStack.pop(); delete OrigReturnStack.front(); OrigReturnStack.pop();
 
-// Parameter value pushes
+// Parameter value pushes	//Lifetime of the heap-allocated variable '__vec' is limited to the current function's scope.
+							//Consider allocating it on the stack instead.
+							//
+							//Also consider inspecting the application's logic.
+							//It's possible that 'else' keyword is missing. [APG]RoboCop[CL]
 #define MAKE_VECTOR()															\
 	int iThis=TypeConversion.cbase_to_id(pthis);											\
 	ke::Vector<Data *> *__vec=new ke::Vector<Data *>;							\
@@ -2890,8 +2894,8 @@ void Hook_Void_Entvar_Entvar_Float(Hook *hook, void *pthis, entvars_t *attacker,
 
 bool Hook_Bool_Void(Hook *hook, void *pthis)
 {
-	bool ret=0;
-	bool origret=0;
+	bool ret=false;
+	bool origret=false;
 
 	PUSH_BOOL()
 
@@ -3096,8 +3100,8 @@ void Hook_Void_Bool(Hook *hook, void *pthis, bool b1)
 
 bool Hook_Bool_Cbase(Hook *hook, void *pthis, void *cb)
 {
-	bool ret=0;
-	bool origret=0;
+	bool ret=false;
+	bool origret=false;
 
 	PUSH_BOOL()
 
@@ -3130,8 +3134,8 @@ bool Hook_Bool_Cbase(Hook *hook, void *pthis, void *cb)
 
 bool Hook_Bool_Entvar(Hook *hook, void *pthis, entvars_t *ev1)
 {
-	bool ret = 0;
-	bool origret = 0;
+	bool ret = false;
+	bool origret = false;
 
 	PUSH_BOOL()
 
@@ -3164,8 +3168,8 @@ bool Hook_Bool_Entvar(Hook *hook, void *pthis, entvars_t *ev1)
 
 bool Hook_Bool_Int(Hook *hook, void *pthis, int i1)
 {
-	bool ret=0;
-	bool origret=0;
+	bool ret=false;
+	bool origret=false;
 
 	PUSH_BOOL()
 

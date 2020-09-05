@@ -341,7 +341,7 @@ public:
 
 				if (!buffer || maxlen > static_cast<int>(strlen(buffer)))
 				{
-					if (buffer)
+					//if (buffer)
 					{
 						free(buffer);
 					}
