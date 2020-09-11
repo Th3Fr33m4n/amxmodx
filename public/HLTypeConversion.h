@@ -9,7 +9,7 @@
 #ifndef _HL_CONVERSION_TYPE_H_
 #define _HL_CONVERSION_TYPE_H_
 
-#include <stddef.h>   // size_t
+#include <cstddef>   // size_t
 #include <extdll.h>   // edict_t, etc.
 #include <sdk_util.h> // FNullEnt, INDEXENT, etc.
 

@@ -28,8 +28,8 @@
  */
 
 #include "MemoryUtils.h"
-#include <stdio.h> // sscanf
-#include <stdarg.h> // va_start, etc.
+#include <cstdio> // sscanf
+#include <cstdarg> // va_start, etc.
 
 #if defined(__linux__)
 	#include <fcntl.h>

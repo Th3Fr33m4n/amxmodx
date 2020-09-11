@@ -1358,14 +1358,14 @@ static cell AMX_NATIVE_CALL mb_ucfirst(AMX *amx, cell *params)
 	if (firstChLength)
 	{
 		char output[8] = {};
-		auto outputLength = utf8toupper(source, firstChLength, output, MAX_BUFFER_LENGTH - 1, UTF8_LOCALE_DEFAULT, nullptr, TRUE);
+		const int outputLength = utf8toupper(source, firstChLength, output, MAX_BUFFER_LENGTH - 1, UTF8_LOCALE_DEFAULT, nullptr, TRUE);
 
 		// The converted character is either larger or smaller in bytes.
 		if (firstChLength != outputLength)
 		{
 			// Calculates the new string length and makes sure we don't go over the buffer size (fairly unlikely).
 			sourceLength = ke::Min<int>(sourceLength + (outputLength - firstChLength), outputMaxLength);
-
+			
 			// Move data forward or backward minus the first character (whathever its size).
 			memmove(source + outputLength, source + firstChLength, (sourceLength - outputLength) * sizeof(char));	
 		}

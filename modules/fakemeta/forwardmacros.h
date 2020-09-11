@@ -908,7 +908,7 @@
 	}
 
 #define PREPARE_VECTOR(vector_name) \
-	cell vector_name##_cell[3] = {amx_ftoc(vector_name[0]), amx_ftoc(vector_name[1]), amx_ftoc(vector_name[2])}; \
+	cell vector_name##_cell[3] = {amx_ftoc((vector_name)[0]), amx_ftoc((vector_name)[1]), amx_ftoc((vector_name)[2])}; \
 	cell p_##vector_name = MF_PrepareCellArray(vector_name##_cell, 3) \
 
 #define PREPARE_FLOAT(float_name) \

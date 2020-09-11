@@ -12,11 +12,11 @@
 // Module SDK
 //
 
-#include <string.h>
+#include <cstring>
 #include <new>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdarg>
+#include <cstdlib>
+#include <cstdio>
 #include "amxxmodule.h"
 
 /************* METAMOD SUPPORT *************/
@@ -2454,7 +2454,7 @@ C_DLLEXPORT int AMXX_Query(int *interfaceVersion, amxx_module_info_s *moduleInfo
 }
 
 // request function
-#define REQFUNC(name, fptr, type) if ((fptr = (type)reqFnptrFunc(name)) == 0) return AMXX_FUNC_NOT_PRESENT
+#define REQFUNC(name, fptr, type) if (((fptr) = (type)reqFnptrFunc(name)) == 0) return AMXX_FUNC_NOT_PRESENT
 // request optional function
 #define REQFUNC_OPT(name, fptr, type) fptr = (type)reqFnptrFunc(name)
 
@@ -2952,7 +2952,7 @@ void operator delete[](void * ptr) {
 #include "sdk_util.h"
 #include <cbase.h>
 
-#include <string.h>			// for strncpy(), etc
+#include <cstring>			// for strncpy(), etc
 
 #include "osdep.h"			// win32 vsnprintf, etc
 

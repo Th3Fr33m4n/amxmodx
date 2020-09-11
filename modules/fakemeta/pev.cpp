@@ -155,7 +155,7 @@ void initialze_offsets()
 	DO_OFFSET(pContainingEntity);
 }
 
-#define EDICT_OFFS(v,o) ((char *)v + o)
+#define EDICT_OFFS(v,o) ((char *)(v) + (o))
 
 // originally by mahnsawce
 static cell AMX_NATIVE_CALL amx_pev(AMX *amx,cell *params)

@@ -89,17 +89,17 @@ bool isModuleActive();
 bool util_strncmp( const char *sz1, const char *sz2, int size);
 
 #define CHECK_ENTITY(x) \
-	if (x < 0 || x > gpGlobals->maxEntities) { \
+	if ((x) < 0 || (x) > gpGlobals->maxEntities) { \
 		MF_LogError(amx, AMX_ERR_NATIVE, "Entity out of range (%d)", x); \
 		return 0; \
 	} else { \
-		if (x <= gpGlobals->maxClients) { \
+		if ((x) <= gpGlobals->maxClients) { \
 			if (!MF_IsPlayerIngame(x)) { \
 				MF_LogError(amx, AMX_ERR_NATIVE, "Invalid player %d (not in-game)", x); \
 				return 0; \
 			} \
 		} else { \
-			if (x != 0 && FNullEnt(INDEXENT(x))) { \
+			if ((x) != 0 && FNullEnt(INDEXENT(x))) { \
 				MF_LogError(amx, AMX_ERR_NATIVE, "Invalid entity %d", x); \
 				return 0; \
 			} \
@@ -107,7 +107,7 @@ bool util_strncmp( const char *sz1, const char *sz2, int size);
 	}
 
 #define CHECK_PLAYER(x) \
-	if (x < 1 || x > gpGlobals->maxClients) { \
+	if ((x) < 1 || (x) > gpGlobals->maxClients) { \
 		MF_LogError(amx, AMX_ERR_NATIVE, "Player out of range (%d)", x); \
 		return 0; \
 	} else { \
@@ -118,14 +118,14 @@ bool util_strncmp( const char *sz1, const char *sz2, int size);
 	}
 
 #define CHECK_PLAYERRANGE(x) \
-	if (x > gpGlobals->maxClients || x < 0) \
+	if ((x) > gpGlobals->maxClients || (x) < 0) \
 	{ \
 		MF_LogError(amx, AMX_ERR_NATIVE, "Player out of range (%d)", x); \
 		return 0; \
 	}
 
 #define CHECK_NONPLAYER(x) \
-	if (x < 1 || x <= gpGlobals->maxClients || x > gpGlobals->maxEntities) { \
+	if ((x) < 1 || (x) <= gpGlobals->maxClients || (x) > gpGlobals->maxEntities) { \
 		MF_LogError(amx, AMX_ERR_NATIVE, "Non-player entity %d out of range", x); \
 		return 0; \
 	} else { \
@@ -136,7 +136,7 @@ bool util_strncmp( const char *sz1, const char *sz2, int size);
 	}
 
 #define GETEDICT(n) \
-	((n >= 1 && n <= gpGlobals->maxClients) ? MF_GetPlayerEdict(n) : INDEXENT(n))
+	(((n) >= 1 && (n) <= gpGlobals->maxClients) ? MF_GetPlayerEdict(n) : INDEXENT(n))
 
 #endif // TFCX_H
 

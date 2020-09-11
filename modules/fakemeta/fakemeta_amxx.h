@@ -48,8 +48,8 @@
 	}
 #endif
 
-#define CHECK_ENTITY(x) if (x != 0 && (FNullEnt(TypeConversion.id_to_edict(x)) || x < 0 || x > gpGlobals->maxEntities)) { MF_LogError(amx, AMX_ERR_NATIVE, "Invalid entity"); return 0; }
-#define CHECK_OFFSET(x) if (x < 0) { MF_LogError(amx, AMX_ERR_NATIVE, "Invalid offset"); return 0; }
+#define CHECK_ENTITY(x) if ((x) != 0 && (FNullEnt(TypeConversion.id_to_edict(x)) || (x) < 0 || (x) > gpGlobals->maxEntities)) { MF_LogError(amx, AMX_ERR_NATIVE, "Invalid entity"); return 0; }
+#define CHECK_OFFSET(x) if ((x) < 0) { MF_LogError(amx, AMX_ERR_NATIVE, "Invalid offset"); return 0; }
 #define CHECK_ENTITY_PDATA(x) \
 	if (FNullEnt(TypeConversion.id_to_edict(x))) { \
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid entity %d", x); \

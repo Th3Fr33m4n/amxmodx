@@ -51,7 +51,7 @@ void initialize_glb_offsets()
 	DO_OFFSET_GLB(pStringBase);
 }
 
-#define GET_OFFS(v,o) ((char *)v + o)
+#define GET_OFFS(v,o) ((char *)(v) + (o))
 
 static cell AMX_NATIVE_CALL amx_glb(AMX *amx, cell *params)
 {
