@@ -417,10 +417,8 @@ typedef struct
 } TYPEDESCRIPTION;
 
 // Fix warning in MSVC8
-#ifdef _WIN32
 #undef ARRAYSIZE
 #define ARRAYSIZE(p)		(sizeof(p)/sizeof(p[0]))
-#endif
 
 typedef struct 
 {
