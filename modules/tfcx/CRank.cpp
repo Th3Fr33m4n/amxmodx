@@ -152,7 +152,7 @@ RankSystem::RankStats* RankSystem::findEntryInRank(const char* unique, const cha
 	{         // Otherwise the stats file would be essentially reset.
 	
 		// The IP passed does not contain the port any more for unique
-		size_t iplen = strlen(unique);
+		const size_t iplen = strlen(unique);
 		
 		
 		while ( a )
@@ -164,7 +164,7 @@ RankSystem::RankStats* RankSystem::findEntryInRank(const char* unique, const cha
 				// eg: checking 4.2.2.2 would match 4.2.2.24 here.
 				
 				// Get the next character stored in targetUnique
-				char c = targetUnique[iplen];
+				const char c = targetUnique[iplen];
 				
 				// If c is either a colon or end of line, then this
 				// is a valid match.

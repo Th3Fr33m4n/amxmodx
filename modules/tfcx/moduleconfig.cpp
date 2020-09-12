@@ -77,9 +77,9 @@ struct sUserMsg {
 
 const char* get_localinfo( const char* name , const char* def = nullptr )
 {
-	const char* b = LOCALINFO( const_cast<char*>(name) );
+	const char* b = LOCALINFO( (char*)(name) );
 	if (((b==nullptr)||(*b==0)) && def )
-		SET_LOCALINFO(const_cast<char*>(name),const_cast<char*>(b = def) );
+		SET_LOCALINFO((char*)(name),(char*)(b = def) );
 	return b;
 }
 
