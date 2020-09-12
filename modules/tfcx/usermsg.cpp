@@ -220,7 +220,7 @@ void Client_Damage(void* mValue){
 						break;
 					}
 
-					pAttacker = GET_PLAYER_POINTER_I(tempInt);
+					//pAttacker = GET_PLAYER_POINTER_I(tempInt); // Rogue Code? [APG]RoboCop[CL]
 
 					if (pAttacker->teamId == mPlayer->teamId) // ???
 					{
@@ -324,7 +324,7 @@ void Client_AmmoX(void* mValue){
 		if ( mPlayer->current == TFC_WPN_AC && mPlayer->weapons[mPlayer->current].ammo > *static_cast<int*>(mValue)  && iAmmo == weaponData[mPlayer->current].ammoSlot )
 			mPlayer->saveShot(mPlayer->current);
 	}
-else if ( mPlayer->classId == TFC_PC_SNIPER ){
+  else if ( mPlayer->classId == TFC_PC_SNIPER ){
 		if ( (mPlayer->current == TFC_WPN_SNIPERRIFLE || mPlayer->current == TFC_WPN_AUTORIFLE) && mPlayer->weapons[mPlayer->current].ammo > *static_cast<int*>(mValue) && iAmmo == weaponData[mPlayer->current].ammoSlot )
 			mPlayer->saveShot(mPlayer->current);
 	}
@@ -333,6 +333,7 @@ else if ( mPlayer->classId == TFC_PC_SNIPER ){
     for(int i = 1; i < MAX_WEAPONS ; ++i) 
       if (iAmmo == weaponData[i].ammoSlot)
         mPlayer->weapons[i].ammo = *static_cast<int*>(mValue);
+  default: ;
   }
 }
 
