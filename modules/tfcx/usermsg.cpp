@@ -213,7 +213,7 @@ void Client_Damage(void* mValue){
 				case 'e':
 					weapon = TFC_WPN_TIMER; // TFC_WPN_MEDKIT ??
 
-					tempInt = get_pdata_ehandle(mPlayer->pEdict, pdTimerOwner * 4); // function is char-based.
+					//tempInt = get_pdata_ehandle(mPlayer->pEdict, pdTimerOwner * 4); // function is char-based. // Rogue Code? [APG]RoboCop[CL]
 
 					if (tempInt < 1 || tempInt > gpGlobals->maxClients)
 					{
