@@ -12,11 +12,11 @@
 // Module SDK
 //
 
-#include <cstring>
+#include <string.h>
 #include <new>
-#include <cstdarg>
-#include <cstdlib>
-#include <cstdio>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "amxxmodule.h"
 
 /************* METAMOD SUPPORT *************/
@@ -2454,7 +2454,7 @@ C_DLLEXPORT int AMXX_Query(int *interfaceVersion, amxx_module_info_s *moduleInfo
 }
 
 // request function
-#define REQFUNC(name, fptr, type) if (((fptr) = (type)reqFnptrFunc(name)) == 0) return AMXX_FUNC_NOT_PRESENT
+#define REQFUNC(name, fptr, type) if ((fptr = (type)reqFnptrFunc(name)) == 0) return AMXX_FUNC_NOT_PRESENT
 // request optional function
 #define REQFUNC_OPT(name, fptr, type) fptr = (type)reqFnptrFunc(name)
 
@@ -2952,7 +2952,7 @@ void operator delete[](void * ptr) {
 #include "sdk_util.h"
 #include <cbase.h>
 
-#include <cstring>			// for strncpy(), etc
+#include <string.h>			// for strncpy(), etc
 
 #include "osdep.h"			// win32 vsnprintf, etc
 
@@ -3034,7 +3034,9 @@ void UTIL_HudMessage(CBaseEntity *pEntity, const hudtextparms_t &textparms,
 
 short FixedSigned16( float value, float scale )
 {
-	int output = static_cast<int>(value * scale);
+	int output;
+
+	output = static_cast<int>(value * scale);
 
 	if ( output > 32767 )
 		output = 32767;
@@ -3047,7 +3049,9 @@ short FixedSigned16( float value, float scale )
 
 unsigned short FixedUnsigned16( float value, float scale )
 {
-	int output = static_cast<int>(value * scale);
+	int output;
+
+	output = static_cast<int>(value * scale);
 	if ( output < 0 )
 		output = 0;
 	if ( output > 0xFFFF )

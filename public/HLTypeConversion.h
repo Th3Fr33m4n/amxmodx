@@ -9,7 +9,7 @@
 #ifndef _HL_CONVERSION_TYPE_H_
 #define _HL_CONVERSION_TYPE_H_
 
-#include <cstddef>   // size_t
+#include <stddef.h>   // size_t
 #include <extdll.h>   // edict_t, etc.
 #include <sdk_util.h> // FNullEnt, INDEXENT, etc.
 
@@ -196,8 +196,8 @@ class EHANDLE
 {
 	private:
 
-		edict_t* m_pent = nullptr;
-		int		 m_serialnumber = 0;
+		edict_t* m_pent;
+		int		 m_serialnumber;
 
 	public:
 

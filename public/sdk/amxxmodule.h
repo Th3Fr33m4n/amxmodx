@@ -20,7 +20,7 @@
 #include "moduleconfig.h"
 #include <IGameConfigs.h>
 
-#include <cstddef> // size_t
+#include <stddef.h> // size_t
 // metamod include files
 #ifdef USE_METAMOD
 #include <extdll.h>
@@ -79,7 +79,7 @@ struct amxx_module_info_s
 // Copyright (c) ITB CompuPhase, 1997-2005
 
 #if defined HAVE_STDINT_H
-  #include <cstdint>
+  #include <stdint.h>
 #else
   #if defined __LCC__ || defined __DMC__ || defined LINUX || defined __APPLE__
     #if defined HAVE_INTTYPES_H

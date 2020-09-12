@@ -28,8 +28,8 @@
  */
 
 #include "MemoryUtils.h"
-#include <cstdio> // sscanf
-#include <cstdarg> // va_start, etc.
+#include <stdio.h> // sscanf
+#include <stdarg.h> // va_start, etc.
 
 #if defined(__linux__)
 	#include <fcntl.h>
@@ -134,7 +134,7 @@ void *MemoryUtils::FindPattern(const void *libPtr, const char *pattern, size_t l
 	while (ptr < end)
 	{
 		found = true;
-		for (size_t i = 0; i < len; i++)
+		for (register size_t i = 0; i < len; i++)
 		{
 			if (pattern[i] != '\x2A' && pattern[i] != ptr[i])
 			{
