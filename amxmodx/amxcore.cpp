@@ -36,6 +36,7 @@
 #include "amx.h"
 #if defined __WIN32__ || defined _WIN32 || defined WIN32 || defined _Windows
   #include <windows.h>
+  #include <winuser.h>
 #endif
 
 /* A few compilers do not provide the ANSI C standard "time" functions */
@@ -74,7 +75,7 @@ static proplist *list_additem(proplist *root)
   proplist *item;
 
   assert(root!=NULL);
-  if ((item=(proplist *)malloc(sizeof(proplist)))==NULL)
+  if ((item=static_cast<proplist*>(malloc(sizeof(proplist))))==NULL)
     return NULL;
   item->name=NULL;
   item->id=0;
@@ -97,7 +98,7 @@ static void list_setitem(proplist *item,cell id,char *name,cell value)
   char *ptr;
 
   assert(item!=NULL);
-  if ((ptr=(char *)malloc(strlen(name)+1))==NULL)
+  if ((ptr=static_cast<char*>(malloc(strlen(name) + 1)))==NULL)
     return;
 //  if (item->name!=NULL)
     free(item->name);
@@ -140,10 +141,10 @@ static cell AMX_NATIVE_CALL numargs(AMX *amx, cell *params)
   cell bytes;
 
   (void)params;
-  hdr=(AMX_HEADER *)amx->base;
+  hdr=reinterpret_cast<AMX_HEADER*>(amx->base);
   data=amx->data ? amx->data : amx->base+(int)hdr->dat;
   /* the number of bytes is on the stack, at "frm + 2*cell" */
-  bytes= * (cell *)(data+(int)amx->frm+2*sizeof(cell));
+  bytes= * reinterpret_cast<cell*>(data + (int)amx->frm + 2 * sizeof(cell));
   /* the number of arguments is the number of bytes divided
    * by the size of a cell */
   return bytes/sizeof(cell);
@@ -155,14 +156,14 @@ static cell AMX_NATIVE_CALL getarg(AMX *amx, cell *params)
   uchar *data;
   cell value;
 
-  hdr=(AMX_HEADER *)amx->base;
+  hdr=reinterpret_cast<AMX_HEADER*>(amx->base);
   data=amx->data ? amx->data : amx->base+(int)hdr->dat;
   /* get the base value */
-  value= * (cell *)(data+(int)amx->frm+((int)params[1]+3)*sizeof(cell));
+  value= * reinterpret_cast<cell*>(data + (int)amx->frm + ((int)params[1] + 3) * sizeof(cell));
   /* adjust the address in "value" in case of an array access */
   value+=params[2]*sizeof(cell);
   /* get the value indirectly */
-  value= * (cell *)(data+(int)value);
+  value= * reinterpret_cast<cell*>(data + (int)value);
   return value;
 }
 
@@ -172,10 +173,10 @@ static cell AMX_NATIVE_CALL setarg(AMX *amx, cell *params)
   uchar *data;
   cell value;
 
-  hdr=(AMX_HEADER *)amx->base;
+  hdr=reinterpret_cast<AMX_HEADER*>(amx->base);
   data=amx->data ? amx->data : amx->base+(int)hdr->dat;
   /* get the base value */
-  value= * (cell *)(data+(int)amx->frm+((int)params[1]+3)*sizeof(cell));
+  value= * reinterpret_cast<cell*>(data + (int)amx->frm + ((int)params[1] + 3) * sizeof(cell));
   /* adjust the address in "value" in case of an array access */
   value+=params[2]*sizeof(cell);
   /* verify the address */
@@ -318,7 +319,7 @@ static char *MakePackedString(cell *cptr)
   char *dest;
 
   amx_StrLen(cptr,&len);
-  dest=(char *)malloc(len+sizeof(cell));
+  dest=static_cast<char*>(malloc(len + sizeof(cell)));
   amx_GetString(dest,cptr,0,UNLIMITED);
   return dest;
 }
@@ -436,7 +437,7 @@ static cell AMX_NATIVE_CALL core_random(AMX *amx,cell *params)
     /* one-time initialization (or, mostly one-time) */
     #if !defined SN_TARGET_PS2 && !defined _WIN32_WCE
         if (IL_StandardRandom_seed == INITIAL_SEED)
-            IL_StandardRandom_seed=(unsigned long)time(NULL);
+            IL_StandardRandom_seed=static_cast<unsigned long>(time(NULL));
     #endif
 
     lo = IL_StandardRandom_seed & 0xffff;

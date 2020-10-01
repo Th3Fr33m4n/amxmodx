@@ -1203,7 +1203,7 @@ extern "C" char *MNF_GetAmxStringNull(AMX *amx, cell amx_addr, int bufferId, int
 
 int MNF_GetAmxStringLen(const cell *ptr)
 {
-	register int c = 0;
+	int c = 0;
 
 	while (ptr[c])
 		++c;
