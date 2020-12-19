@@ -9,7 +9,7 @@
 
 #include "amxmodx.h"
 #include <amxmodx_version.h>
-#include <cstring>
+#include <string>
 
 void amx_command()
 {

@@ -307,7 +307,7 @@ CvarInfo* CvarManager::FindCvar(size_t index)
 
 	size_t iter_id = 0;
 
-	for (CvarsList::iterator iter = m_Cvars.begin(); iter != m_Cvars.end(); ++iter)
+	for (CvarsList::iterator iter = m_Cvars.begin(); iter != m_Cvars.end(); iter++)
 	{
 		if (iter->amxmodx && iter_id++ == index)
 		{
@@ -533,7 +533,7 @@ void CvarManager::OnConsoleCommand()
 		print_srvconsole(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
 	}
 
-	for (CvarsList::iterator iter = m_Cvars.begin(); iter != m_Cvars.end(); ++iter)
+	for (CvarsList::iterator iter = m_Cvars.begin(); iter != m_Cvars.end(); iter++)
 	{
 		CvarInfo* ci = (*iter);
 
@@ -612,7 +612,7 @@ void CvarManager::OnConsoleCommand()
 void CvarManager::OnPluginUnloaded()
 {
 	// Clear only plugin hooks list.
-	for (CvarsList::iterator cvar = m_Cvars.begin(); cvar != m_Cvars.end(); ++cvar)
+	for (CvarsList::iterator cvar = m_Cvars.begin(); cvar != m_Cvars.end(); cvar++)
 	{
 		for (size_t i = 0; i < (*cvar)->binds.length(); ++i)
 		{

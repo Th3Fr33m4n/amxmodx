@@ -774,6 +774,15 @@ void C_ServerDeactivate_Post()
 	g_vault.clear();
 	g_xvars.clear();
 	g_plugins.clear();
+	g_langMngr.Clear();
+
+	ArrayHandles.clear();
+	TrieHandles.clear();
+	TrieIterHandles.clear();
+	TrieSnapshotHandles.clear();
+	DataPackHandles.clear();
+	TextParsersHandles.clear();
+	GameConfigHandle.clear();
 
 	g_CvarManager.OnPluginUnloaded();
 
@@ -880,7 +889,7 @@ BOOL C_ClientConnect_Post(edict_t *pEntity, const char *pszName, const char *psz
 			{
 				List<AUTHORIZEFUNC>::iterator iter, end=g_auth_funcs.end();
 				AUTHORIZEFUNC fn;
-				for (iter=g_auth_funcs.begin(); iter!=end; ++iter)
+				for (iter=g_auth_funcs.begin(); iter!=end; iter++)
 				{
 					fn = (*iter);
 					fn(pPlayer->index, authid);
@@ -1012,7 +1021,7 @@ void C_ClientUserInfoChanged_Post(edict_t *pEntity, char *infobuffer)
 	if (pPlayer->ingame)
 	{
 		pPlayer->name =name;			//	Make sure player have name up to date
-	} else if (pPlayer->IsBot()) {
+	} else if (pEntity && pEntity->pvPrivateData && pPlayer->IsBot()) {
 		pPlayer->Connect(name, "127.0.0.1"/*CVAR_GET_STRING("net_address")*/);
 
 		executeForwards(FF_ClientConnect, static_cast<cell>(pPlayer->index));
@@ -1023,7 +1032,7 @@ void C_ClientUserInfoChanged_Post(edict_t *pEntity, char *infobuffer)
 		{
 			List<AUTHORIZEFUNC>::iterator iter, end=g_auth_funcs.end();
 			AUTHORIZEFUNC fn;
-			for (iter=g_auth_funcs.begin(); iter!=end; ++iter)
+			for (iter=g_auth_funcs.begin(); iter!=end; iter++)
 			{
 				fn = (*iter);
 				fn(pPlayer->index, authid);
@@ -1227,7 +1236,7 @@ void C_StartFrame_Post(void)
 				{
 					List<AUTHORIZEFUNC>::iterator iter, end=g_auth_funcs.end();
 					AUTHORIZEFUNC fn;
-					for (iter=g_auth_funcs.begin(); iter!=end; ++iter)
+					for (iter=g_auth_funcs.begin(); iter!=end; iter++)
 					{
 						fn = (*iter);
 						fn((*player)->index, auth);
@@ -1528,7 +1537,7 @@ void C_CvarValue2(const edict_t *pEdict, int requestId, const char *cvar, const 
 
 	List<ClientCvarQuery_Info *>::iterator iter, end=pPlayer->queries.end();
 	ClientCvarQuery_Info *info;
-	for (iter=pPlayer->queries.begin(); iter!=end; ++iter)
+	for (iter=pPlayer->queries.begin(); iter!=end; iter++)
 	{
 		info = (*iter);
 		if ( info->requestId == requestId )
@@ -1729,6 +1738,14 @@ C_DLLEXPORT	int	Meta_Detach(PLUG_LOADTIME now, PL_UNLOAD_REASON	reason)
 	g_xvars.clear();
 	g_plugins.clear();
 	g_langMngr.Clear();
+
+	ArrayHandles.clear();
+	TrieHandles.clear();
+	TrieIterHandles.clear();
+	TrieSnapshotHandles.clear();
+	DataPackHandles.clear();
+	TextParsersHandles.clear();
+	GameConfigHandle.clear();
 
 	ClearMessages();
 

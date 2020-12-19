@@ -43,8 +43,8 @@ template<>
 int HashFunction<ke::AString>(const ke::AString &k)
 {
 	unsigned long hash = 5381;
-	const char *str = k.chars();
-	char c;
+	register const char *str = k.chars();
+	register char c;
 	while ((c = *str++))
 	{
 		hash = ((hash << 5) + hash) + c; // hash*33 + c
@@ -56,8 +56,8 @@ template<>
 int HashAlt<const char *>(char const * const &k)
 {
 	unsigned long hash = 5381;
-	const char *str = k;
-	char c;
+	register const char *str = k;
+	register char c;
 	while ((c = *str++))
 	{
 		hash = ((hash << 5) + hash) + c; // hash*33 + c
@@ -69,8 +69,8 @@ template<>
 int HashAlt<ke::AString>(ke::AString const &k)
 {
 	unsigned long hash = 5381;
-	const char *str = k.chars();
-	char c;
+	register const char *str = k.chars();
+	register char c;
 	while ((c = *str++))
 	{
 		hash = ((hash << 5) + hash) + c; // hash*33 + c
@@ -171,7 +171,7 @@ CLangMngr::CLang::~CLang()
 void CLangMngr::CLang::Clear()
 {
 	THash<int, defentry>::iterator iter;
-	for (iter=m_LookUpTable.begin(); iter!=m_LookUpTable.end(); ++iter)
+	for (iter=m_LookUpTable.begin(); iter!=m_LookUpTable.end(); iter++)
 	{
 		if (iter->val.definition)
 		{
@@ -568,13 +568,13 @@ void CLangMngr::Clear()
 	
 	for (i = 0; i < m_Languages.length(); i++)
 	{
-//		if (m_Languages[i])
+		if (m_Languages[i])
 			delete m_Languages[i];
 	}
 
 	for (i = 0; i < KeyList.length(); i++)
 	{
-//		if (KeyList[i])
+		if (KeyList[i])
 			delete KeyList[i];
 	}
 

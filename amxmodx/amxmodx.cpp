@@ -19,7 +19,6 @@
 #include "CFlagManager.h"
 #include "nongpl_matches.h"
 #include "format.h"
-#include <cstring>
 
 extern CFlagManager FlagMan;
 ke::Vector<CAdminData *> DynamicAdmins;
@@ -3107,7 +3106,7 @@ static cell AMX_NATIVE_CALL remove_quotes(AMX *amx, cell *params) /* 1 param */
 
 	if (*text == '\"')
 	{
-		cell *temp = text;
+		register cell *temp = text;
 		int len = 0;
 
 		while (*temp++)

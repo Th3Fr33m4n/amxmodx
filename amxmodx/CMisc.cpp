@@ -50,7 +50,7 @@ void CPlayer::Disconnect()
 		pMenu->Close(index);
 
 	List<ClientCvarQuery_Info *>::iterator iter, end=queries.end();
-	for (iter=queries.begin(); iter!=end; ++iter)
+	for (iter=queries.begin(); iter!=end; iter++)
 	{
 		unregisterSPForward((*iter)->resultFwd);
 		delete [] (*iter)->params;
@@ -103,7 +103,7 @@ bool CPlayer::Connect(const char* connectname, const char* ipaddress)
 	}
 
 	List<ClientCvarQuery_Info *>::iterator iter, end=queries.end();
-	for (iter=queries.begin(); iter!=end; ++iter)
+	for (iter=queries.begin(); iter!=end; iter++)
 	{
 		unregisterSPForward((*iter)->resultFwd);
 		delete [] (*iter)->params;

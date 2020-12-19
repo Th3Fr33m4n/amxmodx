@@ -19,8 +19,6 @@
  *  3.  This notice may not be removed or altered from any source distribution.
  */
 
-#include <cstring>
-
 #define AMX_NODYNALOAD
 #define AMX_ANSIONLY
 
@@ -292,7 +290,7 @@ typedef enum {
   static int check_endian(void)
   {
     uint16_t val=0x00ff;
-    unsigned char *ptr=reinterpret_cast<unsigned char*>(&val);
+    unsigned char *ptr=(unsigned char *)&val;
     /* "ptr" points to the starting address of "val". If that address
      * holds the byte "0xff", the computer stored the low byte of "val"
      * at the lower address, and so the memory lay out is Little Endian.
@@ -323,7 +321,7 @@ typedef enum {
 #if BYTE_ORDER==BIG_ENDIAN || PAWN_CELL_SIZE==32
   static void swap32(uint32_t *v)
   {
-    unsigned char *s = reinterpret_cast<unsigned char*>(v);
+    unsigned char *s = (unsigned char *)v;
     unsigned char t;
 
     assert(sizeof(*v)==4);
@@ -521,7 +519,7 @@ static int amx_BrowseRelocate(AMX *amx)
   #endif
 
   assert(amx!=NULL);
-  hdr=reinterpret_cast<AMX_HEADER*>(amx->base);
+  hdr=(AMX_HEADER *)amx->base;
   assert(hdr!=NULL);
   assert(hdr->magic==AMX_MAGIC);
   code=amx->base+(int)hdr->cod;
@@ -541,14 +539,14 @@ static int amx_BrowseRelocate(AMX *amx)
 
   amx->sysreq_d=0;      /* preset */
   #if (defined __GNUC__ || defined ASM32 || defined JIT) 
-    amx_Exec(amx, static_cast<cell*>(static_cast<void*>(&opcode_list)), 0);
+    amx_Exec(amx, (cell*)(void*)&opcode_list, 0);
     /* to use direct system requests, a function pointer must fit in a cell;
      * because the native function's address will be stored as the parameter
      * of SYSREQ.D
      */
     if ((amx->flags & AMX_FLAG_JITC)==0 && sizeof(AMX_NATIVE)<=sizeof(cell))
       amx->sysreq_d=opcode_list[OP_SYSREQ_D];
-	amx->userdata[UD_OPCODELIST] = static_cast<void*>(opcode_list);
+	amx->userdata[UD_OPCODELIST] = (void *)opcode_list;
   #else
     /* ANSI C
      * to use direct system requests, a function pointer must fit in a cell;
@@ -572,7 +570,7 @@ static int amx_BrowseRelocate(AMX *amx)
        * as big as the size of a pointer (jump address); so basically we
        * rely on the opcode and a pointer being 32-bit
        */
-      *reinterpret_cast<cell*>(code + (int)cip) = opcode_list[op];
+      *(cell *)(code+(int)cip) = opcode_list[op];
     #endif
     #if defined JIT
       opcode_count++;
