@@ -79,6 +79,10 @@ typedef int BOOL;
 #include "stdio.h"
 #include "stdlib.h"
 #include "math.h"
+
+//Fix for GCC 7 - [APG]RoboCop[CL]
+#include <algorithm>
+
 #ifndef min
 #define min(a,b)  (((a) < (b)) ? (a) : (b))
 #endif

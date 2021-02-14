@@ -15,21 +15,20 @@
 #include "amxxmodule.h"
 #include "tsx.h"
 
-
 void Client_ResetHUD_End(void* mValue)
 {
-	if ( mPlayer->IsAlive() ){ // ostatni przed spawn'em 
-		mPlayer->clearStats = gpGlobals->time + 0.25f; // teraz czysc statystyki 
+	if ( mPlayer->IsAlive() ){ // last one before spawn 
+		mPlayer->clearStats = gpGlobals->time + 0.25f; // now clear the statistics 
 	}
-	else { // dalej "dead" nie czysc statystyk!
+	else { // still "dead" do not clean the statistics!
 		mPlayer->items = 0;
 		mPlayer->is_specialist = 0;
 		mPlayer->killingSpree = 0;
 		mPlayer->killFlags = 0;
 		mPlayer->frags = (int)mPlayer->pEdict->v.frags;
 		/* 
-		fix dla user_kill() z addfrag 
-		oraz self kills
+		fix for user_kill() with addfrag
+		and self kills
 		*/
 	}
 }
@@ -113,7 +112,7 @@ void Client_TSHealth_End(void* mValue){
 			}
 		}
 		else if ( szCName[0] == 'k' ) {
-			edict_t *pOwner =  (edict_t *)*( (int*)enemy->pvPrivateData + gKnifeOffset );
+			edict_t *pOwner =  (edict_t *)*( (int*)enemy->pvPrivateData + gKnifeOffset );//That triggers crash [APG]RoboCop[CL]
 
 			if ( FNullEnt( (edict_t*)pOwner) )
 				return;
@@ -150,7 +149,7 @@ void Client_TSHealth_End(void* mValue){
 
 	// death
 
-    if ( (int)pAttacker->pEdict->v.frags - pAttacker->frags == 0 ) // nie bylo fraga ? jest tak dla bledu z granatem ..
+    if ( (int)pAttacker->pEdict->v.frags - pAttacker->frags == 0 ) // was not a frag? this is for the pomegranate error...
 		pAttacker = mPlayer;
 
 	int killFlags = 0;
@@ -161,8 +160,8 @@ void Client_TSHealth_End(void* mValue){
 		int stuntKill = 0;
 		int slpos = 0;
 
-		if ( weapon == 24 ) // dla granata nie liczy sie sflags
-			; // nic nie rob..
+		if ( weapon == 24 ) // no sflags for a grenade
+			; // don't do anything..
 		else if ( sflags == 20 || sflags == 1028 || sflags == 2052 )
 			stuntKill = 1;
 		else if ( sflags == 36)
@@ -202,10 +201,10 @@ void Client_TSHealth_End(void* mValue){
 
 		pAttacker->frags += pAttacker->lastFrag; 
 			if ( pAttacker->frags != pAttacker->pEdict->v.frags ){
-				// moze to sliding kill ?
+				// maybe it's a sliding kill ?
 				if ( slpos )
 					killFlags |= TSKF_SLIDINGKILL;	
-				else  // moze to kung fu z bronia ?
+				else  // maybe it's kung fu with a gun ?
 					weapon = 36;
 				pAttacker->lastFrag += (int)pAttacker->pEdict->v.frags - pAttacker->frags;
 				pAttacker->frags = (int)pAttacker->pEdict->v.frags;
@@ -234,7 +233,7 @@ void Client_WStatus(void* mValue)
 	switch(mState++){
 	case 1:
 		if ( !*(int*)mValue ){
-			mPlayer->current = 36; // fix dla wytraconej broni
+			mPlayer->current = 36; // fix for lost weapon
 		}
 		break;
 	}
