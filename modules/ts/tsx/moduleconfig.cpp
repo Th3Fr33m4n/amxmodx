@@ -80,9 +80,9 @@ struct sUserMsg
 
 const char* get_localinfo( const char* name , const char* def = 0 )
 {
-	const char* b = LOCALINFO( (char*)name );
+	const char* b = LOCALINFO( const_cast<char*>(name) );
 	if (((b==0)||(*b==0)) && def )
-		SET_LOCALINFO((char*)name,(char*)(b = def) );
+		SET_LOCALINFO(const_cast<char*>(name),const_cast<char*>(b = def) );
 	return b;
 }
 
@@ -131,9 +131,9 @@ void check_stunts(edict_s *player)
 void ServerActivate_Post( edict_t *pEdictList, int edictCount, int clientMax )
 {
 
-	is_theonemode =	(int)CVAR_GET_FLOAT("mp_theonemode") ? true:false;
+	is_theonemode =	static_cast<int>(CVAR_GET_FLOAT("mp_theonemode")) ? true:false;
 
-	rankBots = (int)tsstats_rankbots->value ? true:false;
+	rankBots = static_cast<int>(tsstats_rankbots->value) ? true:false;
 
 	for( int i = 1; i <= gpGlobals->maxClients; ++i )
 		GET_PLAYER_POINTER_I(i)->Init( i , pEdictList + i );
@@ -168,7 +168,7 @@ void ServerDeactivate()
 		if (pPlayer->rank) pPlayer->Disconnect();
 	}
 
-	if ( (g_rank.getRankNum() >= (int)tsstats_maxsize->value) || ((int)tsstats_reset->value == 1) ) {
+	if ( (g_rank.getRankNum() >= static_cast<int>(tsstats_maxsize->value)) || (static_cast<int>(tsstats_reset->value) == 1) ) {
 		CVAR_SET_FLOAT("tsstats_reset",0.0);
 		g_rank.clear();
 	}
@@ -239,7 +239,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	RETURN_META(MRES_IGNORED);
 }
 
-void MessageEnd_Post(void)
+void MessageEnd_Post()
 {
 	if (endfunction) (*endfunction)(NULL);
 	RETURN_META(MRES_IGNORED);
@@ -247,37 +247,37 @@ void MessageEnd_Post(void)
 
 void WriteByte_Post(int iValue)
 {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteChar_Post(int iValue)
 {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteShort_Post(int iValue)
 {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteLong_Post(int iValue)
 {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteAngle_Post(float flValue)
 {
-	if (function) (*function)((void *)&flValue);
+	if (function) (*function)(static_cast<void*>(&flValue));
 	RETURN_META(MRES_IGNORED);
 }
 
 void WriteCoord_Post(float flValue)
 {
-	if (function) (*function)((void *)&flValue);
+	if (function) (*function)(static_cast<void*>(&flValue));
 	RETURN_META(MRES_IGNORED);
 }
 
@@ -289,7 +289,7 @@ void WriteString_Post(const char *sz)
 
 void WriteEntity_Post(int iValue)
 {
-	if (function) (*function)((void *)&iValue);
+	if (function) (*function)(static_cast<void*>(&iValue));
 	RETURN_META(MRES_IGNORED);
 }
 

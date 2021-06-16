@@ -285,35 +285,33 @@ void Client_Damage_End(void* mValue){
 }
 
 void Client_CurWeapon(void* mValue){
-  
-  static int iState;
-  static int iId;
-  switch (mState++){
-  case 0: 
-    iState = *static_cast<int*>(mValue);
-    break;
-  case 1:
-    if (!iState) break; 
-    iId = *static_cast<int*>(mValue);
-    break;
-  case 2:
-	if (!mPlayer || !iState ) break;
-    int iClip = *static_cast<int*>(mValue);
-    
-	if ((iClip > -1) && (iClip < mPlayer->weapons[iId].clip)){
-		mPlayer->saveShot(iId);
+	switch (mState++) {
+		static int iId;
+		static int iState;
+	case 0:
+		iState = *static_cast<int*>(mValue);
+		break;
+	case 1:
+		if (!iState) break;
+		iId = *static_cast<int*>(mValue);
+		break;
+	case 2:
+		if (!mPlayer || !iState) break;
+		int iClip = *static_cast<int*>(mValue);
+
+		if ((iClip > -1) && (iClip < mPlayer->weapons[iId].clip)) {
+			mPlayer->saveShot(iId);
+		}
+
+		mPlayer->weapons[iId].clip = iClip;
+		mPlayer->current = iId;
 	}
-	
-    mPlayer->weapons[iId].clip = iClip;
-	mPlayer->current = iId;
-  }
 }
 
 void Client_AmmoX(void* mValue){
-  
-  static int iAmmo;
-  switch (mState++){
-  case 0:
+	switch (mState++){
+		static int iAmmo;
+	case 0:
     iAmmo = *static_cast<int*>(mValue);
     break;
   case 1:
@@ -338,10 +336,9 @@ void Client_AmmoX(void* mValue){
 }
 
 void Client_AmmoPickup(void* mValue){
-  
-  static int iSlot;
-  switch (mState++){
-  case 0:
+	switch (mState++){
+		static int iSlot;
+	case 0:
     iSlot = *static_cast<int*>(mValue);
     break;
   case 1:
@@ -354,9 +351,9 @@ void Client_AmmoPickup(void* mValue){
 }
 
 void Client_ScoreInfo(void* mValue){
-  static int iIndex;
-  static int iClass;
-  switch (mState++){
+	switch (mState++){
+		static int iClass;
+		static int iIndex;
   case 0:
     iIndex = *static_cast<int*>(mValue);
     break;

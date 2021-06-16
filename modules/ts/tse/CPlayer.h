@@ -14,15 +14,15 @@
 inline bool IsPlayerValid(AMX *amx, int pl) {
 	if (pl < 1 || pl > gpGlobals->maxClients) {
 		MF_LogError(amx, AMX_ERR_NATIVE, "Player out of range (%d)", pl);
-		return 0;
+		return false;
 	}
 	else {
 		if (!MF_IsPlayerIngame(pl) || FNullEnt(MF_GetPlayerEdict(pl))) {
 			MF_LogError(amx, AMX_ERR_NATIVE, "Invalid player %d", pl);
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 #define Player(i) (&PlayersArray[i])

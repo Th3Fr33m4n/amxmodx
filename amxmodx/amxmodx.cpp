@@ -4797,7 +4797,7 @@ AMX_NATIVE_INFO amxmodx_Natives[] =
 	{"plugin_flags",			plugin_flags},
 	{"precache_model",			precache_model},
 	{"precache_sound",			precache_sound},
-	{"precache_generic",			precache_generic},
+	{"precache_generic",		precache_generic},
 	{"precache_event",			precache_event},
 	{"random_float",			random_float},
 	{"random_num",				random_num},

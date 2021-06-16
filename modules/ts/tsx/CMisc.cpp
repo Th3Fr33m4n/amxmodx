@@ -46,7 +46,7 @@ void CPlayer::PutInServer()
 	const char* unique;
 	const char* name = STRING(pEdict->v.netname);
 	bool isip = false;
-	switch((int)tsstats_rank->value) {
+	switch(static_cast<int>(tsstats_rank->value)) {
 	case 1: 
 		if ( (unique = GETPLAYERAUTHID(pEdict)) == 0 )
 			unique = name; // failed to get authid
@@ -100,7 +100,7 @@ void CPlayer::saveKill(CPlayer* pVictim, int wweapon, int hhs, int ttk)
 	if ( ignoreBots(pEdict,pVictim->pEdict) )
 		return;
 
-	pVictim->attackers[index].name = (char*)weaponData[wweapon].name;
+	pVictim->attackers[index].name = static_cast<char*>(weaponData[wweapon].name);
 	pVictim->attackers[index].kills++;
 	pVictim->attackers[index].hs += hhs;
 	pVictim->attackers[index].tks += ttk;
@@ -114,9 +114,9 @@ void CPlayer::saveKill(CPlayer* pVictim, int wweapon, int hhs, int ttk)
 	
 	pVictim->weaponsRnd[pVictim->current].deaths++; // DEC-Weapon (round) stats
 	pVictim->weaponsRnd[0].deaths++;                   // DEC-Weapon (round) stats
-	
-	int vi = pVictim->index;
-	victims[vi].name = (char*)weaponData[wweapon].name;
+
+	const int vi = pVictim->index;
+	victims[vi].name = static_cast<char*>(weaponData[wweapon].name);
 	victims[vi].deaths++;
 	victims[vi].hs += hhs;
 	victims[vi].tks += ttk;
@@ -156,7 +156,7 @@ void CPlayer::saveHit(CPlayer* pVictim, int wweapon, int ddamage, int bbody)
 	pVictim->attackers[0].damage += ddamage;
 	pVictim->attackers[0].bodyHits[bbody]++;
 
-	int vi = pVictim->index;
+	const int vi = pVictim->index;
 	victims[vi].hits++;
 	victims[vi].damage += ddamage;
 	victims[vi].bodyHits[bbody]++;
@@ -199,22 +199,22 @@ void CPlayer::saveShot(int weapon)
 
 void CPlayer::SetOffsetF(int offs, float val)
 {
-	*((float *)pEdict->pvPrivateData + offs) = val;
+	*(static_cast<float*>(pEdict->pvPrivateData) + offs) = val;
 }
 
 void CPlayer::SetOffset(int offs, int val)
 {
-	*((int *)pEdict->pvPrivateData + offs) = val;
+	*(static_cast<int*>(pEdict->pvPrivateData) + offs) = val;
 }
 
 float CPlayer::GetOffsetF(int offs)
 {
-	return *((float *)pEdict->pvPrivateData + offs);
+	return *(static_cast<float*>(pEdict->pvPrivateData) + offs);
 }
 
 int CPlayer::GetOffset(int offs)
 {
-	return *((int *)pEdict->pvPrivateData + offs);
+	return *(static_cast<int*>(pEdict->pvPrivateData) + offs);
 }
 
 float CPlayer::GetTime()

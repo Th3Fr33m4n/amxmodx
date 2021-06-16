@@ -50,7 +50,7 @@ static cell AMX_NATIVE_CALL tse_getuserkevlar(AMX *amx, cell *params)
 {
 	byte pid = params[1];
 	CHECK_PLAYER_NGTV(pid);
-	return (bool)(Player(pid)->GetPDataInt(628) != 0);
+	return Player(pid)->GetPDataInt(628) != 0;
 }
 
 static cell AMX_NATIVE_CALL tse_getuserstamina(AMX *amx, cell *params) 
@@ -113,6 +113,7 @@ static cell AMX_NATIVE_CALL tse_getusercurritems(AMX *amx, cell *params)
 			return 2;
 		case 16842752:
 			return 3;
+		default: ;
 	}
 	return 0;
 }
@@ -139,6 +140,7 @@ static cell AMX_NATIVE_CALL tse_setusercurritems(AMX *amx, cell *params)
 			Player(pid)->SetPDataInt(462, 16842752);
 			break;
 		}
+	default: ;
 	}
 	return 1;
 }
@@ -276,7 +278,7 @@ AMX_NATIVE_INFO pl_funcs[] = {
 	{ "tse_setfakepwup", tse_setfakepwup },
 	{ "tse_setuserpwupduration", tse_setuserpwupduration },
 	{ "tse_configmeleeatk", tse_configmeleeatk },
-	{ NULL, NULL }
+	{nullptr, nullptr }
 };
 
 static cell AMX_NATIVE_CALL tse_sendweapparams(AMX *amx, cell *params)
@@ -395,7 +397,7 @@ static cell AMX_NATIVE_CALL tse_setweapready(AMX *amx, cell *params)
 	byte weapon = params[2];
 	if (!WeaponsList[weapon].offsets.clip) return 0;
 	int isready = params[3];
-	Player(pid)->SetWeapPDataInt(WeaponsList[weapon].offsets.clip + 8, (int)!(bool)(isready != 0));
+	Player(pid)->SetWeapPDataInt(WeaponsList[weapon].offsets.clip + 8, (int)!(isready != 0));
 	return 1;
 }
 
@@ -465,5 +467,5 @@ AMX_NATIVE_INFO weap_funcs[] = {
 	{ "tse_isuserhasweap", tse_isuserhasweap },
 	{ "tse_createweap", tse_createweap },
 	{ "tse_giveuserweap", tse_giveuserweap },
-	{ NULL, NULL }
+	{nullptr, nullptr }
 };

@@ -275,7 +275,6 @@ void RankSystem::loadRank(const char* filename)
 	if (i == RANK_VERSION)
 	{
 		Stats d;
-		char unique[64], name[64];
 		if (fread(&i, sizeof(short int), 1, bfp) != 1)
 		{
 			fclose(bfp);
@@ -284,6 +283,8 @@ void RankSystem::loadRank(const char* filename)
 
 		while(i && !feof(bfp))
 		{
+			char name[64];
+			char unique[64];
 			TRYREAD(name, i, sizeof(char), bfp);
 			TRYREAD(&i, 1, sizeof(short int), bfp);
 			TRYREAD(unique, i, sizeof(char), bfp);

@@ -3034,9 +3034,7 @@ void UTIL_HudMessage(CBaseEntity *pEntity, const hudtextparms_t &textparms,
 
 short FixedSigned16( float value, float scale )
 {
-	int output;
-
-	output = static_cast<int>(value * scale);
+	int output = static_cast<int>(value * scale);
 
 	if ( output > 32767 )
 		output = 32767;
@@ -3049,9 +3047,7 @@ short FixedSigned16( float value, float scale )
 
 unsigned short FixedUnsigned16( float value, float scale )
 {
-	int output;
-
-	output = static_cast<int>(value * scale);
+	int output = static_cast<int>(value * scale);
 	if ( output < 0 )
 		output = 0;
 	if ( output > 0xFFFF )

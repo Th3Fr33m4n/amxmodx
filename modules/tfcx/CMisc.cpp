@@ -105,6 +105,7 @@ void CPlayer::PutInServer(){
 	case 2:
 		unique = ip;
 		isip = true;
+	default: ;
 	}
 	rank = g_rank.findEntryInRank( unique , name , isip);
 }

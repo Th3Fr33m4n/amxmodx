@@ -84,9 +84,13 @@ Thumbs.db
 # AMXX plugin build related files
 plugins/compile.dat
 plugins/compiled/
+*.amx
+*.amxx
 
 build_deps/
 mysql-5.7/lib/libmysqld.a
 mysql-5.7/lib/mysqlserver.lib
 mysql-5.5.8/
 apg-load
+*.i
+*.cmd

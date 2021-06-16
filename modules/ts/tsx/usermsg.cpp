@@ -25,7 +25,7 @@ void Client_ResetHUD_End(void* mValue)
 		mPlayer->is_specialist = 0;
 		mPlayer->killingSpree = 0;
 		mPlayer->killFlags = 0;
-		mPlayer->frags = (int)mPlayer->pEdict->v.frags;
+		mPlayer->frags = static_cast<int>(mPlayer->pEdict->v.frags);
 		/* 
 		fix for user_kill() with addfrag
 		and self kills
@@ -35,46 +35,48 @@ void Client_ResetHUD_End(void* mValue)
 
 void Client_ScoreInfo(void* mValue)
 {
-	static int iId;
 	switch(mState++){
+		static int iId;
 	case 0:
-		iId = *(int*)mValue;
+		iId = *static_cast<int*>(mValue);
 		break;
 	case 4:
 		if ( iId && (iId < 33) ){
-			GET_PLAYER_POINTER_I(iId)->teamId = *(int*)mValue;
+			GET_PLAYER_POINTER_I(iId)->teamId = *static_cast<int*>(mValue);
 		}
 		break;
+	default: ;
 	}
 }
 
 void Client_WeaponInfo(void* mValue)
 {
-	static int wpn;
 	switch(mState++){
+		static int wpn;
 	case 0:
-		wpn =  *(int*)mValue;
+		wpn =  *static_cast<int*>(mValue);
 		if ( !wpn ) wpn = 36; // kung fu
 		mPlayer->current = wpn;
 		break;
 	case 1:
-		mPlayer->weapons[wpn].clip = *(int*)mValue;
+		mPlayer->weapons[wpn].clip = *static_cast<int*>(mValue);
 		break;
 	case 2:
-		mPlayer->weapons[wpn].ammo = *(int*)mValue;
+		mPlayer->weapons[wpn].ammo = *static_cast<int*>(mValue);
 		break;
 	case 3:
-		mPlayer->weapons[wpn].mode = *(int*)mValue;
+		mPlayer->weapons[wpn].mode = *static_cast<int*>(mValue);
 		break;
 	case 4:
-		mPlayer->weapons[wpn].attach = *(int*)mValue;
+		mPlayer->weapons[wpn].attach = *static_cast<int*>(mValue);
 		break;
+	default: ;
 	}
 }
 
 void Client_ClipInfo(void* mValue)
 {
-	int iValue = *(int*)mValue;
+	const int iValue = *static_cast<int*>(mValue);
 	if ( iValue < mPlayer->weapons[mPlayer->current].clip ) {
 		mPlayer->saveShot(mPlayer->current);
 	}
@@ -83,7 +85,7 @@ void Client_ClipInfo(void* mValue)
 
 void Client_TSHealth_End(void* mValue){
 	edict_t *enemy = mPlayer->pEdict->v.dmg_inflictor;
-	int damage = (int)mPlayer->pEdict->v.dmg_take;
+	int damage = static_cast<int>(mPlayer->pEdict->v.dmg_take);
 
 	if ( !damage || !enemy )
 		return;
@@ -112,9 +114,10 @@ void Client_TSHealth_End(void* mValue){
 			}
 		}
 		else if ( szCName[0] == 'k' ) {
-			edict_t *pOwner =  (edict_t *)*( (int*)enemy->pvPrivateData + gKnifeOffset );//That triggers crash [APG]RoboCop[CL]
+			//That line below triggers crash [APG]RoboCop[CL]
+			edict_t* pOwner = reinterpret_cast<edict_t*>(*(static_cast<int*>(enemy->pvPrivateData) + gKnifeOffset));
 
-			if ( FNullEnt( (edict_t*)pOwner) )
+			if ( FNullEnt( static_cast<edict_t*>(pOwner)) )
 				return;
 
 			pAttacker = GET_PLAYER_POINTER( pOwner );
@@ -136,12 +139,12 @@ void Client_TSHealth_End(void* mValue){
 		pAttacker->saveShot(weapon);
 	
 	MF_ExecuteForward(g_damage_info,
-		(cell)pAttacker->index,
-		(cell)mPlayer->index,
-		(cell)damage,
-		(cell)weapon,
-		(cell)aim,
-		(cell)TA
+		static_cast<cell>(pAttacker->index),
+		static_cast<cell>(mPlayer->index),
+		static_cast<cell>(damage),
+		static_cast<cell>(weapon),
+		static_cast<cell>(aim),
+		static_cast<cell>(TA)
 		);
 
 	if ( mPlayer->IsAlive() )
@@ -149,7 +152,7 @@ void Client_TSHealth_End(void* mValue){
 
 	// death
 
-    if ( (int)pAttacker->pEdict->v.frags - pAttacker->frags == 0 ) // was not a frag? this is for the pomegranate error...
+    if ( static_cast<int>(pAttacker->pEdict->v.frags) - pAttacker->frags == 0 ) // was not a frag? this is for the pomegranate error...
 		pAttacker = mPlayer;
 
 	int killFlags = 0;
@@ -206,55 +209,56 @@ void Client_TSHealth_End(void* mValue){
 					killFlags |= TSKF_SLIDINGKILL;	
 				else  // maybe it's kung fu with a gun ?
 					weapon = 36;
-				pAttacker->lastFrag += (int)pAttacker->pEdict->v.frags - pAttacker->frags;
-				pAttacker->frags = (int)pAttacker->pEdict->v.frags;
+				pAttacker->lastFrag += static_cast<int>(pAttacker->pEdict->v.frags) - pAttacker->frags;
+				pAttacker->frags = static_cast<int>(pAttacker->pEdict->v.frags);
 			}
 	}
 
 	pAttacker->killFlags = killFlags;
 	pAttacker->saveKill(mPlayer,weapon,( aim == 1 ) ? 1:0 ,TA);
 	MF_ExecuteForward(g_death_info,
-		(cell)pAttacker->index,
-		(cell)mPlayer->index,
-		(cell)weapon,
-		(cell)aim,
-		(cell)TA);
+		static_cast<cell>(pAttacker->index),
+		static_cast<cell>(mPlayer->index),
+		static_cast<cell>(weapon),
+		static_cast<cell>(aim),
+		static_cast<cell>(TA));
 }
 
 void Client_TSState(void* mValue)
 {
 	mPlayer->oldstate = mPlayer->state;
 	mPlayer->checkstate = 1;
-	mPlayer->state =  *(int*)mValue;
+	mPlayer->state =  *static_cast<int*>(mValue);
 }
 
 void Client_WStatus(void* mValue)
 {
 	switch(mState++){
 	case 1:
-		if ( !*(int*)mValue ){
+		if ( !*static_cast<int*>(mValue) ){
 			mPlayer->current = 36; // fix for lost weapon
 		}
 		break;
+	default: ;
 	}
 }
 
 void Client_TSCash(void* mValue)
 {
-	mPlayer->money = *(int*)mValue;
+	mPlayer->money = *static_cast<int*>(mValue);
 }
 
 void Client_TSSpace(void* mValue)
 {
-	mPlayer->space = *(int*)mValue;
+	mPlayer->space = *static_cast<int*>(mValue);
 }
 
 void Client_PwUp(void* mValue)
 {
-	static int iPwType;
 	switch(mState++){
+		static int iPwType;
 	case 0:
-		iPwType = *(int*)mValue;
+		iPwType = *static_cast<int*>(mValue);
 		switch(iPwType){
 		case TSPWUP_KUNGFU :
 			mPlayer->items |= TSITEM_KUNGFU;
@@ -267,7 +271,8 @@ void Client_PwUp(void* mValue)
 		break;
 	case 1:
 		if ( iPwType != TSPWUP_KUNGFU && iPwType != TSPWUP_SJUMP )
-			mPlayer->PwUpValue = *(int*)mValue;
+			mPlayer->PwUpValue = *static_cast<int*>(mValue);
 		break;
+	default: ;
 	}
 }

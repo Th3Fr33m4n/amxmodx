@@ -77,9 +77,9 @@ struct sUserMsg {
 
 const char* get_localinfo( const char* name , const char* def = nullptr )
 {
-	const char* b = LOCALINFO( (char*)(name) );
+	const char* b = LOCALINFO( name );
 	if (((b==nullptr)||(*b==0)) && def )
-		SET_LOCALINFO((char*)(name),(char*)(b = def) );
+		SET_LOCALINFO(name,b = def );
 	return b;
 }
 
@@ -214,7 +214,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	RETURN_META(MRES_IGNORED);
 }
 
-void MessageEnd_Post(void) {
+void MessageEnd_Post() {
 	if (endfunction) (*endfunction)(nullptr);
 	RETURN_META(MRES_IGNORED);
 }
@@ -281,8 +281,7 @@ void TraceLine_Post(const float *v1, const float *v2, int fNoMonsters, edict_t *
 	else{
 		if ( e->v.owner && e->v.owner->v.flags& (FL_CLIENT | FL_FAKECLIENT) ){
 			CPlayer *pPlayer = GET_PLAYER_POINTER(e->v.owner);
-			int i;
-			for ( i=0;i<MAX_TRACE;i++){
+			for ( int i = 0;i<MAX_TRACE;i++){
 				if ( util_strncmp( traceData[i].szTag,traceData[i].start ? STRING(e->v.classname)+traceData[i].start :  STRING(e->v.classname) ,traceData[i].stop) ){
 					if ( traceData[i].iAction & ACT_NADE_SHOT  ){
 						pPlayer->saveShot(traceData[i].iId);

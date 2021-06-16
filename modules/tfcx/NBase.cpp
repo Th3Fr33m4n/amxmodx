@@ -183,7 +183,6 @@ static cell AMX_NATIVE_CALL TFC_SetBAmmo(AMX *amx, cell *params) {
 		break;
 	default : 
 		return 0;
-		break;
 	}
 	return 1;
 }
@@ -198,27 +197,19 @@ static cell AMX_NATIVE_CALL TFC_GetBAmmo(AMX *amx, cell *params) {
 	switch(params[2]){ // ammo
 	case TFC_AMMO_SHELLS:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_SHELLS]);
-		break;
 	case TFC_AMMO_BULLETS:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_BULLETS]);
-		break;
 	case TFC_AMMO_CELLS:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_CELLS]);
-		break;
 	case TFC_AMMO_ROCKETS:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_ROCKETS]);
-		break;
 	case TFC_AMMO_NADE1:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_NADE1]);
-		break;
 	case TFC_AMMO_NADE2:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + pdAmmo[TFC_AMMO_NADE2]);
-		break;
 	default : 
 		return 0;
-		break;
 	}
-	return 1;
 }
 
 static cell AMX_NATIVE_CALL TFC_GetWeaponBAmmo(AMX *amx, cell *params) { 
@@ -236,25 +227,20 @@ static cell AMX_NATIVE_CALL TFC_GetWeaponBAmmo(AMX *amx, cell *params) {
 	case TFC_WPN_TRANQ:
 	case TFC_WPN_AC:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_SHELLS);
-		break;
 	case TFC_WPN_NG:
 	case TFC_WPN_SUPERNG:
 	case TFC_WPN_RAILGUN:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_BULLETS);
-		break;
 	case TFC_WPN_FLAMETHROWER:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_CELLS);
-		break;
 	case TFC_WPN_GL:
 	case TFC_WPN_RPG:
 	case TFC_WPN_IC:
 	case TFC_WPN_PL:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_ROCKETS);
-		break;
 	case TFC_WPN_CALTROP:
 	case TFC_WPN_NORMALGRENADE:
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_NADE1);
-		break;
 	case TFC_WPN_CONCUSSIONGRENADE: 
 	case TFC_WPN_NAILGRENADE: 
 	case TFC_WPN_MIRVGRENADE:
@@ -264,13 +250,9 @@ static cell AMX_NATIVE_CALL TFC_GetWeaponBAmmo(AMX *amx, cell *params) {
 		return *( static_cast<int*>(pPlayer->pEdict->pvPrivateData) + PD_AMMO_NADE2);
 
 
-		break;
 	default : 
 		return 0;
-		break;
 	}
-	return 1;
-
 }
 
 static cell AMX_NATIVE_CALL TFC_SetWeaponBAmmo(AMX *amx, cell *params) { 
@@ -324,7 +306,6 @@ static cell AMX_NATIVE_CALL TFC_SetWeaponBAmmo(AMX *amx, cell *params) {
 		break;
 	default : 
 		return 0;
-		break;
 	}
 	return 1;
 }

@@ -431,16 +431,12 @@ void FN_META_QUERY(void);
 #endif // FN_META_QUERY
 
 #ifdef FN_META_ATTACH
-void FN_META_ATTACH(void);
+void FN_META_ATTACH();
 #endif // FN_META_ATTACH
 
 #ifdef FN_META_DETACH
 void FN_META_DETACH(void);
 #endif // FN_META_DETACH
-
-
-
-
 
 #ifdef FN_GameDLLInit
 void FN_GameDLLInit(void);
@@ -531,7 +527,7 @@ void FN_ServerActivate(edict_t *pEdictList, int edictCount, int clientMax);
 #endif // FN_ServerActivate
 
 #ifdef FN_ServerDeactivate
-void FN_ServerDeactivate(void);
+void FN_ServerDeactivate();
 #endif // FN_ServerDeactivate
 
 #ifdef FN_PlayerPreThink
@@ -1617,7 +1613,7 @@ void FN_MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edic
 #endif // FN_MessageBegin_Post
 
 #ifdef FN_MessageEnd_Post
-void FN_MessageEnd_Post(void);
+void FN_MessageEnd_Post();
 #endif // FN_MessageEnd_Post
 
 #ifdef FN_WriteByte_Post
@@ -2047,15 +2043,15 @@ int FN_AMXX_CHECKGAME(const char *);
 #endif // FN_AMXX_CHECKGAME
 
 #ifdef FN_AMXX_ATTACH
-void FN_AMXX_ATTACH(void);
+void FN_AMXX_ATTACH();
 #endif // FN_AMXX_ATTACH
 
 #ifdef FN_AMXX_DETACH
-void FN_AMXX_DETACH(void);
+void FN_AMXX_DETACH();
 #endif // FN_AMXX_DETACH
 
 #ifdef FN_AMXX_PLUGINSLOADED
-void FN_AMXX_PLUGINSLOADED(void);
+void FN_AMXX_PLUGINSLOADED();
 #endif // FN_AMXX_PLUGINSLOADED
 
 #ifdef FN_AMXX_PLUGINSUNLOADING
@@ -2135,7 +2131,7 @@ typedef char *			(*PFN_BUILD_PATHNAME_R)			(char * /*buffer*/, size_t /* maxlen 
 typedef cell *			(*PFN_GET_AMXADDR)				(AMX * /*amx*/, cell /*offset*/);
 typedef cell *			(*PFN_GET_AMXVECTOR_NULL)		(AMX * /*amx*/, cell /*offset*/);
 typedef void			(*PFN_PRINT_SRVCONSOLE)			(const char * /*format*/, ...);
-typedef const char *	(*PFN_GET_MODNAME)				(void);
+typedef const char *	(*PFN_GET_MODNAME)				();
 typedef const char *	(*PFN_GET_AMXSCRIPTNAME)		(int /*id*/);
 typedef AMX *			(*PFN_GET_AMXSCRIPT)			(int /*id*/);
 typedef int				(*PFN_FIND_AMXSCRIPT_BYAMX)		(const AMX * /*amx*/);

@@ -45,7 +45,7 @@ uint16_t CPlayer::GetPowerup()
 
 edict_t *CPlayer::GetWeaponEdict()
 {
-	edict_t *weapon = NULL;
+	edict_t *weapon = nullptr;
 	while ((weapon = g_engfuncs.pfnFindEntityByString(weapon, "classname", "weapon_tsgun")) != 0)
 		if (weapon->v.owner == this->PlayerEdict)
 			return weapon;

@@ -88,7 +88,7 @@ static cell AMX_NATIVE_CALL get_user_wrstats(AMX *amx, cell *params) /* 4 param 
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid player %d", index);
 		return 0;
 	}
-	int weapon = params[2];
+	const int weapon = params[2];
 	if (weapon<0||weapon>=TSMAX_WEAPONS){
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid weapon %d", weapon);
 		return 0;
@@ -119,7 +119,7 @@ static cell AMX_NATIVE_CALL get_user_wstats(AMX *amx, cell *params) /* 4 param *
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid player %d", index);
 		return 0;
 	}
-	int weapon = params[2];
+	const int weapon = params[2];
 	if (weapon<0||weapon>=TSMAX_WEAPONS){
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid weapon %d", weapon);
 		return 0;
@@ -208,8 +208,7 @@ static cell AMX_NATIVE_CALL get_user_rstats(AMX *amx, cell *params) /* 3 param *
 
 static cell AMX_NATIVE_CALL get_stats(AMX *amx, cell *params) /* 3 param */
 {
-	
-	int index = params[1] + 1;
+	const int index = params[1] + 1;
 
 	for(RankSystem::iterator a = g_rank.front(); a ;--a){
 		if ((*a).getPosition() == index)  {
@@ -262,7 +261,7 @@ static cell AMX_NATIVE_CALL register_cwpn(AMX *amx, cell *params){ // name,logna
 }
 
 static cell AMX_NATIVE_CALL cwpn_dmg(AMX *amx, cell *params){ // wid,att,vic,dmg,hp=0
-	int weapon = params[1];
+	const int weapon = params[1];
 	if (  weapon < TSMAX_WEAPONS-TSMAX_CUSTOMWPNS ){ // only for custom weapons
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid weapon %d", weapon);
 		return 0;
@@ -279,14 +278,14 @@ static cell AMX_NATIVE_CALL cwpn_dmg(AMX *amx, cell *params){ // wid,att,vic,dmg
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid victim %d", vic);
 		return 0;
 	}
-	
-	int dmg = params[4];
+
+	const int dmg = params[4];
 	if ( dmg<1 ){
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid damage %d", dmg);
 		return 0;
 	}
-	
-	int aim = params[5];
+
+	const int aim = params[5];
 	if ( aim < 0 || aim > 7 ){
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid aim %d", aim);
 		return 0;
@@ -327,7 +326,7 @@ static cell AMX_NATIVE_CALL cwpn_dmg(AMX *amx, cell *params){ // wid,att,vic,dmg
 }
 
 static cell AMX_NATIVE_CALL cwpn_shot(AMX *amx, cell *params){ // player,wid
-	int index = params[2];
+	const int index = params[2];
 
 	if (!MF_IsPlayerIngame(index))
 	{
@@ -335,7 +334,7 @@ static cell AMX_NATIVE_CALL cwpn_shot(AMX *amx, cell *params){ // player,wid
 		return 0;
 	}
 
-	int weapon = params[1];
+	const int weapon = params[1];
 	if (weapon < TSMAX_WEAPONS-TSMAX_CUSTOMWPNS)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid weapon %d", weapon);

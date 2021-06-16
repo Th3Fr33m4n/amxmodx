@@ -20,14 +20,14 @@ void CmdHandling();
 const char *deststypes[10] = 
 {
 	"Broadcast (unreliable)",
-	NULL,
+	nullptr,
 	"Broadcast",
 	"Init",
 	"PVS (unreliable)",
 	"PAS (unreliable)",
 	"PVS",
 	"PAS",
-	NULL,
+	nullptr,
 	"HLTV"
 };
 
@@ -167,7 +167,7 @@ void PlayerPreThink_Post(edict_t *player)
 		else 
 			stunttype = TSE_STN_FLIP;
 		pl->HooksInfo.IsStateChecked = false;
-		MF_ExecuteForward(OnPlayerStunt, static_cast<cell>(pl->PlayerIndex), static_cast<cell>(stunttype));
+		MF_ExecuteForward(OnPlayerStunt, pl->PlayerIndex, static_cast<cell>(stunttype));
 	}
 
 	// client_onkungfuhit processing
@@ -183,7 +183,7 @@ void PlayerPreThink_Post(edict_t *player)
 		if (pl->HooksInfo.KnockTime != duration && pl->HooksInfo.KnockDamage != damage)
 		{
 			if (pl->GetPDataFloat(482) != 0.0 && pl->GetPDataFloat(483) != 0.0) {
-				if (MF_ExecuteForward(OnPlayerMeleeHit, static_cast<cell>(pl->PlayerIndex), pl->GetPDataFloat(483), pl->GetPDataFloat(482)))
+				if (MF_ExecuteForward(OnPlayerMeleeHit, pl->PlayerIndex, pl->GetPDataFloat(483), pl->GetPDataFloat(482)))
 				{
 					pl->SetPDataFloat(482, 0.0);
 					pl->SetPDataFloat(483, 0.0);
@@ -200,7 +200,7 @@ void PlayerPreThink_Post(edict_t *player)
 	if (pl->HooksInfo.IsPwupTaken) {
 		pl->HooksInfo.IsPwupTaken = false;
 		if (pl->HooksInfo.PwupDuration && pl->HooksInfo.PwupType)
-			MF_ExecuteForward(OnPlayerPickupPwup, static_cast<cell>(pl->PlayerIndex), static_cast<cell>(pl->HooksInfo.PwupType), static_cast<cell>(pl->HooksInfo.PwupDuration));
+			MF_ExecuteForward(OnPlayerPickupPwup, pl->PlayerIndex, static_cast<cell>(pl->HooksInfo.PwupType), static_cast<cell>(pl->HooksInfo.PwupDuration));
 	}
 
 	RETURN_META(MRES_IGNORED);
@@ -222,6 +222,7 @@ int RegUserMsg_Post(const char *msgname, int size)
 			PRINT("%s registered with ID %d\n", msgdecl->name, msgdecl->id);
 	}
 	RETURN_META_VALUE(MRES_IGNORED, 0);
+	return 0;
 }
 
 void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t *ed)
@@ -229,7 +230,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	if (ed)
 		MsgPlayer = Player(ENTINDEX(ed));
 	else
-		MsgPlayer = NULL;
+		MsgPlayer = nullptr;
 	MsgState = 0;
 	if (msg_type < 0 || msg_type >= MAX_REG_MSGS)
 		msg_type = 0;
@@ -242,16 +243,16 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	RETURN_META(MRES_IGNORED);
 }
 
-void MessageEnd_Post(void) {
-	if (MFunctionEnd) (*MFunctionEnd)(NULL);
+void MessageEnd_Post() {
+	if (MFunctionEnd) (*MFunctionEnd)(nullptr);
 	RETURN_META(MRES_IGNORED);
 }
 
 void HookMsg_WeaponInfo(void* data)
 {
-	static int weapon;
 	switch (MsgState++) {
-		case 0: {
+		static int weapon;
+	case 0: {
 			weapon = *(int *)data;
 			MsgPlayer->CurrentWeapon = weapon;
 			break;
@@ -272,6 +273,7 @@ void HookMsg_WeaponInfo(void* data)
 			MsgPlayer->Weapons[weapon].attachments = *(int *)data;
 			break;
 		}
+	default: ;
 	}
 }
 
@@ -292,6 +294,7 @@ void HookMsg_PwUp(void* data)
 				MsgPlayer->HooksInfo.PwupFlag = false;
 			break;
 		}
+	default: ;
 	}
 }
 

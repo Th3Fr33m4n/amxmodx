@@ -12,10 +12,10 @@
 #include "msghooking.h"
 
 HookMsg DeclaresMsgs[] = {
-	{ NULL, NULL, nullptr, false },
-	{ "WeaponInfo", NULL, &HookMsg_WeaponInfo, false },
-	{ "TSState", NULL, &HookMsg_TSState, false },
-	{ "PwUp", NULL, &HookMsg_PwUp, false }
+	{ nullptr, 0, nullptr, false },
+	{ "WeaponInfo", 0, &HookMsg_WeaponInfo, false },
+	{ "TSState", 0, &HookMsg_TSState, false },
+	{ "PwUp", 0, &HookMsg_PwUp, false }
 };
 const char *msgbinds[MAX_REG_MSGS];
 
@@ -24,7 +24,7 @@ HookMsg *GetMsgDeclareByID(int id)
 	for (int i = 1; DeclaresMsgs[i].name; i++)
 		if (DeclaresMsgs[i].id == id)
 			return &DeclaresMsgs[i];
-	return &DeclaresMsgs[NULL];
+	return &DeclaresMsgs[0];
 }
 
 HookMsg *GetMsgDeclareByName(const char * name)
@@ -32,7 +32,7 @@ HookMsg *GetMsgDeclareByName(const char * name)
 	for (int i = 1; DeclaresMsgs[i].name; i++)
 		if (strcmp(DeclaresMsgs[i].name, name) == 0)
 			return &DeclaresMsgs[i];
-	return &DeclaresMsgs[NULL];
+	return &DeclaresMsgs[0];
 }
 
 int GetMsgIDByName(const char * name)
@@ -41,7 +41,7 @@ int GetMsgIDByName(const char * name)
 		if (msgbinds[i])
 			if (strcmp(msgbinds[i], name) == 0)
 				return i;
-	return NULL;
+	return 0;
 }
 
 CPlayer *MsgPlayer;

@@ -89,7 +89,7 @@ class AMXXConfig(object):
 
     mysql_path = builder.options.mysql_path
     if not len(mysql_path):
-      mysql_path = os.getenv('MYSQL55', '')
+      mysql_path = os.getenv('MYSQL57', '')
 
     if len(mysql_path):
       self.mysql_path = os.path.join(builder.originalCwd, mysql_path)
@@ -97,7 +97,7 @@ class AMXXConfig(object):
         raise Exception('MySQL path does not exist: {0}'.format(mysql_path))
     else:
       try_paths = [
-        os.path.join(builder.sourcePath, '..', 'mysql-5.5'),
+        os.path.join(builder.sourcePath, '..', 'mysql-5.7'),
       ]
       for try_path in try_paths:
         if os.path.exists(try_path):
@@ -482,10 +482,11 @@ builder.RunBuildScripts(
     'modules/nvault/AMBuilder',
     'modules/regex/AMBuilder',
     'modules/sockets/AMBuilder',
-    'modules/sqlite/AMBuilder',
+    'modules/sqlite/AMBuilder',#Broken? [APG]RoboCop[CL]
     'modules/tfcx/AMBuilder',
-    'modules/ts/tsfun/AMBuilder',
-    'modules/ts/tsx/AMBuilder',
+    'modules/ts/tsfun/AMBuilder',#Broken? [APG]RoboCop[CL]
+    'modules/ts/tsx/AMBuilder',#Broken? [APG]RoboCop[CL]
+    'modules/ts/tse/AMBuilder',#Provided from tsmod.net
   ],
   { 'AMXX': AMXX }
 )

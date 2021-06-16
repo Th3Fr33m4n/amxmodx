@@ -17,7 +17,7 @@
 
 static cell AMX_NATIVE_CALL get_weapon_name(AMX *amx, cell *params)
 { // from id to name 3 params id, name, len
-	int id = params[1];
+	const int id = params[1];
 	if (id<0 || id>=TSMAX_WEAPONS)
 	{ 
 		MF_LogError(amx, AMX_ERR_NATIVE, "Weapon %d is not valid", id);
@@ -30,8 +30,7 @@ static cell AMX_NATIVE_CALL wpnlog_to_name(AMX *amx, cell *params)
 { // from log to name
 	int iLen;
 	char *log = MF_GetAmxString(amx,params[1],0,&iLen);
-	int i;
-	for ( i=1; i<TSMAX_WEAPONS; i++ ){
+	for ( int i = 1; i<TSMAX_WEAPONS; i++ ){
 		if ( strcmp(log,weaponData[i].logname ) == 0 )
 			return MF_SetAmxString(amx,params[2],weaponData[i].name,params[3]);
 	}
@@ -43,8 +42,7 @@ static cell AMX_NATIVE_CALL wpnlog_to_id(AMX *amx, cell *params)
 	int iLen;
 	char *log = MF_GetAmxString(amx,params[1],0,&iLen);
 
-	int i;
-	for (i=1; i<TSMAX_WEAPONS; i++ )
+	for (int i = 1; i<TSMAX_WEAPONS; i++ )
 	{
 		if ( strcmp(log,weaponData[i].logname) == 0 )
 			return i;
@@ -54,7 +52,7 @@ static cell AMX_NATIVE_CALL wpnlog_to_id(AMX *amx, cell *params)
 
 static cell AMX_NATIVE_CALL get_weapon_logname(AMX *amx, cell *params)
 { // from id to log
-	int id = params[1];
+	const int id = params[1];
 	if (id<0 || id>=TSMAX_WEAPONS)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Weapon %d is not valid", id);
@@ -65,7 +63,7 @@ static cell AMX_NATIVE_CALL get_weapon_logname(AMX *amx, cell *params)
 
 static cell AMX_NATIVE_CALL is_melee(AMX *amx, cell *params)
 {
-	int id = params[1];
+	const int id = params[1];
 	if (id<1 || id>=TSMAX_WEAPONS)
 	{ 
 		MF_LogError(amx, AMX_ERR_NATIVE, "Weapon %d is not valid", id);
@@ -86,7 +84,7 @@ static cell AMX_NATIVE_CALL ts_get_user_weapon(AMX *amx, cell *params){
 	CPlayer *pPlayer = GET_PLAYER_POINTER_I(id);
 	if (pPlayer->ingame)
 	{
-		int wpn = pPlayer->current;
+		const int wpn = pPlayer->current;
 		cell *cpTemp = MF_GetAmxAddr(amx,params[2]);
 		*cpTemp = pPlayer->weapons[wpn].clip;
 		cpTemp = MF_GetAmxAddr(amx,params[3]);
@@ -110,7 +108,7 @@ static cell AMX_NATIVE_CALL get_user_weapon(AMX *amx, cell *params){
 	CPlayer *pPlayer = GET_PLAYER_POINTER_I(id);
 	if (pPlayer->ingame)
 	{
-		int wpn = pPlayer->current;
+		const int wpn = pPlayer->current;
 		cell *cpTemp = MF_GetAmxAddr(amx,params[2]);
 		*cpTemp = pPlayer->weapons[wpn].clip;
 		cpTemp = MF_GetAmxAddr(amx,params[3]);
@@ -147,40 +145,40 @@ BEGIN_USER_FUNC(get_user_state)
 END_USER_FUNC()
 
 BEGIN_USER_FUNC(get_user_message)
-	int val = pPlayer->GetOffset(TSX_MSG_OFFSET);
+const int val = pPlayer->GetOffset(TSX_MSG_OFFSET);
 	return (val & 15);
 END_USER_FUNC()
 
 BEGIN_USER_FUNC(set_user_message)
-	int message = params[2];
+const int message = params[2];
 	if (message < 1 || message > 16)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid message id: %d", message);
 		return 0;
 	}
-	int val = pPlayer->GetOffset(TSX_MSG_OFFSET);
+const int val = pPlayer->GetOffset(TSX_MSG_OFFSET);
 	pPlayer->SetOffset(TSX_MSG_OFFSET, (val & ~15)^message);
 	return 1;
 END_USER_FUNC()
 
 BEGIN_USER_FUNC(set_bullettrail)
-	int bullettrail = params[2] * 256;
+const int bullettrail = params[2] * 256;
 	pPlayer->SetOffset(TSX_BTRAIL_OFFSET, bullettrail);
 	return 1;
 END_USER_FUNC()
 
 BEGIN_USER_FUNC(set_fake_slowmo)
-	float time = amx_ctof(params[2]);
+const float time = amx_ctof(params[2]);
 	pPlayer->SetOffset(TSX_SLOMO1_OFFSET, TSPWUP_SLOWMO);
-	float prev = pPlayer->GetTime();
+const float prev = pPlayer->GetTime();
 	pPlayer->SetOffsetF(TSX_SLOMO2_OFFSET, prev+time);
 	return 1;
 END_USER_FUNC()
 
 BEGIN_USER_FUNC(set_fake_slowpause)
-	float time = amx_ctof(params[2]);
+const float time = amx_ctof(params[2]);
 	pPlayer->SetOffset(TSX_SLOMO1_OFFSET, TSPWUP_SLOWPAUSE);
-	float prev = pPlayer->GetTime();
+const float prev = pPlayer->GetTime();
 	pPlayer->SetOffsetF(TSX_SLOMO2_OFFSET, prev+time);
 	return 1;
 END_USER_FUNC()
@@ -214,7 +212,7 @@ BEGIN_USER_FUNC(force_powerup_run)
 END_USER_FUNC()
 
 BEGIN_USER_FUNC(has_superjump)
-	int val3 = pPlayer->GetOffset(TSX_MSG_OFFSET);
+const int val3 = pPlayer->GetOffset(TSX_MSG_OFFSET);
 
 	if (val3 & 0x01000000)
 		return 1;
@@ -223,7 +221,7 @@ BEGIN_USER_FUNC(has_superjump)
 END_USER_FUNC()
 
 BEGIN_USER_FUNC(has_fupowerup)
-	int val3 = pPlayer->GetOffset(TSX_MSG_OFFSET);
+const int val3 = pPlayer->GetOffset(TSX_MSG_OFFSET);
 
 	if (val3 & 65536)
 		return 1;
@@ -532,7 +530,7 @@ static cell AMX_NATIVE_CALL get_stats_size(AMX *amx, cell *params)
 
 static cell AMX_NATIVE_CALL is_custom(AMX *amx, cell *params)
 {
-	int weapon = params[1];
+	const int weapon = params[1];
 	if (weapon < TSMAX_WEAPONS-TSMAX_CUSTOMWPNS)
 	{
 		return 0;
