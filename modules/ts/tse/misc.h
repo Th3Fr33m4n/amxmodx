@@ -8,6 +8,8 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
+#ifndef MISC_H
+#define MISC_H
 #include "amxxmodule.h"
 #pragma once
 
@@ -30,3 +32,4 @@
 #define TSE_STN_DIVE   3
 #define TSE_STN_GETUP  4
 #define TSE_STN_FLIP   5
+#endif // MISC_H

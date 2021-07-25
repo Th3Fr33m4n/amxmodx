@@ -104,6 +104,7 @@ int RegUserMsg_Post(const char *pszName, int iSize)
 	}
 
 	RETURN_META_VALUE(MRES_IGNORED, 0);
+	return 0;
 }
 
 void check_stunts(edict_s *player)

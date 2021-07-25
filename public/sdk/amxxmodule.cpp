@@ -12,11 +12,10 @@
 // Module SDK
 //
 
-#include <string.h>
-#include <new>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdarg>
+#include <cstdlib>
+#include <cstdio>
 #include "amxxmodule.h"
 
 /************* METAMOD SUPPORT *************/

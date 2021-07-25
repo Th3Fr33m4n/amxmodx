@@ -8,6 +8,9 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
+#ifndef MSGHOOKING_H
+#define MSGHOOKING_H
+
 #include "amxxmodule.h"
 #include "CPlayer.h"
 #pragma once
@@ -37,6 +40,4 @@ extern void HookMsg_WeaponInfo(void*);
 extern void HookMsg_TSState(void*);
 extern void HookMsg_PwUp(void*);
 
-
-
-
+#endif // MSGHOOKING_H

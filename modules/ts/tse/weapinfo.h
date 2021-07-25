@@ -8,6 +8,9 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
+#ifndef WEAPINFO_H
+#define WEAPINFO_H
+
 #include "amxxmodule.h"
 #include "misc.h"
 #pragma once
@@ -45,3 +48,4 @@ extern uint32_t GetFiremodeByMask(uint32_t mask);
 
 extern IGameConfig *MainConfig;
 extern IGameConfig *CommonConfig;
+#endif // WEAPINFO_H

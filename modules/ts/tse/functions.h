@@ -8,8 +8,12 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+
 #include "amxxmodule.h"
 #pragma once
 
 extern AMX_NATIVE_INFO pl_funcs[];
 extern AMX_NATIVE_INFO weap_funcs[];
+#endif // FUNCTIONS_H

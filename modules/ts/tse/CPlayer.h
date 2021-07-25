@@ -8,6 +8,9 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
+#ifndef CPLAYER_H
+#define CPLAYER_H
+
 #include "amxxmodule.h"
 #pragma once
 
@@ -97,4 +100,4 @@ edict_t *CreateWeapon(int id, Vector coord, short ttl, uint16_t clips, byte atcm
 edict_t *CreatePowerup(uint16_t type, Vector coord, short ttl);
 
 
-
+#endif // CPLAYER_H

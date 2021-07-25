@@ -321,15 +321,18 @@ class AMXXConfig(object):
 
   def configure_mac(self, cxx):
     cxx.defines += ['OSX', '_OSX', 'POSIX']
-    cxx.cflags += ['-mmacosx-version-min=10.5']
+    cxx.cflags += [
+      '-mmacosx-version-min=10.7',
+      '-Wno-address-of-packed-member',
+    ]
     cxx.linkflags += [
-      '-mmacosx-version-min=10.5',
+      '-mmacosx-version-min=10.7',
       '-arch', 'i386',
       '-lstdc++',
-      '-stdlib=libstdc++',
+      '-stdlib=libc++',
       '-framework', 'CoreServices',
     ]
-    cxx.cxxflags += ['-stdlib=libstdc++']
+    cxx.cxxflags += ['-stdlib=libc++']
 
   def configure_windows(self, cxx):
     cxx.defines += ['WIN32', '_WINDOWS']
