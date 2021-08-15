@@ -11,7 +11,7 @@
 // SQLite Module
 //
 
-#include <stdio.h>
+#include <cstdio>
 #include "sh_list.h"
 #include "sqlite_header.h"
 #include "sqlheaders.h"

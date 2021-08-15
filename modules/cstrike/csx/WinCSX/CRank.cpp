@@ -10,7 +10,7 @@
 #include "stdafx.h"
 
 #include "CRank.h"
-#include <stdio.h>
+#include <cstdio>
 
 // *****************************************************
 // class Stats

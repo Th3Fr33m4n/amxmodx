@@ -12,7 +12,7 @@
 // DoD Fun Module
 //
 
-#include <string.h>
+#include <cstring>
 #include "amxxmodule.h"
 #include "dodfun.h"
 

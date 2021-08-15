@@ -269,7 +269,7 @@ public:
 	{
 		m_Access=Access;
 	};
-	cell GetAccess(void) const
+	cell GetAccess() const
 	{
 		return m_Access;
 	};
@@ -278,7 +278,7 @@ public:
 	{
 		m_Flags=Flags;
 	};
-	cell GetFlags(void) const
+	cell GetFlags() const
 	{
 		return m_Flags;
 	};
@@ -297,7 +297,7 @@ public:
 		m_AuthData[arraysize(m_AuthData)-1]=0;
 
 	};
-	const cell *GetAuthID(void) const
+	const cell *GetAuthID() const
 	{
 		return &m_AuthData[0];
 	};
@@ -316,7 +316,7 @@ public:
 		m_Password[arraysize(m_Password)-1]=0;
 
 	};
-	const cell *GetPass(void) const
+	const cell *GetPass() const
 	{
 		return &m_Password[0];
 	};

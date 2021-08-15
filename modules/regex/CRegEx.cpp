@@ -14,8 +14,8 @@
 #include "amxxmodule.h"
 #include "pcre.h"
 #include "CRegEx.h"
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
+#include <cctype>
 #include "utils.h"
 
 RegEx::RegEx()

@@ -7,7 +7,7 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
-#include <time.h>
+#include <ctime>
 #include "amxmodx.h"
 #include "fakemeta.h"
 #include "CMenu.h"
@@ -1211,7 +1211,7 @@ void C_ClientCommand(edict_t *pEntity)
 	RETURN_META(result);
 }
 
-void C_StartFrame_Post(void)
+void C_StartFrame_Post()
 {
 	if (g_auth_time < gpGlobals->time)
 	{
@@ -1406,7 +1406,7 @@ void C_WriteEntity_Post(int iValue)
 	RETURN_META(MRES_IGNORED);
 }
 
-void C_MessageEnd_Post(void)
+void C_MessageEnd_Post()
 {
 	g_events.executeEvents();
 	if (endfunction) (*endfunction)(NULL);
@@ -1414,7 +1414,7 @@ void C_MessageEnd_Post(void)
 	RETURN_META(MRES_IGNORED);
 }
 
-const char *C_Cmd_Args(void)
+const char *C_Cmd_Args()
 {
 	// if the global "fake" flag is set, which means that engclient_cmd was used, supercede the function
 	if (g_fakecmd.fake)
@@ -1434,7 +1434,7 @@ const char *C_Cmd_Argv(int argc)
 	RETURN_META_VALUE(MRES_IGNORED, NULL);
 }
 
-int	C_Cmd_Argc(void)
+int	C_Cmd_Argc()
 {
 	// if the global "fake" flag is set, which means that engclient_cmd was used, supercede the function
 	if (g_fakecmd.fake)

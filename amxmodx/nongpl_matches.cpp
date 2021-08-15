@@ -7,7 +7,7 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
-#include <string.h>
+#include <cstring>
 #include "nongpl_matches.h"
 
 NONGPL_PLUGIN_T NONGPL_PLUGIN_LIST[] = 

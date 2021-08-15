@@ -10,7 +10,7 @@
 #ifndef _INCLUDE_LIBRARIES_H
 #define _INCLUDE_LIBRARIES_H
 
-#include <string.h>
+#include <cstring>
 #include "amxmodx.h"
 
 enum LibSource

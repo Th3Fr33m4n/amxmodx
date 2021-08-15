@@ -325,7 +325,7 @@ void C_WriteEntity(int iValue)
 	RETURN_META(MRES_IGNORED);
 }
 
-void C_MessageEnd(void)
+void C_MessageEnd()
 {
 	int mres = 0;
 	

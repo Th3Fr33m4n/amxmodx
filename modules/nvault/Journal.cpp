@@ -11,8 +11,8 @@
 // NVault Module
 //
 
-#include <stdio.h>
-#include <stdarg.h>
+#include <cstdio>
+#include <cstdarg>
 #if defined(__linux__) || defined(__APPLE__)
 #include <unistd.h>
 #endif

@@ -11,8 +11,8 @@
 // SQLite Module
 //
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include "SqliteDriver.h"
 #include "SqliteDatabase.h"
 #include "SqliteQuery.h"

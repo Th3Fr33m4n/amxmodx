@@ -3,11 +3,11 @@
  *  Copyright (c) ITB CompuPhase, 2001-2002
  *  This file may be freely used. No warranties of any kind.
  */
-#include <time.h>
-#include <assert.h>
+#include <ctime>
+#include <cassert>
 #if defined __WIN32__ || defined _WIN32
-  #include <windows.h>
-  #include <mmsystem.h>
+  #include <Windows.h>
+#include <MMSystem.h>
 #endif
 
 #ifdef __GNUC__
@@ -16,7 +16,7 @@
 #	endif
 #endif
 
-#include <stdlib.h>
+#include <cstdlib>
 
 // this file does not include amxmodx.h, so we have to include the memory manager here
 #ifdef MEMORY_TEST

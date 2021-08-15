@@ -11,7 +11,7 @@
 // MySQL Module
 //
 
-#include <string.h>
+#include <cstring>
 #include <sh_stack.h>
 #include <amtl/am-vector.h>
 #include "mysql2_header.h"

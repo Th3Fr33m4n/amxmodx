@@ -544,7 +544,7 @@ float EventsMngr::getArgFloat(int a) const
 	}
 }
 
-void EventsMngr::clearEvents(void)
+void EventsMngr::clearEvents()
 {
 	for (int i = 0; i < MAX_AMX_REG_MSG; ++i)
 	{

@@ -21,11 +21,11 @@
  *  3.  This notice may not be removed or altered from any source distribution.
  */
 
-#include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdarg.h>
+#include <cassert>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cstdarg>
 #include "osdefs.h"     /* for _MAX_PATH */
 #include "amx.h"
 #include "amxdbg.h"

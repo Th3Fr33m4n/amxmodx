@@ -11,8 +11,8 @@
 // MySQL Module
 //
 
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 #include "MysqlResultSet.h"
 
 using namespace SourceMod;

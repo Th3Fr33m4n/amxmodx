@@ -28,19 +28,19 @@
 # endif
 #endif
 
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
-#include <limits.h>
-#include <assert.h>
+#include <cctype>
+#include <cstdlib>
+#include <cstring>
+#include <climits>
+#include <cassert>
 #include "amx.h"
 #if defined __WIN32__ || defined _WIN32 || defined WIN32 || defined _Windows
-  #include <windows.h>
+  #include <Windows.h>
 #endif
 
 /* A few compilers do not provide the ANSI C standard "time" functions */
 #if !defined SN_TARGET_PS2 && !defined _WIN32_WCE
-  #include <time.h>
+  #include <ctime>
 #endif
 
 #if defined _UNICODE

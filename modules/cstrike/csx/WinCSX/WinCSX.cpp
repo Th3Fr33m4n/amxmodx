@@ -9,8 +9,8 @@
 
 #include "stdafx.h"
 #include "WinCSX.h"
-#include <stdio.h>
-#include "commctrl.h"
+#include <cstdio>
+#include "CommCtrl.h"
 #include <amtl/am-string.h>
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,

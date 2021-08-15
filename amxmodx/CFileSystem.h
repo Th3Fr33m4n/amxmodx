@@ -11,7 +11,7 @@
 #define _INCLUDE_CFILESYSTEM_H_
 
 #include <FileSystem.h> // IFileSystem, FileSystemSeek_t, FileHandle_t (HLSDK)
-#include <stdio.h>      // FILE*
+#include <cstdio>      // FILE*
 
 extern IFileSystem* g_FileSystem;
 

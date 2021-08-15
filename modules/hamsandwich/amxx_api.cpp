@@ -20,7 +20,7 @@
 #include "ham_const.h"
 #include "hooklist.h"
 #include "offsets.h"
-#include <assert.h>
+#include <cassert>
 #include "DataHandler.h"
 #include "hook_specialbot.h"
 #include <HLTypeConversion.h>

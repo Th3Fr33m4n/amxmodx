@@ -38,7 +38,7 @@
 #include <assert.h>
 #include <ILibrarySys.h>*/
 
-#include <wctype.h>
+#include <cwctype>
 
 TextParsers g_TextParser;
 ITextParsers *textparsers = &g_TextParser;

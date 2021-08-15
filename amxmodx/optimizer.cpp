@@ -7,7 +7,7 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
-#include <string.h>
+#include <cstring>
 #include "optimizer.h"
 
 int g_opt_level = 0;

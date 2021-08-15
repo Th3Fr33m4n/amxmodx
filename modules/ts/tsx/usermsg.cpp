@@ -45,7 +45,6 @@ void Client_ScoreInfo(void* mValue)
 			GET_PLAYER_POINTER_I(iId)->teamId = *static_cast<int*>(mValue);
 		}
 		break;
-	default: ;
 	}
 }
 
@@ -70,7 +69,6 @@ void Client_WeaponInfo(void* mValue)
 	case 4:
 		mPlayer->weapons[wpn].attach = *static_cast<int*>(mValue);
 		break;
-	default: ;
 	}
 }
 
@@ -239,7 +237,6 @@ void Client_WStatus(void* mValue)
 			mPlayer->current = 36; // fix for lost weapon
 		}
 		break;
-	default: ;
 	}
 }
 
@@ -273,6 +270,5 @@ void Client_PwUp(void* mValue)
 		if ( iPwType != TSPWUP_KUNGFU && iPwType != TSPWUP_SJUMP )
 			mPlayer->PwUpValue = *static_cast<int*>(mValue);
 		break;
-	default: ;
 	}
 }

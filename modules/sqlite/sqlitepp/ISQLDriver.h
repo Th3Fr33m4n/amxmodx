@@ -14,7 +14,7 @@
 #ifndef _INCLUDE_SOURCEMOD_DATABASE2_H
 #define _INCLUDE_SOURCEMOD_DATABASE2_H
 
-#include <stdarg.h>
+#include <cstdarg>
 
 namespace SourceMod
 {

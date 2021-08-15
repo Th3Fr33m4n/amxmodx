@@ -10,7 +10,7 @@
 #ifndef CFLAGMANAGER_H
 #define CFLAGMANAGER_H
 
-#include <time.h>
+#include <ctime>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -37,7 +37,7 @@ public:
 		m_iFlags=0;
 		m_iHidden=0;
 	};
-	const int NeedWritten(void) const
+	const int NeedWritten() const
 	{
 		return m_iNeedWritten;
 	};
@@ -47,22 +47,22 @@ public:
 		m_iNeedWritten=i;
 	};
 
-	const ke::AString *GetName(void) const
+	const ke::AString *GetName() const
 	{
 		return &m_strName;
 	};
 
-	const ke::AString *GetFlags(void) const
+	const ke::AString *GetFlags() const
 	{
 		return &m_strFlags;
 	};
 
-	const ke::AString *GetComment(void) const
+	const ke::AString *GetComment() const
 	{
 		return &m_strComment;
 	};
 
-	const int Flags(void) const
+	const int Flags() const
 	{
 		return m_iFlags;
 	};
@@ -100,7 +100,7 @@ public:
 	{
 		m_iHidden=i;
 	};
-	int IsHidden(void) const
+	int IsHidden() const
 	{
 		return m_iHidden;
 	};
@@ -115,7 +115,7 @@ private:
 	int						 m_iDisabled;
 	
 
-	void CreateIfNotExist(void) const
+	void CreateIfNotExist() const
 	{
 		FILE *fp;
 		
@@ -152,7 +152,7 @@ private:
 	 * Returns 1 if the timestamp for the file is different than the one we have loaded
 	 * 0 otherwise
 	 */
-	inline int NeedToLoad(void)
+	inline int NeedToLoad()
 	{
 		struct stat TempStat;
 
@@ -188,7 +188,7 @@ public:
 	 */
 	void SetFile(const char *Filename="cmdaccess.ini");
 
-	const char *GetFile(void) const	{ return m_strConfigFile.chars(); };
+	const char *GetFile() const	{ return m_strConfigFile.chars(); };
 	
 	/**
 	 * Parse the file, and load all entries
@@ -208,7 +208,7 @@ public:
 	/**
 	 * Write the commands back to the file
 	 */
-	void WriteCommands(void);
+	void WriteCommands();
 
 	/**
 	 * Add this straight from the cmdaccess.ini file
@@ -223,9 +223,9 @@ public:
 	 */
 	int ShouldIAddThisCommand(const AMX *amx, const cell *params, const char *cmdname) const;
 
-	void Clear(void);
+	void Clear();
 
-	void CheckIfDisabled(void);
+	void CheckIfDisabled();
 };
 
 #endif // CFLAGMANAGER_H

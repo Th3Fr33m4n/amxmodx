@@ -11,8 +11,8 @@
 // MySQL Module
 //
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include "MysqlDriver.h"
 #include "MysqlDatabase.h"
 #include "MysqlQuery.h"

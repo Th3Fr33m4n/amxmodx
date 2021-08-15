@@ -12,7 +12,7 @@
 
 #define MAX_LOGARGS 12
 
-#include <stdarg.h>
+#include <cstdarg>
 #include "natives_handles.h"
 
 // *****************************************************

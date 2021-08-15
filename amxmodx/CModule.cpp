@@ -19,10 +19,10 @@ typedef void* (*PFN_REQ_FNPTR)(const char * /*name*/);
 typedef int (FAR *QUERYMOD_NEW)(int * /*ifvers*/, amxx_module_info_s * /*modInfo*/);
 typedef int (FAR *CHECKGAME_NEW)(const char *);
 typedef int (FAR *ATTACHMOD_NEW)(PFN_REQ_FNPTR /*reqFnptrFunc*/);
-typedef int (FAR *DETACHMOD_NEW)(void);
-typedef void (FAR *PLUGINSLOADED_NEW)(void);
-typedef void (*PLUGINSUNLOADED_NEW)(void);
-typedef void (*PLUGINSUNLOADING_NEW)(void);
+typedef int (FAR *DETACHMOD_NEW)();
+typedef void (FAR *PLUGINSLOADED_NEW)();
+typedef void (*PLUGINSUNLOADED_NEW)();
+typedef void (*PLUGINSUNLOADING_NEW)();
 
 // *****************************************************
 // class CModule

@@ -11,7 +11,7 @@
 // NVault Module
 //
 
-#include <stdlib.h>
+#include <cstdlib>
 #include "amxxapi.h"
 #include "NVault.h"
 

@@ -27,7 +27,7 @@
 
 #if defined WIN32
 #define WINDOWS_LEAN_AND_MEAN
-#include <windows.h>
+#include <Windows.h>
 #else
 //implement these with setjmp later.
 bool IsBadReadPtr(void *l, size_t size)

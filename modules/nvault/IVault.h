@@ -14,7 +14,7 @@
 #ifndef _INCLUDE_IVAULT_H
 #define _INCLUDE_IVAULT_H
 
-#include <time.h>
+#include <ctime>
 
 class IVault
 {

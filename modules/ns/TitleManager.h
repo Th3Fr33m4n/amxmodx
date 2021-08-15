@@ -14,9 +14,9 @@
 #ifndef TITLEMANAGER_H
 #define TITLEMANAGER_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include <amtl/am-string.h>
 #include "Hash.h"

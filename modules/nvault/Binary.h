@@ -14,7 +14,7 @@
 #ifndef _INCLUDE_BINARY_H
 #define _INCLUDE_BINARY_H
 
-#include <stdio.h>
+#include <cstdio>
 #include "compat.h"
 #include "amxxmodule.h"
 

@@ -7,7 +7,7 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
-#include <ctype.h>
+#include <cctype>
 #include "amxmodx.h"
 #include "format.h"
 #include "binlog.h"
@@ -15,9 +15,9 @@
 
 const char* stristr(const char* str, const char* substr)
 {
-	register char *needle = (char *)substr;
-	register char *prevloc = (char *)str;
-	register char *haystack = (char *)str;
+	char *needle = (char *)substr;
+	char *prevloc = (char *)str;
+	char *haystack = (char *)str;
 
 	while (*haystack)
 	{
@@ -53,7 +53,7 @@ char* format_amxstring(AMX *amx, cell *params, int parm, int& len)
 
 int amxstring_len(cell* a)
 {
-	register int c = 0;
+	int c = 0;
 
 	while (a[c])
 		++c;
@@ -82,8 +82,8 @@ int set_amxstring_simple(cell *dest, const char *source, int max)
 
 int set_amxstring(AMX *amx, cell amx_addr, const char *source, int max)
 {
-	register cell* dest = (cell *)(amx->base + (int)(((AMX_HEADER *)amx->base)->dat + amx_addr));
-	register cell* start = dest;
+	cell* dest = (cell *)(amx->base + (int)(((AMX_HEADER *)amx->base)->dat + amx_addr));
+	cell* start = dest;
 
 #if defined BINLOG_ENABLED
 	if (g_binlog_level & 2)
@@ -111,8 +111,8 @@ int set_amxstring_utf8(AMX *amx, cell amx_addr, const T *source, size_t sourcele
 	size_t len = sourcelen;
 	bool needtocheck = false;
 
-	register cell* dest = (cell *)(amx->base + (int)(((AMX_HEADER *)amx->base)->dat + amx_addr));
-	register cell* start = dest;
+	cell* dest = (cell *)(amx->base + (int)(((AMX_HEADER *)amx->base)->dat + amx_addr));
+	cell* start = dest;
 
 	if (len > maxlen)
 	{
@@ -149,8 +149,8 @@ int set_amxstring_utf8_cell(AMX *amx, cell amx_addr, const cell *source, size_t 
 
 extern "C" size_t get_amxstring_r(AMX *amx, cell amx_addr, char *destination, int maxlen)
 {
-	register cell *source = (cell *)(amx->base + (int)(((AMX_HEADER *)amx->base)->dat + amx_addr));
-	register char *dest = destination;
+	cell *source = (cell *)(amx->base + (int)(((AMX_HEADER *)amx->base)->dat + amx_addr));
+	char *dest = destination;
 	char *start = dest;
 
 	while (maxlen-- && *source)
@@ -387,9 +387,9 @@ static cell AMX_NATIVE_CALL replace_stringex(AMX *amx, cell *params)
 
 static cell AMX_NATIVE_CALL contain(AMX *amx, cell *params) /* 2 param */
 {
-	register cell *a = get_amxaddr(amx, params[2]);
-	register cell *b = get_amxaddr(amx, params[1]);
-	register cell *c = b;
+	cell *a = get_amxaddr(amx, params[2]);
+	cell *b = get_amxaddr(amx, params[1]);
+	cell *c = b;
 	cell* str = b;
 	cell* substr = a;
 	
@@ -1353,11 +1353,12 @@ static cell AMX_NATIVE_CALL mb_ucfirst(AMX *amx, cell *params)
 	}
 
 	// Retrieves the first character length in bytes.
-	auto firstChLength = utf8seek(source, sourceLength, source, 1, SEEK_CUR) - source;
+	int firstChLength = utf8seek(source, sourceLength, source, 1, SEEK_CUR) - source;
 
 	if (firstChLength)
 	{
 		char output[8] = {};
+		// int allowed not unsigned? [APG]RoboCop[CL]
 		auto outputLength = utf8toupper(source, firstChLength, output, MAX_BUFFER_LENGTH - 1, UTF8_LOCALE_DEFAULT, nullptr, TRUE);
 
 		// The converted character is either larger or smaller in bytes.

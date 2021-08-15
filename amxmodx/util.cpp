@@ -7,7 +7,7 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
-#include <time.h>
+#include <ctime>
 #include "amxmodx.h"
 #include <utf8rewind.h>
 

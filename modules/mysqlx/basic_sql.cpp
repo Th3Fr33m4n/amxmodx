@@ -11,7 +11,7 @@
 // MySQL Module
 //
 
-#include <stdio.h>
+#include <cstdio>
 #include "mysql2_header.h"
 #include "sqlheaders.h"
 

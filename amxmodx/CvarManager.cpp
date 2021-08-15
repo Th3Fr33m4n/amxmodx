@@ -123,7 +123,7 @@ CvarManager::~CvarManager()
 	OnAmxxShutdown();
 }
 
-void CvarManager::CreateCvarHook(void)
+void CvarManager::CreateCvarHook()
 {
 	// void PF_Cvar_DirectSet(struct cvar_s *var, const char *value) // = pfnCvar_DirectSet
 	// {

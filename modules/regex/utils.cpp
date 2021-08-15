@@ -12,7 +12,7 @@
 //
 
 #include "amxxmodule.h"
-#include <string.h>
+#include <cstring>
 #include "utils.h"
 
 #if defined(WIN32)

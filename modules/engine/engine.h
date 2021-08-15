@@ -16,7 +16,7 @@
 
 #include "amxxmodule.h"
 #include <extdll.h>	
-#include <string.h> 
+#include <cstring>
 #include <meta_api.h>
 #include <sdk_util.h>
 #include <usercmd.h>

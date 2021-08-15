@@ -11,7 +11,7 @@
 // NVault Module
 //
 
-#include <stdio.h>
+#include <cstdio>
 #include "amxxmodule.h"
 #include "NVault.h"
 #include "Binary.h"

@@ -1106,7 +1106,7 @@ int MNF_AddNewNatives(AMX_NATIVE_INFO *natives)
 	return TRUE;
 }
 
-const char *MNF_GetModname(void)
+const char *MNF_GetModname()
 {
 	return g_mod_name.chars();
 }
@@ -1203,7 +1203,7 @@ extern "C" char *MNF_GetAmxStringNull(AMX *amx, cell amx_addr, int bufferId, int
 
 int MNF_GetAmxStringLen(const cell *ptr)
 {
-	register int c = 0;
+	int c = 0;
 
 	while (ptr[c])
 		++c;

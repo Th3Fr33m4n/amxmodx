@@ -11,8 +11,8 @@
 // SQLite Module
 //
 
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 #include "SqliteResultSet.h"
 
 using namespace SourceMod;

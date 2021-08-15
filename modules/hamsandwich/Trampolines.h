@@ -29,17 +29,17 @@
 #undef offsetof
 #endif // offsetof
 #endif // _MSC_VER >= 1400
-#include <windows.h>
+#include <Windows.h>
 #elif defined(__linux__) || defined(__APPLE__)
 #include <sys/mman.h>
 #if defined (__linux__)
 #include <malloc.h>
 #endif
 #endif
-#include <stddef.h> // size_t
-#include <string.h> // memcpy
-#include <stdlib.h> // memalign
-#include <stdio.h>
+#include <cstddef> // size_t
+#include <cstring> // memcpy
+#include <cstdlib> // memalign
+#include <cstdio>
 
 #include <amtl/am-bits.h>
 

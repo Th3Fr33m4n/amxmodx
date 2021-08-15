@@ -15,7 +15,7 @@
 #ifndef CPLAYER_H
 #define CPLAYER_H
 
-#include <string.h>
+#include <cstring>
 
 #include "GameManager.h"
 

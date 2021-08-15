@@ -14,7 +14,7 @@
 
 #include "amxxmodule.h"
 #include "CRank.h"
-#include <stdio.h>
+#include <cstdio>
 #include "tsx.h"
 
 // *****************************************************

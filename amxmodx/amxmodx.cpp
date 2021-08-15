@@ -7,7 +7,7 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
-#include <time.h>
+#include <ctime>
 #include <amtl/am-utility.h>
 #include "amxmodx.h"
 #include "CMenu.h"
@@ -3106,7 +3106,7 @@ static cell AMX_NATIVE_CALL remove_quotes(AMX *amx, cell *params) /* 1 param */
 
 	if (*text == '\"')
 	{
-		register cell *temp = text;
+		cell *temp = text;
 		int len = 0;
 
 		while (*temp++)

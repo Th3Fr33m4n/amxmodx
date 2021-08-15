@@ -13,7 +13,7 @@
 //  2 = one logfile / map
 //  3 = HL Logs
 
-#include <time.h>
+#include <ctime>
 #if defined(_WIN32)
 	#include <io.h>
 #endif

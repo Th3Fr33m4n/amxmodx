@@ -273,7 +273,6 @@ void HookMsg_WeaponInfo(void* data)
 			MsgPlayer->Weapons[weapon].attachments = *(int *)data;
 			break;
 		}
-	default: ;
 	}
 }
 
@@ -294,7 +293,6 @@ void HookMsg_PwUp(void* data)
 				MsgPlayer->HooksInfo.PwupFlag = false;
 			break;
 		}
-	default: ;
 	}
 }
 

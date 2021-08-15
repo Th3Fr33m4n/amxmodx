@@ -11,7 +11,7 @@
 // Regular Expressions Module
 //
 
-#include <string.h>
+#include <cstring>
 #include "pcre.h"
 #include "amxxmodule.h"
 #include <amtl/am-vector.h>

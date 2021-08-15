@@ -11,7 +11,7 @@
 // SQLite Module
 //
 
-#include <string.h>
+#include <cstring>
 #include <sh_stack.h>
 #include <amtl/am-vector.h>
 #include "sqlite_header.h"

@@ -6,9 +6,9 @@
      Localized strptime().
  *-----------------------------------------------------------------------*/
 //#include "config.h"
-#include <time.h>
-#include <ctype.h>
-#include <string.h>
+#include <ctime>
+#include <cctype>
+#include <cstring>
 
 #if defined(__linux__) || defined(__APPLE__)
 #define strnicmp strncasecmp

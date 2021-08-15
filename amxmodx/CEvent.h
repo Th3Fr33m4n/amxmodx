@@ -138,7 +138,7 @@ public:
 	const char* getArgString(int a) const;
 	int getArgInteger(int a) const;
 	float getArgFloat(int a) const;
-	void clearEvents(void);
+	void clearEvents();
 	static int getEventId(const char* msg);
 	int getCurrentMsgType();
 };

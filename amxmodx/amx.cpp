@@ -37,14 +37,14 @@
 # endif
 #endif
 
-#include <assert.h>
-#include <limits.h>
-#include <stdarg.h>
-#include <stddef.h>     /* for wchar_t */
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cassert>
+#include <climits>
+#include <cstdarg>
+#include <cstddef>     /* for wchar_t */
+#include <cstring>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include "osdefs.h"
 #if defined LINUX || defined __FreeBSD__ || defined __OpenBSD__ || defined __APPLE__
   #include <sclinux.h>
@@ -63,7 +63,7 @@
 #endif
 #include "amx.h"
 #if (defined _Windows && !defined AMX_NODYNALOAD) || (defined JIT && __WIN32__)
-  #include <windows.h>
+  #include <Windows.h>
 #endif
 
 
@@ -287,7 +287,7 @@ typedef enum {
                            : ((AMX_FUNCSTUB*)(entry))->name )
 
 #if !defined NDEBUG
-  static int check_endian(void)
+  static int check_endian()
   {
     uint16_t val=0x00ff;
     unsigned char *ptr=(unsigned char *)&val;

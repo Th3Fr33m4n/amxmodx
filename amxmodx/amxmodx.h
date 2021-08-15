@@ -15,8 +15,8 @@
 #include <stdlib.h>
 #include "sclinux.h"
 #endif
-#include <ctype.h>				//tolower, etc
-#include "string.h"
+#include <cctype>				//tolower, etc
+#include <cstring>
 #include <extdll.h>
 #include <meta_api.h>
 
@@ -115,7 +115,7 @@ extern AMX_NATIVE_INFO g_GameConfigNatives[];
 
 #define MAX_BUFFER_LENGTH 16384
 
-char* UTIL_SplitHudMessage(register const char *src);
+char* UTIL_SplitHudMessage(const char *src);
 int UTIL_ReadFlags(const char* c);
 
 void UTIL_ClientPrint(edict_t *pEntity, int msg_dest, char *msg);

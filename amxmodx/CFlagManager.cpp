@@ -7,7 +7,7 @@
 // Additional exceptions apply. For full license details, see LICENSE.txt or visit:
 //     https://alliedmods.net/amxmodx-license
 
-#include <time.h>
+#include <ctime>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "sh_list.h"
@@ -260,7 +260,7 @@ void CFlagManager::LookupOrAdd(const char *Command, int &Flags, AMX *Plugin)
 
 }
 
-void CFlagManager::WriteCommands(void)
+void CFlagManager::WriteCommands()
 {
 	if (m_iDisabled)
 	{
@@ -379,7 +379,7 @@ int CFlagManager::ShouldIAddThisCommand(const AMX *amx, const cell *params, cons
 	return 1;
 }
 
-void CFlagManager::Clear(void)
+void CFlagManager::Clear()
 {
 	List<CFlagEntry *>::iterator	 iter;
 	List<CFlagEntry *>::iterator	 end;

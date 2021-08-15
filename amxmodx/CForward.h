@@ -24,7 +24,7 @@
 #ifndef FORWARD_H
 #define FORWARD_H
 
-#include <stdarg.h>
+#include <cstdarg>
 #include "sh_stack.h"
 
 const int FORWARD_MAX_PARAMS = 32;

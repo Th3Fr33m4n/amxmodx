@@ -30,7 +30,7 @@
 #define AMX_H_INCLUDED
 
 #if defined HAVE_STDINT_H
-  #include <stdint.h>
+  #include <cstdint>
 #else
   #if defined __LCC__ || defined __DMC__ || defined LINUX || defined __APPLE__
     #if defined HAVE_INTTYPES_H

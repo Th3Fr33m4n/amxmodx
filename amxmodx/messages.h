@@ -205,7 +205,7 @@ void C_WriteAngle(float flValue);
 void C_WriteCoord(float flValue);
 void C_WriteString(const char *sz);
 void C_WriteEntity(int iValue);
-void C_MessageEnd(void);
+void C_MessageEnd();
 
 extern RegisteredMessage msgHooks[256];
 extern int msgBlocks[256];

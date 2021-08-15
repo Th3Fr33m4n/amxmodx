@@ -17,9 +17,9 @@
  * 2004-01-09: Adaptions for 64-bit cells (using "double precision"), by
  *             Thiadmer Riemersma
  */
-#include <stdlib.h>     /* for atof() */
-#include <stdio.h>      /* for NULL */
-#include <assert.h>
+#include <cstdlib>     /* for atof() */
+#include <cstdio>      /* for NULL */
+#include <cassert>
 #include <cmath>
 
 // this file does not include amxmodx.h, so we have to include the memory manager here

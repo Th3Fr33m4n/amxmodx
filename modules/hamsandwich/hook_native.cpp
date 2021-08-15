@@ -11,10 +11,10 @@
 // Ham Sandwich Module
 //
 
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstddef>
+#include <cstdlib>
+#include <cstring>
 
 #include <extdll.h>
 #include "amxxmodule.h"

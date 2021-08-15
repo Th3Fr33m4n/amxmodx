@@ -10,7 +10,7 @@
 #ifndef _INCLUDE_WINTHREADS_H_
 #define _INCLUDE_WINTHREADS_H_
 
-#include <windows.h>
+#include <Windows.h>
 #include "IThreader.h"
 
 using namespace SourceMod;
