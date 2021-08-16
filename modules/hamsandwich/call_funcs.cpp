@@ -298,7 +298,7 @@ cell Call_Int_Int_Str_Int(AMX *amx, cell *params)
 	SETUP(3);
 
 	int i3=*MF_GetAmxAddr(amx, params[3]);
-	char *sz4=MF_GetAmxString(amx, params[4], 0, NULL);
+	char *sz4=MF_GetAmxString(amx, params[4], 0, nullptr);
 	int i5=*MF_GetAmxAddr(amx, params[5]);
 
 #if defined(_WIN32)
@@ -313,7 +313,7 @@ cell Call_Int_Int_Str_Int_Int(AMX *amx, cell *params)
 	SETUP(4);
 
 	int i3 = *MF_GetAmxAddr(amx, params[3]);
-	char *sz4 = MF_GetAmxString(amx, params[4], 0, NULL);
+	char *sz4 = MF_GetAmxString(amx, params[4], 0, nullptr);
 	int i5 = *MF_GetAmxAddr(amx, params[5]);
 	int i6 = *MF_GetAmxAddr(amx, params[6]);
 
@@ -329,7 +329,7 @@ cell Call_Int_Int_Str_Int_Bool(AMX *amx, cell *params)
 	SETUP(4);
 
 	int i3 = *MF_GetAmxAddr(amx, params[3]);
-	char *sz4 = MF_GetAmxString(amx, params[4], 0, NULL);
+	char *sz4 = MF_GetAmxString(amx, params[4], 0, nullptr);
 	int i5 = *MF_GetAmxAddr(amx, params[5]);
 	bool i6 = *MF_GetAmxAddr(amx, params[6]) != 0;
 
@@ -509,7 +509,7 @@ cell Call_Void_Entvar_Float_Vector_Trace_Int(AMX *amx, cell *params)
 	v5.y=fl5[1];
 	v5.z=fl5[2];
 
-	if (tr6==NULL)
+	if (tr6== nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Null traceresult provided.");
 
@@ -542,7 +542,7 @@ cell Call_Void_Float_Vector_Trace_Int(AMX *amx, cell *params)
 	v4.y=fl4[1];
 	v4.z=fl4[2];
 
-	if (tr5==NULL)
+	if (tr5== nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Null traceresult provided.");
 
@@ -567,7 +567,7 @@ cell Call_Str_Void(AMX *amx, cell *params)
 #elif defined(__linux__) || defined(__APPLE__)
 	char *v=reinterpret_cast<char *(*)(void *)>(__func)(pv);
 #endif
-	return MF_SetAmxString(amx, params[3], v == NULL ? "" : v, *MF_GetAmxAddr(amx, params[4]));
+	return MF_SetAmxString(amx, params[3], v == nullptr ? "" : v, *MF_GetAmxAddr(amx, params[4]));
 }
 
 cell Call_Cbase_Void(AMX *amx, cell *params)
@@ -768,7 +768,7 @@ cell Call_Int_ItemInfo(AMX *amx, cell *params)
 
 	void *ptr=reinterpret_cast<void *>(*MF_GetAmxAddr(amx, params[3]));
 
-	if (ptr==0)
+	if (ptr==nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Null ItemInfo handle!");
 		return 0;
@@ -991,7 +991,7 @@ cell Call_Void_Str_Float_Float_Float(AMX *amx, cell *params)
 {
 	SETUP(4);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
 	float f4=amx_ctof(*MF_GetAmxAddr(amx, params[4]));
 	float f5=amx_ctof(*MF_GetAmxAddr(amx, params[5]));
 	float f6=amx_ctof(*MF_GetAmxAddr(amx, params[6]));
@@ -1009,7 +1009,7 @@ cell Call_Void_Str_Float_Float_Float_Int_Cbase(AMX *amx, cell *params)
 {
 	SETUP(6);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
 	float f4=amx_ctof(*MF_GetAmxAddr(amx, params[4]));
 	float f5=amx_ctof(*MF_GetAmxAddr(amx, params[5]));
 	float f6=amx_ctof(*MF_GetAmxAddr(amx, params[6]));
@@ -1033,7 +1033,7 @@ cell Call_Void_Str_Float_Float_Float_Bool_Cbase(AMX *amx, cell *params)
 {
 	SETUP(6);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
 	float f4=amx_ctof(*MF_GetAmxAddr(amx, params[4]));
 	float f5=amx_ctof(*MF_GetAmxAddr(amx, params[5]));
 	float f6=amx_ctof(*MF_GetAmxAddr(amx, params[6]));
@@ -1171,7 +1171,7 @@ cell Call_Int_Str(AMX *amx, cell *params)
 {
 	SETUP(1);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
 
 #if defined(_WIN32)
 	return reinterpret_cast<int (__fastcall *)(void*, int, const char *)>(__func)(pv, 0, sz3);
@@ -1247,7 +1247,7 @@ cell Call_Void_Str_Bool(AMX *amx, cell *params)
 {
 	SETUP(2);
 
-	const char *sz3=STRING(ALLOC_STRING(MF_GetAmxString(amx, params[3], 0, NULL)));
+	const char *sz3=STRING(ALLOC_STRING(MF_GetAmxString(amx, params[3], 0, nullptr)));
 	bool b4=*MF_GetAmxAddr(amx, params[4]) ? true : false;
 
 #if defined(_WIN32)
@@ -1263,9 +1263,9 @@ cell Call_Int_Str_Str_Int_Str_Int_Int(AMX* amx, cell* params)
 {
 	SETUP(6);
 
-	const char *sz3=STRING(ALLOC_STRING(MF_GetAmxString(amx, params[3], 0, NULL)));
-	const char *sz4=STRING(ALLOC_STRING(MF_GetAmxString(amx, params[4], 1, NULL)));
-	const char *sz6=STRING(ALLOC_STRING(MF_GetAmxString(amx, params[6], 2, NULL)));
+	const char *sz3=STRING(ALLOC_STRING(MF_GetAmxString(amx, params[3], 0, nullptr)));
+	const char *sz4=STRING(ALLOC_STRING(MF_GetAmxString(amx, params[4], 1, nullptr)));
+	const char *sz6=STRING(ALLOC_STRING(MF_GetAmxString(amx, params[6], 2, nullptr)));
 
 	int i5=*MF_GetAmxAddr(amx, params[5]);
 	int i7=*MF_GetAmxAddr(amx, params[7]);
@@ -1298,7 +1298,7 @@ cell Call_Void_Str_Int(AMX *amx, cell *params)
 {
 	SETUP(2);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
 	int i4=*MF_GetAmxAddr(amx, params[4]);
 
 #if defined(_WIN32)
@@ -1373,7 +1373,7 @@ cell Call_Void_Str(AMX *amx, cell *params)
 {
 	SETUP(1);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
 
 #if defined(_WIN32)
 	reinterpret_cast<void (__fastcall *)(void*, int, const char *)>(__func)(pv, 0, sz3);
@@ -1408,8 +1408,8 @@ cell Call_Int_Str_Vector_Str(AMX* amx, cell* params)
 {
 	SETUP(3);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
-	char *sz5=MF_GetAmxString(amx, params[5], 1, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
+	char *sz5=MF_GetAmxString(amx, params[5], 1, nullptr);
 
 	Vector v4;
 
@@ -1429,8 +1429,8 @@ cell Call_Int_Str_Str(AMX* amx, cell* params)
 {
 	SETUP(2);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
-	char *sz4=MF_GetAmxString(amx, params[4], 1, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
+	char *sz4=MF_GetAmxString(amx, params[4], 1, nullptr);
 
 #if defined(_WIN32)
 	return reinterpret_cast<int (__fastcall *)(void*, int, const char *, const char *)>(__func)(pv, 0, sz3, sz4);
@@ -1459,8 +1459,8 @@ cell Call_Void_Str_Str_Int(AMX *amx, cell *params)
 {
 	SETUP(3);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
-	char *sz4=MF_GetAmxString(amx, params[4], 1, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
+	char *sz4=MF_GetAmxString(amx, params[4], 1, nullptr);
 	int i5=*MF_GetAmxAddr(amx, params[5]);
 
 #if defined(_WIN32)
@@ -2081,14 +2081,14 @@ cell Call_Str_Str(AMX *amx, cell *params)
 {
 	SETUP(3);
 
-	char *sz3=MF_GetAmxString(amx, params[3], 0, NULL);
+	char *sz3=MF_GetAmxString(amx, params[3], 0, nullptr);
 
 #if defined(_WIN32)
 	char *v=reinterpret_cast<char *(__fastcall *)(void *, int, const char*)>(__func)(pv, 0, sz3);
 #elif defined(__linux__) || defined(__APPLE__)
 	char *v=reinterpret_cast<char *(*)(void *, const char *)>(__func)(pv, sz3);
 #endif
-	return MF_SetAmxString(amx, params[4], v == NULL ? "" : v, *MF_GetAmxAddr(amx, params[5]));
+	return MF_SetAmxString(amx, params[4], v == nullptr ? "" : v, *MF_GetAmxAddr(amx, params[5]));
 }
 
 cell Call_Void_Short(AMX *amx, cell *params)

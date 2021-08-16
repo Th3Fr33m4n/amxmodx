@@ -480,5 +480,5 @@ AMX_NATIVE_INFO pev_natives[] = {
 	{ "set_pev_string",	amx_set_pev_string },
 	{ "pev_valid",		amx_pev_valid },
 	{ "pev_serial",		amx_pev_serial },
-	{NULL,				NULL},
+	{nullptr, nullptr},
 };

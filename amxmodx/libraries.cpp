@@ -34,7 +34,7 @@ bool DecodeLibCmdString(const char *str, LibDecoder *dec)
 	if (dec->buffer)
 	{
 		free(dec->buffer);
-		dec->buffer = NULL;
+		dec->buffer = nullptr;
 	}
 	if (str[0] != '?')
 	{
@@ -74,7 +74,7 @@ bool DecodeLibCmdString(const char *str, LibDecoder *dec)
 		{
 			dec->buffer = strdup(str);
 			dec->param1 = dec->buffer;
-			dec->param2 = NULL;
+			dec->param2 = nullptr;
 		} else {
 			dec->buffer = strdup(str);
 			char *p = strchr(dec->buffer, '_');
@@ -134,7 +134,7 @@ size_t ClearLibraries(LibSource src)
 			iter = g_libraries.erase(iter);
 			count++;
 		} else {
-			iter++;
+			++iter;
 		}
 	}
 

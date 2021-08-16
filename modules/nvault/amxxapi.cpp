@@ -55,7 +55,7 @@ static cell nvault_open(AMX *amx, cell *params)
 			return i;
 	}
 	NVault *v = (NVault *)g_VaultMngr.OpenVault(file);
-	if (v == NULL || !v->Open())
+	if (v == nullptr || !v->Open())
 	{
 		delete v;
 		return -1;
@@ -89,7 +89,7 @@ static cell nvault_touch(AMX *amx, cell *params)
 
 	if (params[3] == -1)
 	{
-		pVault->Touch(key, time(NULL));
+		pVault->Touch(key, time(nullptr));
 	} else {
 		pVault->Touch(key, static_cast<time_t>(params[3]));
 	}
@@ -207,7 +207,7 @@ static cell nvault_close(AMX *amx, cell *params)
 	NVault *pVault = g_Vaults.at(id);
 	pVault->Close();
 	delete pVault;
-	g_Vaults[id] = NULL;
+	g_Vaults[id] = nullptr;
 	g_OldVaults.append(id);
 
 	return 1;
@@ -279,5 +279,5 @@ AMX_NATIVE_INFO nVault_natives[] = {
 	{"nvault_prune",			nvault_prune},
 	{"nvault_remove",			nvault_remove},
 	{"nvault_touch",			nvault_touch},
-	{NULL,				NULL},
+	{nullptr, nullptr},
 };

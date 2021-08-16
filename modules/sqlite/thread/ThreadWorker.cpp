@@ -10,12 +10,12 @@
 #include "ThreadWorker.h"
 
 ThreadWorker::ThreadWorker() : 
-	m_Threader(NULL),
-	m_QueueLock(NULL),
-	m_StateLock(NULL),
-	m_PauseSignal(NULL),
-	m_AddSignal(NULL),
-	me(NULL),
+	m_Threader(nullptr),
+	m_QueueLock(nullptr),
+	m_StateLock(nullptr),
+	m_PauseSignal(nullptr),
+	m_AddSignal(nullptr),
+	me(nullptr),
 	m_think_time(DEFAULT_THINK_TIME_MS)
 {
 	m_state = Worker_Invalid;
@@ -23,11 +23,11 @@ ThreadWorker::ThreadWorker() :
 
 ThreadWorker::ThreadWorker(IThreader *pThreader, unsigned int thinktime) : 
 	m_Threader(pThreader),
-	m_QueueLock(NULL),
-	m_StateLock(NULL),
-	m_PauseSignal(NULL),
-	m_AddSignal(NULL),
-	me(NULL),
+	m_QueueLock(nullptr),
+	m_StateLock(nullptr),
+	m_PauseSignal(nullptr),
+	m_AddSignal(nullptr),
+	me(nullptr),
 	m_think_time(thinktime)
 {
 	if (m_Threader)
@@ -129,7 +129,7 @@ void ThreadWorker::RunThread(IThreadHandle *pHandle)
 SWThreadHandle *ThreadWorker::PopThreadFromQueue()
 {
 	if (m_state <= Worker_Stopped && !m_QueueLock)
-		return NULL;
+		return nullptr;
 
 	SWThreadHandle *swt;
 	m_QueueLock->Lock();
@@ -168,7 +168,7 @@ bool ThreadWorker::Start()
 {
 	if (m_state == Worker_Invalid)
 	{
-		if (m_Threader == NULL)
+		if (m_Threader == nullptr)
 			return false;
 	} else if (m_state != Worker_Stopped) {
 		return false;
@@ -227,11 +227,11 @@ bool ThreadWorker::Stop(bool flush_cancel)
 	m_AddSignal->DestroyThis();
 
 	//invalidizzle
-	m_QueueLock = NULL;
-	m_StateLock = NULL;
-	m_PauseSignal = NULL;
-	m_AddSignal = NULL;
-	me = NULL;
+	m_QueueLock = nullptr;
+	m_StateLock = nullptr;
+	m_PauseSignal = nullptr;
+	m_AddSignal = nullptr;
+	me = nullptr;
 
 	return true;
 }

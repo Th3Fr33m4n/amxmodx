@@ -102,15 +102,15 @@ g_user_msg[] =
 	{ "Object",		&gmsgObject,			Client_Object,			false },
 	{ "Object",		&gmsgObject_End,		Client_Object_End,		true  },
 	{ "PStatus",	&gmsgPStatus,			Client_PStatus,			false },
-	{ "ScoreShort",	&gmsgScoreShort,		NULL,					false },
-	{ "PTeam",		&gmsgPTeam,				NULL,					false },
-	{ 0,0,0,false }
+	{ "ScoreShort",	&gmsgScoreShort, nullptr,					false },
+	{ "PTeam",		&gmsgPTeam, nullptr,					false },
+	{ nullptr,nullptr,nullptr,false }
 };
 
-const char* get_localinfo( const char* name , const char* def = 0 )
+const char* get_localinfo( const char* name , const char* def = nullptr )
 {
 	const char* b = LOCALINFO( (char*)name );
-	if (((b==0)||(*b==0)) && def )
+	if (((b==nullptr)||(*b==0)) && def )
 		SET_LOCALINFO((char*)name,(char*)(b = def) );
 	return b;
 }
@@ -273,7 +273,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	else 
 	{
 		mPlayerIndex = 0;
-		mPlayer = NULL;
+		mPlayer = nullptr;
 	}
 
 	mDest = msg_dest;
@@ -287,8 +287,8 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	RETURN_META(MRES_IGNORED);
 }
 
-void MessageEnd_Post(void) {
-	if (endfunction) (*endfunction)(NULL);
+void MessageEnd_Post() {
+	if (endfunction) (*endfunction)(nullptr);
 	RETURN_META(MRES_IGNORED);
 }
 

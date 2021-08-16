@@ -166,7 +166,7 @@ void Client_Health_End(void* mValue)
 		
 	mPlayer->pEdict->v.dmg_take = 0.0; 
 	
-	CPlayer* pAttacker = NULL;
+	CPlayer* pAttacker = nullptr;
 
 	if(enemy->v.flags & (FL_CLIENT | FL_FAKECLIENT))
 	{
@@ -276,7 +276,7 @@ void Client_Object(void* mValue)
 
 	// First need to find out what was picked up
 	const char *classname;
-	edict_t* pObject = NULL;
+	edict_t* pObject = nullptr;
 
 	//const char* value;
 

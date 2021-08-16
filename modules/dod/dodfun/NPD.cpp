@@ -771,5 +771,5 @@ AMX_NATIVE_INFO pd_Natives[] = {
   { "area_set_data", area_set_data },
   { "area_get_data", area_get_data },
   ///*******************
-  { NULL, NULL } 
+  {nullptr, nullptr} 
 };

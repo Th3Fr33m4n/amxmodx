@@ -47,13 +47,13 @@ public:
 	bool isFree(bool set=false, bool val=false);
 	void Clear();
 
-	int Compile(const char *pattern, const char* flags = NULL);
+	int Compile(const char *pattern, const char* flags = nullptr);
 	int Compile(const char *pattern, int iFlags);
 	int Match(const char *str);
 	int MatchAll(const char *str);
 	int Replace(char *text, size_t text_maxlen, const char *replace, size_t replaceLen, int flags = 0);
 	void ClearMatch();
-	const char *GetSubstring(size_t start, char buffer[], size_t max, size_t *outlen = NULL);
+	const char *GetSubstring(size_t start, char buffer[], size_t max, size_t *outlen = nullptr);
 	void MakeSubpatternsTable(int numSubpatterns);
 
 public:

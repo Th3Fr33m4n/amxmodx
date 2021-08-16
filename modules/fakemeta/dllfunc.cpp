@@ -382,6 +382,6 @@ static cell AMX_NATIVE_CALL dllfunc(AMX *amx,cell *params)
 
 AMX_NATIVE_INFO dllfunc_natives[] = {
 	{"dllfunc",			dllfunc},
-	{NULL,				NULL},
+	{nullptr, nullptr},
 };
 

@@ -97,7 +97,7 @@ char *UTIL_ReplaceEx(char *subject, size_t maxLen, const char *search, size_t se
 	/* It's not possible to search or replace */
 	if (searchLen > textLen)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	/* Handle the case of one byte replacement.
@@ -115,7 +115,7 @@ char *UTIL_ReplaceEx(char *subject, size_t maxLen, const char *search, size_t se
 		}
 		else
 		{
-			return NULL;
+			return nullptr;
 		}
 	}
 
@@ -249,5 +249,5 @@ char *UTIL_ReplaceEx(char *subject, size_t maxLen, const char *search, size_t se
 		browsed++;
 	}
 
-	return NULL;
+	return nullptr;
 }

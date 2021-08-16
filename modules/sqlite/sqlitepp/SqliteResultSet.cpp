@@ -32,7 +32,7 @@ SqliteResultSet::~SqliteResultSet()
 	if (m_pResults)
 	{
 		sqlite3_free_table(m_pResults);
-		m_pResults = NULL;
+		m_pResults = nullptr;
 	}
 }
 
@@ -52,7 +52,7 @@ const char *SqliteResultSet::GetString(unsigned int columnId)
 {
 	if (columnId > m_Columns)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	return m_pResults[m_CurIndex + columnId];
@@ -60,7 +60,7 @@ const char *SqliteResultSet::GetString(unsigned int columnId)
 
 bool SqliteResultSet::IsNull(unsigned int columnId)
 {
-	return (GetString(columnId) == NULL);
+	return (GetString(columnId) == nullptr);
 }
 
 double SqliteResultSet::GetDouble(unsigned int columnId)
@@ -90,7 +90,7 @@ const char *SqliteResultSet::GetRaw(unsigned int columnId, size_t *length)
 		{
 			*length = 0;
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	const char *str = GetString(columnId);
@@ -100,7 +100,7 @@ const char *SqliteResultSet::GetRaw(unsigned int columnId, size_t *length)
 		{
 			*length = 0;
 		}
-		return NULL;
+		return nullptr;
 	} else {
 		if (length)
 		{
@@ -129,7 +129,7 @@ const char *SqliteResultSet::FieldNumToName(unsigned int num)
 {
 	if (num >= m_Columns)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	return m_pResults[num];

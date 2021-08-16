@@ -75,10 +75,10 @@ private:
 	int			*m_index;
 	int			 m_type;
 
-	bool IsSet(void)
+	bool IsSet()
 	{
 		return (m_type != RET_VOID &&
-				m_data != NULL);
+				m_data != nullptr);
 	};
 	bool IsType(const int type)
 	{
@@ -86,10 +86,10 @@ private:
 	};
 
 public:
-	Data() : m_data(NULL), m_index(NULL), m_type(RET_VOID)
+	Data() : m_data(nullptr), m_index(nullptr), m_type(RET_VOID)
 	{ /* nothing */	};
 
-	Data(int type, void *ptr) : m_data(ptr), m_index(NULL), m_type(type)
+	Data(int type, void *ptr) : m_data(ptr), m_index(nullptr), m_type(type)
 	{ /* nothing */ };
 
 	Data(int type, void *ptr, int *cptr) : m_data(ptr), m_index(cptr), m_type(type)
@@ -114,27 +114,27 @@ public:
 		}
 		if (IsType(RET_INTEGER))
 		{
-			*(reinterpret_cast<int *>(m_data))=*data;
+			*(static_cast<int *>(m_data))=*data;
 			return 0;
 		}
 		else if (IsType(RET_BOOL))
 		{
-			*(reinterpret_cast<bool *>(m_data)) = *data > 0;
+			*(static_cast<bool *>(m_data)) = *data > 0;
 			return 0;
 		}
 		else if (IsType(RET_SHORT))
 		{
-			*(reinterpret_cast<short *>(m_data)) = *data;
+			*(static_cast<short *>(m_data)) = *data;
 			return 0;
 		}
 		else if (IsType(RET_ITEMINFO))
 		{
-			*(reinterpret_cast<int *>(m_data)) = *data;
+			*(static_cast<int *>(m_data)) = *data;
 			return 0;
 		}
 		else if (IsType(RET_TRACE))
 		{
-			*(reinterpret_cast<int *>(m_data))=*data;
+			*(static_cast<int *>(m_data))=*data;
 			return 0;
 		}
 
@@ -151,7 +151,7 @@ public:
 		{
 			return -1;
 		}
-		*(reinterpret_cast<REAL *>(m_data))=amx_ctof(*data);
+		*(static_cast<REAL *>(m_data))=amx_ctof(*data);
 
 		return 0;
 	};
@@ -165,7 +165,7 @@ public:
 		{
 			return -1;
 		}
-		Vector *vec=reinterpret_cast<Vector *>(m_data);
+		Vector *vec=static_cast<Vector *>(m_data);
 
 		vec->x=amx_ctof(data[0]);
 		vec->y=amx_ctof(data[1]);
@@ -184,7 +184,7 @@ public:
 			return -1;
 		}
 
-		ke::AString *str=reinterpret_cast<ke::AString *>(m_data);
+		ke::AString *str=static_cast<ke::AString *>(m_data);
 
 		cell *i=data;
 		size_t len=0;
@@ -218,7 +218,7 @@ public:
 		}
 		if (IsType(RET_CBASE))
 		{
-			*(reinterpret_cast<void **>(m_data))= TypeConversion.id_to_cbase(*data);
+			*(static_cast<void **>(m_data))= TypeConversion.id_to_cbase(*data);
 			if (updateIndex && m_index)
 			{
 				*m_index=*data;
@@ -228,7 +228,7 @@ public:
 		}
 		else if (IsType(RET_ENTVAR))
 		{
-			*(reinterpret_cast<entvars_t **>(m_data))= TypeConversion.id_to_entvars(*data);
+			*(static_cast<entvars_t **>(m_data))= TypeConversion.id_to_entvars(*data);
 			if (updateIndex && m_index)
 			{
 				*m_index=*data;
@@ -238,7 +238,7 @@ public:
 		}
 		else if (IsType(RET_EDICT))
 		{
-			*(reinterpret_cast<edict_t **>(m_data)) = TypeConversion.id_to_edict(*data);
+			*(static_cast<edict_t **>(m_data)) = TypeConversion.id_to_edict(*data);
 			if (updateIndex && m_index)
 			{
 				*m_index = *data;
@@ -257,32 +257,32 @@ public:
 		}
 		if (IsType(RET_INTEGER))
 		{
-			*data=*(reinterpret_cast<int *>(m_data));
+			*data=*(static_cast<int *>(m_data));
 
 			return 0;
 		}
 		else if (IsType(RET_BOOL))
 		{
-			*data = *(reinterpret_cast<bool *>(m_data));
+			*data = *(static_cast<bool *>(m_data));
 
 			return 0;
 		}
 
 		else if (IsType(RET_SHORT))
 		{
-			*data = *(reinterpret_cast<short *>(m_data));
+			*data = *(static_cast<short *>(m_data));
 
 			return 0;
 		}
 		else if (IsType(RET_ITEMINFO))
 		{
-			*data = *(reinterpret_cast<int *>(m_data));
+			*data = *(static_cast<int *>(m_data));
 
 			return 0;
 		}
 		else if (IsType(RET_TRACE))
 		{
-			*data=*(reinterpret_cast<int *>(m_data));
+			*data=*(static_cast<int *>(m_data));
 
 			return 0;
 		}
@@ -299,7 +299,7 @@ public:
 		{
 			return -1;
 		}
-		*data=amx_ftoc(*(reinterpret_cast<REAL *>(m_data)));
+		*data=amx_ftoc(*(static_cast<REAL *>(m_data)));
 
 		return 0;
 	};
@@ -313,7 +313,7 @@ public:
 		{
 			return -1;
 		}
-		Vector *vec=reinterpret_cast<Vector *>(m_data);
+		Vector *vec=static_cast<Vector *>(m_data);
 		data[0]=amx_ftoc(vec->x);
 		data[1]=amx_ftoc(vec->y);
 		data[2]=amx_ftoc(vec->z);
@@ -330,7 +330,7 @@ public:
 		{
 			return -1;
 		}
-		const char *i=(reinterpret_cast<ke::AString *>(m_data)->chars());
+		const char *i=(static_cast<ke::AString *>(m_data)->chars());
 
 		while (len-- &&
 			  (*data++=*i++)!='\0')
@@ -353,13 +353,13 @@ public:
 		}
 		else if (IsType(RET_ENTVAR))
 		{
-			*data= TypeConversion.entvars_to_id(reinterpret_cast<entvars_t *>(m_data));
+			*data= TypeConversion.entvars_to_id(static_cast<entvars_t *>(m_data));
 
 			return 0;
 		}
 		else if (IsType(RET_EDICT))
 		{
-			*data = TypeConversion.edict_to_id(reinterpret_cast<edict_t *>(m_data));
+			*data = TypeConversion.edict_to_id(static_cast<edict_t *>(m_data));
 
 			return 0;
 		}

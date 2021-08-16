@@ -59,12 +59,12 @@ private:
 	
 public:
 	MenuMngr() : m_watch_iter(end())
-		{ headid = NULL; headcmd = NULL; }
+		{ headid = nullptr; headcmd = nullptr; }
 	~MenuMngr();
 
 	// Interface
 
-	int findMenuId(const char* name, AMX* a = 0);
+	int findMenuId(const char* name, AMX* a = nullptr);
 	int registerMenuId(const char* n, AMX* a);
 	void registerMenuCmd(CPluginMngr::CPlugin *a, int mi, int k, int f, bool from_new_menu=false);
 	void clear();
@@ -83,7 +83,7 @@ public:
 	};
 	
 	inline iterator begin() const { return iterator(headcmd); }
-	inline iterator end() const { return iterator(0); }
+	inline iterator end() const { return iterator(nullptr); }
 
 	MenuMngr::iterator SetWatchIter(MenuMngr::iterator iter);
 	inline MenuMngr::iterator GetWatchIter() { return m_watch_iter; }

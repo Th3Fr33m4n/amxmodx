@@ -24,7 +24,7 @@ MysqlQuery::MysqlQuery(const char *querystring, MysqlDatabase *db) :
 {
 	m_QueryLen = strlen(querystring);
 	m_QueryString = new char[m_QueryLen + 1];
-	m_LastRes = NULL;
+	m_LastRes = nullptr;
 	strcpy(m_QueryString, querystring);
 }
 
@@ -88,7 +88,7 @@ bool MysqlQuery::ExecuteR(QueryInfo *info, char *error, size_t maxlength)
 		info->errorcode = mysql_errno(m_pDatabase->m_pMysql);
 		info->success = false;
 		info->affected_rows = 0;
-		info->rs = NULL;
+		info->rs = nullptr;
 		if (error && maxlength)
 		{
 			ke::SafeSprintf(error, maxlength, "%s", mysql_error(m_pDatabase->m_pMysql));
@@ -105,12 +105,12 @@ bool MysqlQuery::ExecuteR(QueryInfo *info, char *error, size_t maxlength)
 				info->errorcode = mysql_errno(m_pDatabase->m_pMysql);
 				info->success = false;
 				info->affected_rows = 0;
-				info->rs = NULL;
+				info->rs = nullptr;
 			} else {
 				info->errorcode = 0;
 				info->success = true;
 				info->affected_rows = mysql_affected_rows(m_pDatabase->m_pMysql);
-				info->rs = NULL;
+				info->rs = nullptr;
 			}
 		} else {
 			info->errorcode = 0;

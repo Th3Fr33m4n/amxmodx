@@ -66,9 +66,9 @@ IDatabase *SqliteDriver::Connect(DatabaseInfo *info, int *errcode, char *error, 
 			ke::SafeSprintf(error, maxlength, "%s", sqlite3_errmsg(pSql));
 		}
 		sqlite3_close(pSql);
-		return NULL;
+		return nullptr;
 	} else {
-		sqlite3_busy_handler(pSql, busy_handler, NULL);
+		sqlite3_busy_handler(pSql, busy_handler, nullptr);
 		SqliteDatabase *pDb = new SqliteDatabase(pSql, this);
 		return static_cast<IDatabase *>(pDb);
 	}
@@ -78,7 +78,7 @@ int SqliteDriver::QuoteString(const char *str, char buffer[], size_t maxlen, siz
 {
 	char *res = sqlite3_snprintf(static_cast<int>(maxlen), buffer, "%q", str);
 
-	if (res != NULL && newsize != NULL)
+	if (res != nullptr && newsize != nullptr)
 	{
 		*newsize = strlen(buffer);
 	}

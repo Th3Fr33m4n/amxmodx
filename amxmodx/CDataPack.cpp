@@ -270,7 +270,7 @@ const char *CDataPack::ReadString(size_t *len) const
 	size_t real_len;
 	if (!CanReadString(&real_len))
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	m_curptr += sizeof(char);
@@ -322,7 +322,7 @@ void *CDataPack::ReadMemory(size_t *size) const
 	size_t bytecount;
 	if (!CanReadMemory(&bytecount))
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	m_curptr += sizeof(char);

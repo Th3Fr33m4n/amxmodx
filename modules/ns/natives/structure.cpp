@@ -148,7 +148,7 @@ static cell AMX_NATIVE_CALL ns_get_build(AMX *amx, cell *params)
 	char *buildtype = MF_GetAmxString(amx,params[1],0,&iLength);
 	int iBuiltOnly = params[2];
 	int iNumber = params[3];
-	edict_t* pBuild = NULL;
+	edict_t* pBuild = nullptr;
 	int iCount=0;
 
 	while ((pBuild = UTIL_FindEntityByString(pBuild,"classname",buildtype)) != NULL)
@@ -377,7 +377,7 @@ AMX_NATIVE_INFO structure_natives[] = {
 	//{ "ns_get_phase_nextuse",		ns_get_phase_nextuse },
 	//{ "ns_add_phase_nextuse",		ns_add_phase_nextuse },
 
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 };
 void AddNatives_Structure()
 {

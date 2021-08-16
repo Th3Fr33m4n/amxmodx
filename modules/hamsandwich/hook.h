@@ -40,7 +40,7 @@ public:
 	int              trampSize;
 
 	Hook(void **vtable_, int entry_, void *target_, bool voidcall, bool retbuf, int paramcount, const char *name) :
-		func(NULL), vtable(vtable_), entry(entry_), target(target_), exec(0), del(0), tramp(NULL), trampSize(0)
+		func(nullptr), vtable(vtable_), entry(entry_), target(target_), exec(0), del(0), tramp(nullptr), trampSize(0)
 		{
 			// original function is vtable[entry]
 			// to not make the compiler whine, cast vtable to int **

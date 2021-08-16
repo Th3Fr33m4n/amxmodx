@@ -154,7 +154,7 @@ public:
 	};
 	
 	inline iterator begin() { return iterator(getValidLogEvent(logevents[logArgc]), this); }
-	inline iterator end() { return iterator(0, this); }
+	inline iterator end() { return iterator(nullptr, this); }
 };
 
 struct LogEventHook

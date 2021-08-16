@@ -19,7 +19,7 @@
 #include "GameManager.h"
 #include "CPlayer.h"
 
-void GameManager::HookPreThink(void)
+void GameManager::HookPreThink()
 {
 	// Only need to hook prethink if at least 1 plugins has any of these forwards:
 	// client_spawn, client_changeteam, client_changeclass
@@ -35,7 +35,7 @@ void GameManager::HookPreThink(void)
 	g_pFunctionTable->pfnPlayerPreThink=NULL;
 };
 
-void GameManager::HookPostThink_Post(void)
+void GameManager::HookPostThink_Post()
 {
 	int i=0;
 	while (i++<gpGlobals->maxClients)
@@ -49,7 +49,7 @@ void GameManager::HookPostThink_Post(void)
 
 	g_pFunctionTable_Post->pfnPlayerPostThink=NULL;
 };
-void GameManager::HookPreThink_Post(void)
+void GameManager::HookPreThink_Post()
 {
 	int i=1;
 	while (i<gpGlobals->maxClients)
@@ -63,7 +63,7 @@ void GameManager::HookPreThink_Post(void)
 
 	g_pFunctionTable_Post->pfnPlayerPreThink=NULL;
 };
-void GameManager::HookUpdateClientData(void)
+void GameManager::HookUpdateClientData()
 {
 	int i=1;
 	while (i<gpGlobals->maxClients)

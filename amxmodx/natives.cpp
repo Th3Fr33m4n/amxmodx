@@ -33,8 +33,8 @@ static char g_errorStr[512] = {0};
 bool g_Initialized = false;
 
 /* Stack stuff */
-regnative *g_pCurNative = NULL;
-AMX *g_pCaller = NULL;
+regnative *g_pCurNative = nullptr;
+AMX *g_pCaller = nullptr;
 cell g_Params[CALLFUNC_MAXPARAMS + 1];
 int g_CurError = AMX_ERR_NONE;
 
@@ -121,7 +121,7 @@ int amxx_DynaCallback(int idx, AMX *amx, cell *params)
 			//don't care
 		} else if (err != -1) {
 			//nothing logged the error
-			LogError(pNative->amx, err, NULL);
+			LogError(pNative->amx, err, nullptr);
 		}
 		pNative->amx->error = AMX_ERR_NONE;
 		//furthermore, log an error in the parent plugin.
@@ -154,7 +154,7 @@ AMX_NATIVE_INFO *BuildNativeTable()
 {
 	if (g_RegNatives.length() < 1)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	AMX_NATIVE_INFO *pNatives = new AMX_NATIVE_INFO[g_RegNatives.length() + 1];
@@ -168,8 +168,8 @@ AMX_NATIVE_INFO *BuildNativeTable()
 		info.func = (AMX_NATIVE)((void *)(pNative->pfn));
 		pNatives[i] = info;
 	}
-	pNatives[g_RegNatives.length()].name = NULL;
-	pNatives[g_RegNatives.length()].func = NULL;
+	pNatives[g_RegNatives.length()].name = nullptr;
+	pNatives[g_RegNatives.length()].func = nullptr;
 
 	//this needs to be deleted
 	return pNatives;
@@ -522,5 +522,5 @@ AMX_NATIVE_INFO g_NativeNatives[] = {
 	{"vdformat",		vdformat},
 	{"param_convert",	param_convert},
 	//////////////////////////
-	{NULL,				NULL},
+	{nullptr, nullptr},
 };

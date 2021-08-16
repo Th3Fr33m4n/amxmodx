@@ -21,7 +21,7 @@ SqlFunctions g_SqliteFuncs =
 {
 	&g_Sqlite,
 	SetMysqlAffinity,
-	NULL
+	nullptr
 };
 
 int SetMysqlAffinity(AMX *amx)

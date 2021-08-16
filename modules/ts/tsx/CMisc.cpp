@@ -58,7 +58,7 @@ void CPlayer::PutInServer()
 	default: 
 		unique = name;
 	}
-	if ( ( rank = g_rank.findEntryInRank( unique , name , isip) ) == 0 )
+	if ( ( rank = g_rank.findEntryInRank( unique , name , isip) ) == nullptr )
 		ingame = false;
 }
 void CPlayer::Connect(const char* ippp)

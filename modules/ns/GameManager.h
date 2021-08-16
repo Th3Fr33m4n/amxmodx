@@ -60,7 +60,7 @@ public:
 
 		ResetForwards();
 	};
-	inline void CheckMap(void)
+	inline void CheckMap()
 	{
 		ke::AString MapName;
 
@@ -83,7 +83,7 @@ public:
 
 
 	};
-	inline int &TitleMap(void)
+	inline int &TitleMap()
 	{
 		return m_iTitlesMap;
 	};
@@ -91,40 +91,40 @@ public:
 	{
 		m_IsCombat=value;
 	};
-	inline int &IsCombat(void)
+	inline int &IsCombat()
 	{
 		return m_IsCombat;
 	};
 
-	inline void UpdateHudText2(void)
+	inline void UpdateHudText2()
 	{
 		if (!m_HudText2)
 		{
 			GetMessageIDs();
 		}
 	};
-	inline void UpdateSetFOV(void)
+	inline void UpdateSetFOV()
 	{
 		if (!m_SetFOV)
 		{
 			GetMessageIDs();
 		}
 	};
-	inline int &GetHudText2(void)
+	inline int &GetHudText2()
 	{
 		return m_HudText2;
 	};
-	inline int &GetSetFOV(void)
+	inline int &GetSetFOV()
 	{
 		return m_SetFOV;
 	};
-	inline void GetMessageIDs(void)
+	inline void GetMessageIDs()
 	{
 		m_HudText2=GET_USER_MSG_ID(&Plugin_info,"HudText2",NULL);
 		m_SetFOV=GET_USER_MSG_ID(&Plugin_info,"SetFOV",NULL);
 	};
 
-	inline void EvaluateCombat(void)
+	inline void EvaluateCombat()
 	{
 		const char *Map=STRING(gpGlobals->mapname);
 
@@ -141,7 +141,7 @@ public:
 		SetCombat(0);
 	};
 
-	inline void ResetForwards(void)
+	inline void ResetForwards()
 	{
 		m_ChangeclassForward=-1;
 		m_BuiltForward=-1;
@@ -151,7 +151,7 @@ public:
 		m_RoundEndForward=-1;
 		m_MapResetForward=-1;
 	};
-	inline void RegisterForwards(void)
+	inline void RegisterForwards()
 	{
 		ResetForwards();
 
@@ -166,7 +166,7 @@ public:
 
 	};
 
-	inline void StartFrame(void)
+	inline void StartFrame()
 	{
 		if (gpGlobals->time >= m_fRoundStartTime)
 		{
@@ -250,11 +250,11 @@ public:
 	{
 		MF_ExecuteForward(m_ChangeclassForward,PlayerID,NewClass,OldClass);
 	};
-	inline void ExecuteRoundStart(void)
+	inline void ExecuteRoundStart()
 	{
 		MF_ExecuteForward(m_RoundStartForward);
 	};
-	inline void ExecuteRoundEnd(void)
+	inline void ExecuteRoundEnd()
 	{
 		MF_ExecuteForward(m_RoundEndForward);
 	};
@@ -265,13 +265,13 @@ public:
 	 * i need.  This tries to run-time optimize out what we 
 	 * do not need.
 	 */
-	void HookPreThink(void);
-	void HookPostThink_Post(void);
-	void HookPreThink_Post(void);
-	void HookUpdateClientData(void);
-	void HookLogs(void); // AlertMessage AND CreateNamedEntity
+	void HookPreThink();
+	void HookPostThink_Post();
+	void HookPreThink_Post();
+	void HookUpdateClientData();
+	void HookLogs(); // AlertMessage AND CreateNamedEntity
 
-	inline void CheckAllHooks(void)
+	inline void CheckAllHooks()
 	{
 		HookPreThink();
 		HookPostThink_Post();
@@ -284,7 +284,7 @@ public:
 	{
 		m_SavedEdict=Edict;
 	};
-	inline edict_t *GetTemporaryEdict(void)
+	inline edict_t *GetTemporaryEdict()
 	{
 		return m_SavedEdict;
 	};

@@ -37,9 +37,9 @@ extern AMX_NATIVE_INFO pdata_natives_safe[];
 
 extern hook_t hooklist[];
 
-int ReadConfig(void);
+int ReadConfig();
 
-void OnAmxxAttach(void)
+void OnAmxxAttach()
 {
 	// Assert that the enum is aligned properly with the table
 
@@ -105,9 +105,9 @@ void OnAmxxDetach()
 	}
 }
 
-void HamCommand(void);
+void HamCommand();
 
-void OnPluginsUnloaded(void)
+void OnPluginsUnloaded()
 {
 	for (size_t i = 0; i < HAM_LAST_ENTRY_DONT_USE_ME_LOL; i++)
 	{
@@ -119,12 +119,12 @@ void OnPluginsUnloaded(void)
 	}
 }
 
-void OnPluginsLoaded(void)
+void OnPluginsLoaded()
 {
 	TypeConversion.init();
 }
 
-void OnMetaAttach(void)
+void OnMetaAttach()
 {
 	REG_SVR_COMMAND("ham", HamCommand);
 }

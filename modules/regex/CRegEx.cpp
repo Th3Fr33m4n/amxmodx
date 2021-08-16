@@ -21,10 +21,10 @@
 RegEx::RegEx()
 {
 	mErrorOffset = 0;
-	mError = NULL;
-	re = NULL;
+	mError = nullptr;
+	re = nullptr;
 	mFree = true;
-	subject = NULL;
+	subject = nullptr;
 	mSubStrings.clear();
 	mMatchesSubs.clear();
 	mSubsNameTable.clear();
@@ -34,14 +34,14 @@ RegEx::RegEx()
 void RegEx::Clear()
 {
 	mErrorOffset = 0;
-	mError = NULL;
+	mError = nullptr;
 	if (re)
 		pcre_free(re);
-	re = NULL;
+	re = nullptr;
 	mFree = true;
 	if (subject)
 		delete[] subject;
-	subject = NULL;
+	subject = nullptr;
 	mSubStrings.clear();
 	mMatchesSubs.clear();
 	mSubsNameTable.clear();
@@ -72,7 +72,7 @@ int RegEx::Compile(const char *pattern, const char* flags)
 		
 	int iFlags = 0;
 	
-	if (flags != NULL)
+	if (flags != nullptr)
 	{
 		for ( ; *flags != 0; flags++)
 		{
@@ -106,9 +106,9 @@ int RegEx::Compile(const char *pattern, const char* flags)
 		}
 	}
 		
-	re = pcre_compile(pattern, iFlags, &mError, &mErrorOffset, NULL);
+	re = pcre_compile(pattern, iFlags, &mError, &mErrorOffset, nullptr);
 
-	if (re == NULL)
+	if (re == nullptr)
 	{
 		return 0;
 	}
@@ -123,9 +123,9 @@ int RegEx::Compile(const char *pattern, int iFlags)
 	if (!mFree)
 		Clear();
 
-	re = pcre_compile(pattern, iFlags, &mError, &mErrorOffset, NULL);
+	re = pcre_compile(pattern, iFlags, &mError, &mErrorOffset, nullptr);
 
-	if (re == NULL)
+	if (re == nullptr)
 	{
 		return 0;
 	}
@@ -136,7 +136,7 @@ int RegEx::Compile(const char *pattern, int iFlags)
 	 * Retrieve the number of captured groups
 	 * including the full match.
 	 */
-	pcre_fullinfo(re, NULL, PCRE_INFO_CAPTURECOUNT, &mNumSubpatterns);
+	pcre_fullinfo(re, nullptr, PCRE_INFO_CAPTURECOUNT, &mNumSubpatterns);
 	++mNumSubpatterns;
 
 	/**
@@ -152,7 +152,7 @@ int RegEx::Match(const char *str)
 {
 	int rc = 0;
 
-	if (mFree || re == NULL)
+	if (mFree || re == nullptr)
 		return -1;
 
 	ClearMatch();
@@ -161,7 +161,7 @@ int RegEx::Match(const char *str)
 	subject = new char[strlen(str) + 1];
 	strcpy(subject, str);
 
-	rc = pcre_exec(re, NULL, subject, (int)strlen(subject), 0, 0, ovector, REGEX_MAX_SUBPATTERNS);
+	rc = pcre_exec(re, nullptr, subject, (int)strlen(subject), 0, 0, ovector, REGEX_MAX_SUBPATTERNS);
 
 	if (rc < 0)
 	{
@@ -198,7 +198,7 @@ int RegEx::MatchAll(const char *str)
 	int sizeOffsets = mNumSubpatterns * 3;
 	int subjectLen = strlen(str);
 
-	if (mFree || re == NULL)
+	if (mFree || re == nullptr)
 	{
 		return -1;
 	}
@@ -210,9 +210,9 @@ int RegEx::MatchAll(const char *str)
 
 	RegExSub sub;
 
-	while (1)
+	while (true)
 	{
-		rr = pcre_exec(re, NULL, subject, (int)subjectLen, startOffset, exoptions | notEmpty, ovector, REGEX_MAX_SUBPATTERNS);
+		rr = pcre_exec(re, nullptr, subject, (int)subjectLen, startOffset, exoptions | notEmpty, ovector, REGEX_MAX_SUBPATTERNS);
 
 		/**
 		 * The string was already proved to be valid UTF-8
@@ -295,10 +295,10 @@ void RegEx::ClearMatch()
 {
 	// Clears match results
 	mErrorOffset = 0;
-	mError = NULL;
+	mError = nullptr;
 	if (subject)
 		delete[] subject;
-	subject = NULL;
+	subject = nullptr;
 	mSubStrings.clear();
 	mMatchesSubs.clear();
 }
@@ -330,7 +330,7 @@ const char *RegEx::GetSubstring(size_t start, char buffer[], size_t max, size_t 
 {
 	if (start >= mSubStrings.length())
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	RegExSub sub = mSubStrings.at(start);
@@ -341,7 +341,7 @@ const char *RegEx::GetSubstring(size_t start, char buffer[], size_t max, size_t 
 void RegEx::MakeSubpatternsTable(int numSubpatterns)
 {
 	int nameCount = 0;
-	int rc = pcre_fullinfo(re, NULL, PCRE_INFO_NAMECOUNT, &nameCount);
+	int rc = pcre_fullinfo(re, nullptr, PCRE_INFO_NAMECOUNT, &nameCount);
 	
 	if (rc < 0) 
 	{
@@ -354,8 +354,8 @@ void RegEx::MakeSubpatternsTable(int numSubpatterns)
 		int nameSize = 0;
 		int i = 0;
 
-		int rc1 = pcre_fullinfo(re, NULL, PCRE_INFO_NAMETABLE, &nameTable);
-		int rc2 = pcre_fullinfo(re, NULL, PCRE_INFO_NAMEENTRYSIZE, &nameSize);
+		int rc1 = pcre_fullinfo(re, nullptr, PCRE_INFO_NAMETABLE, &nameTable);
+		int rc2 = pcre_fullinfo(re, nullptr, PCRE_INFO_NAMEENTRYSIZE, &nameSize);
 
 		rc = rc2 ? rc2 : rc1;
 
@@ -397,7 +397,7 @@ int RegEx::Replace(char *text, size_t textMaxLen, const char *replace, size_t re
 	size_t diffLength = 0;
 
 	char *toReplace = new char[textMaxLen + 1];
-	char *toSearch = NULL;
+	char *toSearch = nullptr;
 
 	/**
 	 * All characters which is not matched are not copied when replacing matches.
@@ -566,7 +566,7 @@ int RegEx::Replace(char *text, size_t textMaxLen, const char *replace, size_t re
 							{
 								const char *pch = strchr(walk, '}');
 
-								if (pch != NULL)
+								if (pch != nullptr)
 								{
 									/**
 									 * A named group maximum character is 32 (PCRE).
@@ -575,7 +575,7 @@ int RegEx::Replace(char *text, size_t textMaxLen, const char *replace, size_t re
 									size_t nameLength = strncopy(name, walk, pch - walk + 1);
 
 									int flags, num = 0;
-									pcre_fullinfo(re, NULL, PCRE_INFO_OPTIONS, &flags);
+									pcre_fullinfo(re, nullptr, PCRE_INFO_OPTIONS, &flags);
 
 									/**
 									 * If PCRE_DUPNAMES is set, the pcre_copy_named_substring function should be used
@@ -783,7 +783,7 @@ int RegEx::Replace(char *text, size_t textMaxLen, const char *replace, size_t re
 
 				++total;
 			}
-			else if ((output = UTIL_ReplaceEx(text + mSubStrings.at(baseIndex).start + diffLength, textMaxLen, search, searchLen, toReplace, browsed, false)) != NULL)
+			else if ((output = UTIL_ReplaceEx(text + mSubStrings.at(baseIndex).start + diffLength, textMaxLen, search, searchLen, toReplace, browsed, false)) != nullptr)
 			{
 				/**
 				 * Then we simply do a replace.
@@ -811,7 +811,7 @@ int RegEx::Replace(char *text, size_t textMaxLen, const char *replace, size_t re
 
 	delete[] toReplace;
 	
-	if (toSearch != NULL)
+	if (toSearch != nullptr)
 	{
 		delete[] toSearch;
 	}

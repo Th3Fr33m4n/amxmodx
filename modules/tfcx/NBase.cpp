@@ -509,5 +509,5 @@ AMX_NATIVE_INFO base_Natives[] = {
 	{"get_weaponname", TFC_GetWpnName},
 
 	//******************* 19 :)
-	{nullptr,			NULL} 
+	{nullptr, nullptr} 
 };

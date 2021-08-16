@@ -507,7 +507,7 @@ AMX_NATIVE_INFO float_Natives[] = {
   { "floatsinh",   n_floatsinh  },
   { "floatcosh",   n_floatcosh  },
   { "floattanh",   n_floattanh  },
-  { NULL, NULL }        /* terminator */
+  {nullptr, nullptr}        /* terminator */
 };
 
 int AMXEXPORT amx_FloatInit(AMX *amx)

@@ -124,7 +124,7 @@ class Grenades
 	} *head;
 
 public:
-	Grenades() { head = 0; }
+	Grenades() { head = nullptr; }
 	~Grenades() { clear(); }
 	
 	void put(edict_t* grenade, float time, int type, CPlayer* player);
@@ -174,7 +174,7 @@ class XVars
 	int realloc_array(int nsize);
 
 public:
-	XVars() { num = 0; size = 0; head = 0; }
+	XVars() { num = 0; size = 0; head = nullptr; }
 	~XVars() { clear(); }
 	
 	void clear();
@@ -228,7 +228,7 @@ class TeamIds
 		static char uid;
 		TeamEle* next;
 		
-		TeamEle(const char* n, int& i) : name(n), id(i), next(0)
+		TeamEle(const char* n, int& i) : name(n), id(i), next(nullptr)
 		{
 			tid = uid++;
 		}

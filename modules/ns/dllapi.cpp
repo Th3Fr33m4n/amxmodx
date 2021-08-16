@@ -37,7 +37,7 @@ CPlayer g_player[33];
 extern void *GameRules;
 
 bool NEW_Initialized=false;
-edict_t *NEW_FirstEdict=NULL;
+edict_t *NEW_FirstEdict= nullptr;
 
 /**
  * This is only called during the CountDown
@@ -130,7 +130,7 @@ void ServerActivate(edict_t *pEdictList, int edictCount, int clientMax)
 
 	}
 
-	GameRules=NULL;
+	GameRules= nullptr;
 
 	RETURN_META(MRES_IGNORED);
 }
@@ -172,13 +172,13 @@ void PlayerPostThink_Post(edict_t *pEntity)
 // Map is changing/server is shutting down.
 // We do all cleanup routines here, since, as noted in metamod's dllapi
 // ServerDeactivate is the very last function called before the server loads up a new map.
-void ServerDeactivate(void)
+void ServerDeactivate()
 {
 	for (int i=1;i<=gpGlobals->maxClients;i++)
 	{
 		GET_PLAYER_I(i)->Disconnect();
 	}
-	GameRules = NULL;
+	GameRules = nullptr;
 	avhgameplay = NULL;
 	RETURN_META(MRES_IGNORED);
 }

@@ -75,13 +75,13 @@ struct sUserMsg
 	{ "TSSpace",&gmsgTSSpace,Client_TSSpace,false },
 	{ "PwUp",&gmsgPwUp,Client_PwUp,false},
 
-	{ 0,0,0,false }
+	{ nullptr,nullptr,nullptr,false }
 };
 
-const char* get_localinfo( const char* name , const char* def = 0 )
+const char* get_localinfo( const char* name , const char* def = nullptr )
 {
 	const char* b = LOCALINFO( const_cast<char*>(name) );
-	if (((b==0)||(*b==0)) && def )
+	if (((b==nullptr)||(*b==0)) && def )
 		SET_LOCALINFO(const_cast<char*>(name),const_cast<char*>(b = def) );
 	return b;
 }
@@ -230,7 +230,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 		mPlayer = GET_PLAYER_POINTER_I(mPlayerIndex);
 	} else {
 		mPlayerIndex = 0;
-		mPlayer = NULL;
+		mPlayer = nullptr;
 	}
 	mState = 0;
 	if ( msg_type < 0 || msg_type >= MAX_REG_MSGS )
@@ -242,7 +242,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 
 void MessageEnd_Post()
 {
-	if (endfunction) (*endfunction)(NULL);
+	if (endfunction) (*endfunction)(nullptr);
 	RETURN_META(MRES_IGNORED);
 }
 

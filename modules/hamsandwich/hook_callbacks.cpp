@@ -1004,8 +1004,8 @@ const char *Hook_Str_Void(Hook *hook, void *pthis)
 
 void *Hook_Cbase_Void(Hook *hook, void *pthis)
 {
-	void *ret=NULL;
-	void *origret=NULL;
+	void *ret= nullptr;
+	void *origret= nullptr;
 	PUSH_CBASE()
 
 	MAKE_VECTOR()
@@ -1197,7 +1197,7 @@ void Hook_Void_pFloat_pFloat(Hook *hook, void *pthis, float *f1, float *f2)
 	P_PTRFLOAT(f2)
 
 	PRE_START()
-		, f1 != NULL ? *f1 : 0, f2 != NULL ? *f2 : 0
+		, f1 != nullptr ? *f1 : 0, f2 != nullptr ? *f2 : 0
 	PRE_END()
 
 #if defined(_WIN32)
@@ -1207,7 +1207,7 @@ void Hook_Void_pFloat_pFloat(Hook *hook, void *pthis, float *f1, float *f2)
 #endif
 
 	POST_START()
-		, f1 != NULL ? *f1 : 0, f2 != NULL ? *f2 : 0
+		, f1 != nullptr ? *f1 : 0, f2 != nullptr ? *f2 : 0
 	POST_END()
 
 	KILL_VECTOR()
@@ -2500,7 +2500,7 @@ int Hook_Int_pVector_pVector_Cbase_pFloat(Hook *hook, void *pthis, Vector *v1, V
 		, MF_PrepareCellArrayA(reinterpret_cast<cell *>(v1), 3, false)
 		, MF_PrepareCellArrayA(reinterpret_cast<cell *>(v2), 3, false)
 		, i3
-		, fl != NULL ? *fl : 0
+		, fl != nullptr ? *fl : 0
 	PRE_END()
 
 #if defined(_WIN32)
@@ -2513,7 +2513,7 @@ int Hook_Int_pVector_pVector_Cbase_pFloat(Hook *hook, void *pthis, Vector *v1, V
 		, MF_PrepareCellArrayA(reinterpret_cast<cell *>(v1), 3, false)
 		, MF_PrepareCellArrayA(reinterpret_cast<cell *>(v2), 3, false)
 		, i3
-		, fl != NULL ? *fl : 0
+		, fl != nullptr ? *fl : 0
 	POST_END()
 
 	KILL_VECTOR()

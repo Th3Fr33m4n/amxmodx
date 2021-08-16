@@ -20,7 +20,7 @@ char *stripPort(char *ip);
 
 bool lookupByIp(const char *ip, const char **path, MMDB_entry_data_s *result);
 double lookupDouble(const char *ip, const char **path);
-const char *lookupString(const char *ip, const char **path, int *length = NULL);
+const char *lookupString(const char *ip, const char **path, int *length = nullptr);
 
 int getContinentId(const char *code);
 const char *getLang(int playerIndex);

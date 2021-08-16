@@ -40,7 +40,7 @@ private:
 class BinaryWriter
 {
 public:
-	BinaryWriter() { m_Fp = NULL; }
+	BinaryWriter() { m_Fp = nullptr; }
 	BinaryWriter(FILE *fp);
 public:
 	void SetFilePtr(FILE *fp) { m_Fp = fp; }

@@ -782,7 +782,7 @@ void InitGlobalVars()
 
 		if (CommonConfig->GetAddress("sv", &address))
 		{
-			Server = *reinterpret_cast<decltype(Server)*>(address);
+			Server = *static_cast<decltype(Server)*>(address);
 		}
 #else
 		if (CommonConfig->GetMemSig("svs", &address))
@@ -806,7 +806,7 @@ void InitGlobalVars()
 #if defined(KE_WINDOWS)
 		if (CommonConfig->GetAddress("g_pGameRules", &address))
 		{
-			GameRules = *reinterpret_cast<decltype(GameRules)*>(address);
+			GameRules = *static_cast<decltype(GameRules)*>(address);
 		}
 #else
 		if (CommonConfig->GetMemSig("g_pGameRules", &address))

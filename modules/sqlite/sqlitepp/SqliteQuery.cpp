@@ -20,7 +20,7 @@
 using namespace SourceMod;
 
 SqliteQuery::SqliteQuery(SqliteDatabase *db, const char *query) : 
-	m_pDatabase(db), m_LastRes(NULL)
+	m_pDatabase(db), m_LastRes(nullptr)
 {
 	m_QueryString = new char[strlen(query)+1];
 	strcpy(m_QueryString, query);
@@ -31,7 +31,7 @@ SqliteQuery::~SqliteQuery()
 	if (m_LastRes)
 	{
 		m_LastRes->FreeHandle();
-		m_LastRes = NULL;
+		m_LastRes = nullptr;
 	}
 
 	delete [] m_QueryString;
@@ -97,7 +97,7 @@ bool SqliteQuery::ExecuteR(QueryInfo *info, char *error, size_t maxlength)
 		}
 		info->affected_rows = 0;
 		info->errorcode = err;
-		info->rs = NULL;
+		info->rs = nullptr;
 		info->success = false;
 	} else {
 		info->affected_rows = sqlite3_changes(m_pDatabase->m_pSql);
@@ -113,7 +113,7 @@ bool SqliteQuery::ExecuteR(QueryInfo *info, char *error, size_t maxlength)
 			SqliteResultSet *pRes = new SqliteResultSet(data);
 			info->rs = static_cast<IResultSet *>(pRes);
 		} else {
-			info->rs = NULL;
+			info->rs = nullptr;
 			if (results)
 			{
 				sqlite3_free_table(results);

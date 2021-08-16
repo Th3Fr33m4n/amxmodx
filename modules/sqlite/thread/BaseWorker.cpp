@@ -47,7 +47,7 @@ IThreadHandle *BaseWorker::MakeThread(IThread *pThread, ThreadFlags flags)
 IThreadHandle *BaseWorker::MakeThread(IThread *pThread, const ThreadParams *params)
 {
 	if (m_state != Worker_Running)
-		return NULL;
+		return nullptr;
 
 	SWThreadHandle *swt = new SWThreadHandle(this, params, pThread);
 
@@ -67,7 +67,7 @@ unsigned int BaseWorker::Flush(bool flush_cancel)
 	SWThreadHandle *swt;
 	unsigned int num = 0;
 
-	while ((swt=PopThreadFromQueue()) != NULL)
+	while ((swt=PopThreadFromQueue()) != nullptr)
 	{
 		swt->m_state = Thread_Done;
 		if (!flush_cancel)
@@ -84,7 +84,7 @@ unsigned int BaseWorker::Flush(bool flush_cancel)
 SWThreadHandle *BaseWorker::PopThreadFromQueue()
 {
 	if (!m_ThreadQueue.size())
-		return NULL;
+		return nullptr;
 
 	List<SWThreadHandle *>::iterator begin;
 	SWThreadHandle *swt;
@@ -118,12 +118,12 @@ unsigned int BaseWorker::RunFrame()
 {
 	unsigned int done = 0;
 	unsigned int max = GetMaxThreadsPerFrame();
-	SWThreadHandle *swt = NULL;
-	IThread *pThread = NULL;
+	SWThreadHandle *swt = nullptr;
+	IThread *pThread = nullptr;
 
 	while (done < max)
 	{
-		if ((swt=PopThreadFromQueue()) == NULL)
+		if ((swt=PopThreadFromQueue()) == nullptr)
 			break;
 		pThread = swt->pThread;
 		swt->m_state = Thread_Running;

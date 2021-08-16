@@ -32,7 +32,7 @@ static cell AMX_NATIVE_CALL lookup_sequence(AMX* amx, cell* params)
 
 	studiohdr_t* pstudiohdr = static_cast<studiohdr_t*>(GET_MODEL_PTR(ent));
 
-	if (pstudiohdr == NULL)
+	if (pstudiohdr == nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Could not retrieve the model pointer from the entity provided.");
 		return 0;
@@ -43,7 +43,7 @@ static cell AMX_NATIVE_CALL lookup_sequence(AMX* amx, cell* params)
 	pseqdesc = reinterpret_cast<mstudioseqdesc_t*>(
 					reinterpret_cast<char*>(pstudiohdr) + pstudiohdr->seqindex);
 
-	char* label = MF_GetAmxString(amx, params[2], 0, NULL);
+	char* label = MF_GetAmxString(amx, params[2], 0, nullptr);
 
 	for (int i = 0; i < pstudiohdr->numseq; i++)
 	{
@@ -212,5 +212,5 @@ AMX_NATIVE_INFO misc_natives[] = {
 	{ "lookup_sequence",			lookup_sequence },
 	{ "set_controller",				set_controller },
 	{ "GetModelBoundingBox",		GetModelBoundingBox },
-	{NULL,							NULL},
+	{nullptr, nullptr},
 };

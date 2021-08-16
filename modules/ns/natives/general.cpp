@@ -30,7 +30,7 @@
 #include "CPlayer.h"
 
 
-edict_t* avhgameplay=NULL;
+edict_t* avhgameplay= nullptr;
 
 // drop-in replacement for user_kill
 static cell AMX_NATIVE_CALL ns_user_kill(AMX *amx, cell *params)
@@ -229,11 +229,11 @@ static cell AMX_NATIVE_CALL ns_get_locationname(AMX *amx, cell *params)
 static cell AMX_NATIVE_CALL ns_lookup_title(AMX *amx, cell *params)
 {
 	// FIX: some keys have upper case characters; to fix i store all keys as lower case
-	ke::AString Input(UTIL_ToLowerCase(MF_GetAmxString(amx,params[1],0,NULL)));
+	ke::AString Input(UTIL_ToLowerCase(MF_GetAmxString(amx,params[1],0, nullptr)));
 
 	const char *Output=TitleMan.Lookup(Input);
 
-	if (Output==NULL) // not found
+	if (Output== nullptr) // not found
 	{
 		return -1;
 	}
@@ -310,7 +310,7 @@ static cell AMX_NATIVE_CALL ns_popup(AMX *amx, cell *params)
 	}
 
 	char msg[190];
-	strncpy(&msg[0],MF_GetAmxString(amx,params[2],0,NULL),188);
+	strncpy(&msg[0],MF_GetAmxString(amx,params[2],0, nullptr),188);
 
 	WRITE_STRING(msg);
 	WRITE_BYTE(params[3]);
@@ -450,11 +450,11 @@ static cell AMX_NATIVE_CALL ns_takedamage(AMX *amx, cell *params)
 
 static cell AMX_NATIVE_CALL ns_get_gameplay(AMX* amx, cell* params)
 {
-	if (avhgameplay == NULL)
+	if (avhgameplay == nullptr)
 	{
 		avhgameplay = FIND_ENTITY_BY_CLASSNAME(NULL, "avhgameplay");
 	}
-	if (avhgameplay == NULL ||
+	if (avhgameplay == nullptr ||
 		avhgameplay->pvPrivateData == NULL) // Still null? Get out of here
 	{
 		return NSGame_CantTell;
@@ -522,7 +522,7 @@ AMX_NATIVE_INFO general_natives[] = {
 	{ "setmem",					setmem },
 #endif
 
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 
 };
 void AddNatives_General()

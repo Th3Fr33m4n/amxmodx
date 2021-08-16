@@ -79,5 +79,5 @@ AMX_NATIVE_INFO base_Natives[] = {
   { "dod_set_fuse", nade_set_fuse },
 
   ///*******************
-  { NULL, NULL } 
+  {nullptr, nullptr} 
 };

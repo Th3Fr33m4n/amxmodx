@@ -33,7 +33,7 @@ public:
 		this->Clear();
 	};
 
-	inline void Clear(void)
+	inline void Clear()
 	{
 		TeamSpawns[0].clear();
 		TeamSpawns[1].clear();

@@ -332,7 +332,7 @@ char *strptime(const char *buf, const char *fmt, struct tm *tm, short addthem)
                ti.qU =     /* week in year (0...53) */
                ti.qV = -1; /* week in year mode: 0=U, 1=W, 2=V */
 
- if (0 > time_int(&ti, (const unsigned char **)&buf, fmt, addthem)) buf = NULL;
+ if (0 > time_int(&ti, (const unsigned char **)&buf, fmt, addthem)) buf = nullptr;
  if (0 <= ti.qS) (*defoper) ( &tm->tm_sec ,  ti.qS );
  if (0 <= ti.qM) (*defoper) ( &tm->tm_min ,  ti.qM ); //tm->tm_min  = ti.qM;
  if (0 <= ti.qI)

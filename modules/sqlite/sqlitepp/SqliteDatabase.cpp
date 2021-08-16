@@ -38,7 +38,7 @@ void SqliteDatabase::Disconnect()
 	if (m_pSql)
 	{
 		sqlite3_close(m_pSql);
-		m_pSql = NULL;
+		m_pSql = nullptr;
 	}
 }
 
@@ -91,7 +91,7 @@ int SqliteDatabase::QuoteString(const char *str, char buffer[], size_t maxlen, s
 
 	char *res = sqlite3_snprintf(static_cast<int>(maxlen), buffer, "%q", str);
 
-	if (res != NULL && newsize != NULL)
+	if (res != nullptr && newsize != nullptr)
 	{
 		*newsize = strlen(buffer);
 	}

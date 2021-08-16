@@ -364,6 +364,6 @@ AMX_NATIVE_INFO stats_Natives[] = {
 	{ "custom_weapon_dmg", cwpn_dmg },
 	{ "custom_weapon_shot", cwpn_shot },
 
-	{ NULL, NULL }
+	{nullptr, nullptr}
 };
 

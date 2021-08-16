@@ -150,7 +150,7 @@ edict_t *FindEntityByString(edict_t *pentStart, const char *szKeyword, const cha
 	if(!FNullEnt(pentEntity))
 		return pentEntity;
 
-	return NULL;
+	return nullptr;
 }
 
 edict_t *FindEntityByClassname(edict_t *pentStart, const char *szName)
@@ -163,7 +163,7 @@ edict_t *FindEntityInSphere(edict_t *pentStart, edict_t *origin, float radius)
 	edict_t* temp = FIND_ENTITY_IN_SPHERE(pentStart, origin->v.origin, radius);
 
 	if(!temp)
-		return NULL;
+		return nullptr;
 
 	return temp;
 }

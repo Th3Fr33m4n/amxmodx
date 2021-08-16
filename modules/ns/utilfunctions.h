@@ -94,7 +94,7 @@ inline BOOL isValidEntity(int x)
 
 edict_t *UTIL_FindEntityByString(edict_t *Start, const char *Keyword, const char *Value);
 
-int UTIL_FindBuildingHive(void);
+int UTIL_FindBuildingHive();
 
 BOOL UTIL_CheckForPublic(const char *publicname);
 BOOL UTIL_CheckForNative(const char *NativeName);
@@ -127,9 +127,9 @@ inline Output get_private_p(edict_t *pEntity, int offset)
  */
 inline edict_t *private_to_edict(void *PrivateData)
 {
-	if (PrivateData==NULL)
+	if (PrivateData== nullptr)
 	{
-		return NULL;
+		return nullptr;
 	}
 	return (*((entvars_t **)((char *)PrivateData + MAKE_OFFSET(ENTVAR))))->pContainingEntity;
 };

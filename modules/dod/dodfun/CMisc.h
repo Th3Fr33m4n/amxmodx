@@ -283,7 +283,7 @@ public:
 	inline void Clear() { count = 0; memset(obj,0,sizeof(obj)); }
 	void SetKeyValue( int index, char *keyname, char *value );
 
-	void InitObj(int dest = MSG_ALL , edict_t* ed = NULL);
+	void InitObj(int dest = MSG_ALL , edict_t* ed = nullptr);
 	void SetObj(int index);
 	
 	void UpdateOwner( int index, int team );

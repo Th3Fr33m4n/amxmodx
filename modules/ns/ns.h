@@ -41,7 +41,7 @@ void PlayerPreThink(edict_t *pEntity);
 void PlayerPreThink_Post(edict_t *pEntity);
 void PlayerPostThink_Post(edict_t *pEntity);
 void UpdateClientData( const struct edict_s *ent, int sendweapons, struct clientdata_s *cd );
-void StartFrame(void);
+void StartFrame();
 edict_t* CreateNamedEntity_Post(int className);
 void AlertMessage_Post(ALERT_TYPE atype, const char *szFmt, ...);
 

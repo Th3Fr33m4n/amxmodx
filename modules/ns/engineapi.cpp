@@ -43,13 +43,13 @@ void AlertMessage_Post(ALERT_TYPE atype, const char *szFmt, ...)
 	MessageStart=va_arg(LogArgs,char *);
 	va_end(LogArgs);
 
-	if (MessageStart==NULL) // Somehow got a null pointer, get out of here now
+	if (MessageStart== nullptr) // Somehow got a null pointer, get out of here now
 	{
 		RETURN_META(MRES_IGNORED);
 	}
 
 
-	if ((TypePointer=strstr(MessageStart,"\"structure_built\""))==NULL) // was not found
+	if ((TypePointer=strstr(MessageStart,"\"structure_built\""))== nullptr) // was not found
 	{
 		RETURN_META(MRES_IGNORED);
 	}
@@ -87,7 +87,7 @@ void AlertMessage_Post(ALERT_TYPE atype, const char *szFmt, ...)
 
 	CPlayer *Player;
 
-	if ((Player=UTIL_PlayerByCID(CID))==NULL)
+	if ((Player=UTIL_PlayerByCID(CID))== nullptr)
 	{
 		RETURN_META(MRES_IGNORED);
 	}

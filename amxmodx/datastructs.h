@@ -33,7 +33,7 @@ public:
 	{
 		if (!GrowIfNeeded(1))
 		{
-			return NULL;
+			return nullptr;
 		}
 		cell *arr = &m_Data[m_Size * m_BlockSize];
 		m_Size++;
@@ -182,7 +182,7 @@ private:
 		else {
 			m_Data = (cell *)malloc(sizeof(cell)* m_BlockSize * m_AllocSize);
 		}
-		return (m_Data != NULL);
+		return (m_Data != nullptr);
 	}
 private:
 	cell  *m_Data;

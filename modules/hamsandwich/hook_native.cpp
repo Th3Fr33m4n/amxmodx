@@ -600,8 +600,8 @@ static cell AMX_NATIVE_CALL RegisterHam(AMX *amx, cell *params)
 	// Fixes a buffer issue by copying locally the strings.
 	// REMOVE_ENTITY invokes pfnOnFreeEntPrivateData which plugins can hook and `function` and `classname` strings are used after that
 	// but it is pointing to the AMXX static buffer. Basically, hooking this forward and doing stuff inside could invalid all RegisterHam calls.
-	ke::AString function(MF_GetAmxString(amx, params[3], 0, NULL));
-	ke::AString classname(MF_GetAmxString(amx, params[2], 1, NULL));
+	ke::AString function(MF_GetAmxString(amx, params[3], 0, nullptr));
+	ke::AString classname(MF_GetAmxString(amx, params[2], 1, nullptr));
 
 	// Check the entity
 
@@ -610,7 +610,7 @@ static cell AMX_NATIVE_CALL RegisterHam(AMX *amx, cell *params)
 
 	CALL_GAME_ENTITY(PLID,classname.chars(),&Entity->v);
 
-	if (Entity->pvPrivateData == NULL)
+	if (Entity->pvPrivateData == nullptr)
 	{
 		REMOVE_ENTITY(Entity);
 
@@ -622,7 +622,7 @@ static cell AMX_NATIVE_CALL RegisterHam(AMX *amx, cell *params)
 
 	REMOVE_ENTITY(Entity);
 
-	if (vtable == NULL)
+	if (vtable == nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE,"Failed to retrieve vtable for \"%s\", hook for \"%s\" not active.",classname.chars(),function.chars());
 
@@ -704,7 +704,7 @@ static cell AMX_NATIVE_CALL RegisterHamFromEntity(AMX *amx, cell *params)
 
 	CHECK_FUNCTION(func);
 
-	char *function=MF_GetAmxString(amx, params[3], 0, NULL);
+	char *function=MF_GetAmxString(amx, params[3], 0, nullptr);
 	int entid=params[2];
 	char classname[64];
 
@@ -712,7 +712,7 @@ static cell AMX_NATIVE_CALL RegisterHamFromEntity(AMX *amx, cell *params)
 
 	edict_t *Entity = TypeConversion.id_to_edict(entid);
 
-	if (!Entity || Entity->pvPrivateData == NULL)
+	if (!Entity || Entity->pvPrivateData == nullptr)
 	{
 
 		MF_LogError(amx, AMX_ERR_NATIVE,"Failed to retrieve classtype for entity id \"%d\", hook for \"%s\" not active.",entid,function);
@@ -721,7 +721,7 @@ static cell AMX_NATIVE_CALL RegisterHamFromEntity(AMX *amx, cell *params)
 	}
 	void **vtable=GetVTable(Entity->pvPrivateData, Offsets.GetBase());
 
-	if (vtable == NULL)
+	if (vtable == nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE,"Failed to retrieve vtable for entity id \"%d\", hook for \"%s\" not active.",entid,function);
 
@@ -825,7 +825,7 @@ static cell AMX_NATIVE_CALL DisableHamForward(AMX *amx, cell *params)
 {
 	Forward *fwd=reinterpret_cast<Forward *>(params[1]);
 
-	if (fwd == 0)
+	if (fwd == nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid HamHook handle.");
 		return -1;
@@ -838,7 +838,7 @@ static cell AMX_NATIVE_CALL EnableHamForward(AMX *amx, cell *params)
 {
 	Forward *fwd=reinterpret_cast<Forward *>(params[1]);
 
-	if (fwd == 0)
+	if (fwd == nullptr)
 	{
 		MF_LogError(amx, AMX_ERR_NATIVE, "Invalid HamHook handle.");
 		return -1;
@@ -857,5 +857,5 @@ AMX_NATIVE_INFO RegisterNatives[] =
 	{ "DisableHamForward",		DisableHamForward },
 	{ "EnableHamForward",		EnableHamForward },
 
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 };

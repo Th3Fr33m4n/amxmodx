@@ -30,7 +30,7 @@ MessageHandler *HookedMessage;
 bool MessageHandler_Initialized=false;
 
 // This is called through ServerActivate_Post
-void Initialize_MessageHandler(void)
+void Initialize_MessageHandler()
 {
 	if (MessageHandler_Initialized)
 	{
@@ -43,7 +43,7 @@ void Initialize_MessageHandler(void)
 
 	while (i<255)
 	{
-		MessageLists[i++]=NULL;
+		MessageLists[i++]= nullptr;
 	};
 
 	// Hook our messages
@@ -85,7 +85,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	}
 
 	// Has a hooked message?
-	if (MessageLists[msg_type]!=NULL) 
+	if (MessageLists[msg_type]!= nullptr) 
 	{
 		// Should this message be hooked?
 		if (MessageLists[msg_type]->Begin(msg_dest,msg_type,pOrigin,ed)==1)
@@ -112,11 +112,11 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	RETURN_META(MRES_IGNORED);
 }
 
-void MessageEnd_Post(void)
+void MessageEnd_Post()
 {
 	HookedMessage->End();
 
-	HookedMessage=NULL;
+	HookedMessage= nullptr;
 
 	// Stop metamod forwarding
 	g_pengfuncsTable_Post->pfnWriteByte=NULL;

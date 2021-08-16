@@ -237,7 +237,7 @@ static cell AMX_NATIVE_CALL get_pdata_ent(AMX *amx, cell *params)
 
 	edict_t *pEdict = get_pdata<edict_t*>(TypeConversion.id_to_edict(index), iOffset);
 
-	if (pEdict == NULL)
+	if (pEdict == nullptr)
 	{
 		return -1;
 	}
@@ -250,7 +250,7 @@ static cell AMX_NATIVE_CALL get_pdata_ent(AMX *amx, cell *params)
 		return -2;
 	}
 
-	if (pEdict->free || pEdict->pvPrivateData == NULL)
+	if (pEdict->free || pEdict->pvPrivateData == nullptr)
 	{
 		return -1;
 	}
@@ -498,7 +498,7 @@ static cell AMX_NATIVE_CALL get_pdata_ehandle(AMX *amx, cell *params)
 
 	edict_t *pEdict = get_pdata<edict_t*>(TypeConversion.id_to_edict(index), offset);
 
-	if (pEdict == NULL)
+	if (pEdict == nullptr)
 	{
 		return -1;
 	}
@@ -511,7 +511,7 @@ static cell AMX_NATIVE_CALL get_pdata_ehandle(AMX *amx, cell *params)
 		return -2;
 	}
 
-	if (pEdict->free || pEdict->pvPrivateData == NULL)
+	if (pEdict->free || pEdict->pvPrivateData == nullptr)
 	{
 		return -1;
 	}
@@ -579,5 +579,5 @@ AMX_NATIVE_INFO pdata_natives[] =
 	{ "set_pdata_vector",	set_pdata_vector },
 	{ "get_pdata_ehandle",	get_pdata_ehandle },
 	{ "set_pdata_ehandle",	set_pdata_ehandle },
-	{ NULL,					NULL }
+	{nullptr, nullptr}
 };

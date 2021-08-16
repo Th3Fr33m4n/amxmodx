@@ -86,7 +86,7 @@ void OnAmxxAttach()
 		}
 
 #if defined(KE_WINDOWS)
-		GameRulesAddress = *reinterpret_cast<void***>(address);
+		GameRulesAddress = *static_cast<void***>(address);
 #else
 		GameRulesAddress = reinterpret_cast<void**>(address);
 #endif

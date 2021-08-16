@@ -19,7 +19,7 @@ float *msgOrigin;
 edict_t *msgpEntity;
 bool inhook = false;
 bool inblock = false;
-enginefuncs_t *g_pEngTable = NULL;
+enginefuncs_t *g_pEngTable = nullptr;
 
 void ClearMessages()
 {
@@ -62,7 +62,7 @@ Message::~Message()
 
 msgparam *Message::AdvPtr()
 {
-	msgparam *pParam = NULL;
+	msgparam *pParam = nullptr;
 
 	if (++m_CurParam >= m_Params.length())
 	{
@@ -118,7 +118,7 @@ float Message::GetParamFloat(size_t index)
 const char *Message::GetParamString(size_t index)
 {
 	if (index < 1 || index > m_CurParam)
-		return 0;
+		return nullptr;
 
 	return m_Params[index]->szData.chars();
 }
@@ -167,7 +167,7 @@ size_t Message::Params()
 
 void Message::Send()
 {
-	msgparam *pParam = NULL;
+	msgparam *pParam = nullptr;
 
 	for (size_t i=1; i<=m_CurParam; i++)
 	{
@@ -904,5 +904,5 @@ AMX_NATIVE_INFO msg_Natives[] =
 	{"ewrite_short",		ewrite_short},
 	{"ewrite_string",		ewrite_string},
 
-	{NULL,					NULL},
+	{nullptr, nullptr},
 };

@@ -60,7 +60,7 @@ public:
 		}
 	};
 
-	void ReadFile(void);
+	void ReadFile();
 
 	inline int Add(const char *Start, int Static)
 	{

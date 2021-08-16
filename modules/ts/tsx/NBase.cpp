@@ -592,5 +592,5 @@ AMX_NATIVE_INFO base_Natives[] = {
 	{ "get_user_weapon", get_user_weapon },
 
 	//"*******************"
-	{ NULL, NULL } 
+	{nullptr, nullptr} 
 };

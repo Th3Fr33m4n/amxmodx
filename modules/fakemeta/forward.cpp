@@ -832,9 +832,9 @@ static cell AMX_NATIVE_CALL unregister_forward(AMX *amx, cell *params)
 		return 0;
 	}
 
-	void *patchAddr = NULL;
+	void *patchAddr = nullptr;
 
-	ke::Vector<int> *peng = NULL;
+	ke::Vector<int> *peng = nullptr;
 	if (post)
 	{
 		peng = &(EnginePost[func]);
@@ -849,10 +849,10 @@ static cell AMX_NATIVE_CALL unregister_forward(AMX *amx, cell *params)
 		{
 			peng->remove(i);
 			MF_UnregisterSPForward(func_id);
-			if (!peng->length() && patchAddr != NULL && func != FM_ServerDeactivate)
+			if (!peng->length() && patchAddr != nullptr && func != FM_ServerDeactivate)
 			{
 				/* Clear out this forward if we no longer need it */
-				*(void **)patchAddr = NULL;
+				*(void **)patchAddr = nullptr;
 			}
 			return 1;
 		}
@@ -1522,7 +1522,7 @@ static cell AMX_NATIVE_CALL register_forward(AMX *amx, cell *params)
 static cell AMX_NATIVE_CALL get_orig_retval(AMX *amx, cell *params)
 {
 	int paramCount = params[0] / sizeof(cell);
-	cell *refFloatRet = 0;
+	cell *refFloatRet = nullptr;
 
 	switch (paramCount)
 	{
@@ -1546,5 +1546,5 @@ AMX_NATIVE_INFO forward_natives[] = {
 	{ "unregister_forward", unregister_forward },
 	{ "forward_return",		fm_return },
 	{ "get_orig_retval",	get_orig_retval },
-	{ NULL,					NULL }
+	{nullptr, nullptr}
 };

@@ -28,7 +28,7 @@ const char *MysqlResultRow::GetRaw(unsigned int columnId, size_t *length)
 	{
 		if (length)
 			*length = 0;
-		return NULL;
+		return nullptr;
 	}
 
 	*length = static_cast<size_t>(m_Lengths[columnId]);
@@ -54,7 +54,7 @@ const char *MysqlResultRow::GetStringSafe(unsigned int columnId)
 const char *MysqlResultRow::GetString(unsigned int columnId)
 {
 	if (columnId >= m_Columns)
-		return NULL;
+		return nullptr;
 
 	return m_CurRow[columnId];
 }
@@ -91,7 +91,7 @@ MysqlResultSet::MysqlResultSet(MYSQL_RES *res, MYSQL *mysql) :
 
 MysqlResultSet::~MysqlResultSet()
 {
-	if (m_pRes == NULL)
+	if (m_pRes == nullptr)
 	{
 		return;
 	}
@@ -100,7 +100,7 @@ MysqlResultSet::~MysqlResultSet()
 	while (mysql_next_result(m_pMySQL) == 0)
 	{
 		m_pRes = mysql_store_result(m_pMySQL);
-		if (m_pRes != NULL)
+		if (m_pRes != nullptr)
 		{
 			mysql_free_result(m_pRes);
 		}
@@ -156,7 +156,7 @@ unsigned int MysqlResultSet::RowCount()
 const char *MysqlResultSet::FieldNumToName(unsigned int num)
 {
 	if (num >= m_Columns)
-		return NULL;
+		return nullptr;
 
 	MYSQL_FIELD *field = mysql_fetch_field_direct(m_pRes, num);
 	if (!field || !field->name)

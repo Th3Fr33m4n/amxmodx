@@ -124,7 +124,7 @@ public:
 		inline iterator& operator--() { ptr = ptr->prev; return *this;}
 		inline iterator& operator++() {	ptr = ptr->next; return *this; }
 		inline RankStats& operator*() {	return *ptr;}
-		operator bool () { return (ptr != 0); }
+		operator bool () { return (ptr != nullptr); }
 	};
 
 	inline iterator front() {  return iterator(head);  }

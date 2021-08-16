@@ -30,7 +30,7 @@ static cell AMX_NATIVE_CALL ns_set_player_model(AMX *amx, cell *params)
 {
 	CreatePlayerPointer(amx,params[1]);
 
-	player->SetModel(MF_GetAmxString(amx,params[2],0,NULL));
+	player->SetModel(MF_GetAmxString(amx,params[2],0, nullptr));
 
 	GameMan.HookPostThink_Post();
 
@@ -140,7 +140,7 @@ static cell AMX_NATIVE_CALL ns_giveitem(AMX *amx, cell *params)
 {
 	CreatePlayerPointer(amx,params[1]);
 
-	char *classname = MF_GetAmxString(amx,params[2],0,NULL);
+	char *classname = MF_GetAmxString(amx,params[2],0, nullptr);
 
 	if (!player->IsConnected())
 	{
@@ -262,7 +262,7 @@ AMX_NATIVE_INFO player_natives[] = {
 	{ "ns_get_user_team",		ns_get_user_team },
 
 
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 };
 void AddNatives_Player()
 {

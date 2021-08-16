@@ -135,11 +135,11 @@ cvar_t init_amxmodx_debug = {"amx_debug", "1", FCVAR_SPONLY};
 cvar_t init_amxmodx_mldebug = {"amx_mldebug", "", FCVAR_SPONLY};
 cvar_t init_amxmodx_language = {"amx_language", "en", FCVAR_SERVER};
 cvar_t init_amxmodx_cl_langs = {"amx_client_languages", "1", FCVAR_SERVER};
-cvar_t* amxmodx_version = NULL;
-cvar_t* amxmodx_modules = NULL;
-cvar_t* amxmodx_language = NULL;
-cvar_t* hostname = NULL;
-cvar_t* mp_timelimit = NULL;
+cvar_t* amxmodx_version = nullptr;
+cvar_t* amxmodx_modules = nullptr;
+cvar_t* amxmodx_language = nullptr;
+cvar_t* hostname = nullptr;
+cvar_t* mp_timelimit = nullptr;
 
 // main forwards
 int FF_ClientCommand = -1;
@@ -329,7 +329,7 @@ const char*	get_localinfo(const char* name, const char* def)
 {
 	const char* b = LOCALINFO((char*)name);
 
-	if (b == 0 || *b == 0)
+	if (b == nullptr || *b == 0)
 	{
 		SET_LOCALINFO((char*)name, (char*)(b = def));
 	}
@@ -341,7 +341,7 @@ const char*	get_localinfo_r(const char *name, const char *def, char buffer[], si
 {
 	const char* b = LOCALINFO((char*)name);
 
-	if (b == 0 || *b == 0)
+	if (b == nullptr || *b == 0)
 	{
 		SET_LOCALINFO((char*)name, (char*)(b = def));
 	}
@@ -373,7 +373,7 @@ int	C_Spawn(edict_t *pent)
 	mp_timelimit = CVAR_GET_POINTER("mp_timelimit");
 
 	// Fix for crashing on mods that do not have mp_timelimit
-	if (mp_timelimit == NULL)
+	if (mp_timelimit == nullptr)
 	{
 		static cvar_t timelimit_holder;
 
@@ -443,7 +443,7 @@ int	C_Spawn(edict_t *pent)
 	ke::SafeSprintf(temporaryMap, sizeof(temporaryMap), "%s", STRING(gpGlobals->mapname));
 
 	prefixed_map_pluginsfile[0] = '\0';
-	if ((tmap_ptr = strchr(temporaryMap, '_')) != NULL)
+	if ((tmap_ptr = strchr(temporaryMap, '_')) != nullptr)
 	{
 		// this map has a prefix
 
@@ -566,22 +566,22 @@ struct sUserMsg
 	{"TextMsg", &gmsgTextMsg, Client_TextMsg, false, false},
 	{"TeamInfo", &gmsgTeamInfo, Client_TeamInfo, false, false},
 	{"WeaponList", &gmsgWeaponList, Client_WeaponList, false, false},
-	{"MOTD", &gmsgMOTD,	0, false, false},
-	{"ServerName", &gmsgServerName,	0, false, false},
-	{"Health", &gmsgHealth,	0, false, false},
-	{"Battery", &gmsgBattery, 0, false, false},
+	{"MOTD", &gmsgMOTD,	nullptr, false, false},
+	{"ServerName", &gmsgServerName,	nullptr, false, false},
+	{"Health", &gmsgHealth,	nullptr, false, false},
+	{"Battery", &gmsgBattery, nullptr, false, false},
 	{"ShowMenu", &gmsgShowMenu, Client_ShowMenu, false, false},
-	{"SendAudio", &gmsgSendAudio, 0, false, false},
+	{"SendAudio", &gmsgSendAudio, nullptr, false, false},
 	{"AmmoX", &gmsgAmmoX, Client_AmmoX, false, false},
 	{"ScoreInfo", &gmsgScoreInfo, Client_ScoreInfo,	false, false},
 	{"VGUIMenu", &gmsgVGUIMenu, Client_VGUIMenu, false, false},
 	{"AmmoPickup", &gmsgAmmoPickup,	Client_AmmoPickup, false, false},
-	{"WeapPickup", &gmsgWeapPickup, 0, false, false},
-	{"ResetHUD", &gmsgResetHUD, 0, false, false},
-	{"RoundTime", &gmsgRoundTime, 0, false, false},
-	{"SayText", &gmsgSayText, 0, false, false},
+	{"WeapPickup", &gmsgWeapPickup, nullptr, false, false},
+	{"ResetHUD", &gmsgResetHUD, nullptr, false, false},
+	{"RoundTime", &gmsgRoundTime, nullptr, false, false},
+	{"SayText", &gmsgSayText, nullptr, false, false},
 	{"InitHUD", &gmsgInitHUD, Client_InitHUDEnd, true, false},
-	{0, 0, 0, false, false}
+	{nullptr, nullptr, nullptr, false, false}
 };
 
 int	C_RegUserMsg_Post(const char *pszName, int iSize)
@@ -889,7 +889,7 @@ BOOL C_ClientConnect_Post(edict_t *pEntity, const char *pszName, const char *psz
 			{
 				List<AUTHORIZEFUNC>::iterator iter, end=g_auth_funcs.end();
 				AUTHORIZEFUNC fn;
-				for (iter=g_auth_funcs.begin(); iter!=end; iter++)
+				for (iter=g_auth_funcs.begin(); iter!=end; ++iter)
 				{
 					fn = (*iter);
 					fn(pPlayer->index, authid);
@@ -1032,7 +1032,7 @@ void C_ClientUserInfoChanged_Post(edict_t *pEntity, char *infobuffer)
 		{
 			List<AUTHORIZEFUNC>::iterator iter, end=g_auth_funcs.end();
 			AUTHORIZEFUNC fn;
-			for (iter=g_auth_funcs.begin(); iter!=end; iter++)
+			for (iter=g_auth_funcs.begin(); iter!=end; ++iter)
 			{
 				fn = (*iter);
 				fn(pPlayer->index, authid);
@@ -1223,7 +1223,7 @@ void C_StartFrame_Post()
 			auto player = g_auth[i].get();
 			const char*	auth = GETPLAYERAUTHID((*player)->pEdict);
 
-			if ((auth == 0) || (*auth == 0))
+			if ((auth == nullptr) || (*auth == 0))
 			{
 				g_auth.remove(i);
 				continue;
@@ -1236,7 +1236,7 @@ void C_StartFrame_Post()
 				{
 					List<AUTHORIZEFUNC>::iterator iter, end=g_auth_funcs.end();
 					AUTHORIZEFUNC fn;
-					for (iter=g_auth_funcs.begin(); iter!=end; iter++)
+					for (iter=g_auth_funcs.begin(); iter!=end; ++iter)
 					{
 						fn = (*iter);
 						fn((*player)->index, auth);
@@ -1327,7 +1327,7 @@ void C_MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict
 		mPlayer	= GET_PLAYER_POINTER_I(mPlayerIndex);
 	} else {
 		mPlayerIndex = 0;
-		mPlayer	= 0;
+		mPlayer	= nullptr;
 	}
 
 	if (msg_type < 0 || msg_type >= MAX_REG_MSGS)
@@ -1409,7 +1409,7 @@ void C_WriteEntity_Post(int iValue)
 void C_MessageEnd_Post()
 {
 	g_events.executeEvents();
-	if (endfunction) (*endfunction)(NULL);
+	if (endfunction) (*endfunction)(nullptr);
 
 	RETURN_META(MRES_IGNORED);
 }
@@ -1537,7 +1537,7 @@ void C_CvarValue2(const edict_t *pEdict, int requestId, const char *cvar, const 
 
 	List<ClientCvarQuery_Info *>::iterator iter, end=pPlayer->queries.end();
 	ClientCvarQuery_Info *info;
-	for (iter=pPlayer->queries.begin(); iter!=end; iter++)
+	for (iter=pPlayer->queries.begin(); iter!=end; ++iter)
 	{
 		info = (*iter);
 		if ( info->requestId == requestId )

@@ -19,7 +19,7 @@ NativeHandle<LogEventHook> LogEventHandles;
 LogEventsMngr::LogEventsMngr()
 {
 	logCurrent = logCounter = 0;
-	logcmplist = 0;
+	logcmplist = nullptr;
 	arelogevents = false;
 	memset(logevents, 0, sizeof(logevents));
 }
@@ -72,7 +72,7 @@ LogEventsMngr::CLogCmp* LogEventsMngr::registerCondition(char* filter)
 void LogEventsMngr::CLogEvent::registerFilter(char* filter)
 {
 	CLogCmp *cmp = parent->registerCondition(filter);
-	if (cmp == 0) return;
+	if (cmp == nullptr) return;
 	
 	for (LogCond* c = filters; c; c = c->next)
 	{
@@ -83,9 +83,9 @@ void LogEventsMngr::CLogEvent::registerFilter(char* filter)
 		}
 	}
 	
-	LogCondEle* aa = new LogCondEle(cmp, 0);
+	LogCondEle* aa = new LogCondEle(cmp, nullptr);
 	
-	if (aa == 0)
+	if (aa == nullptr)
 		return;
 
 	filters = new LogCond(cmp->pos, aa, filters);
@@ -320,5 +320,5 @@ LogEventsMngr::CLogEvent *LogEventsMngr::getValidLogEvent(CLogEvent * a)
 		return a;
 	}
 	
-	return 0;
+	return nullptr;
 }

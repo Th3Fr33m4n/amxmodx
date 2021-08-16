@@ -829,7 +829,7 @@ bool CGameConfig::GetAddress(const char *key, void **retaddr)
 			return false;
 		}
 
-		address = reinterpret_cast<void*>(reinterpret_cast<uint8_t*>(address) + offset);
+		address = reinterpret_cast<void*>(static_cast<uint8_t*>(address) + offset);
 	}
 
 	*retaddr = address;

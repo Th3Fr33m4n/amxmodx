@@ -96,7 +96,7 @@ cell PSKeyValueS(const char *name, AMX *amx, cell *params)
 
 	kvd.szClassName=const_cast<char *>(STRING(reinterpret_cast<edict_t *>(params[1])->v.classname));
 	kvd.szKeyName=name;
-	kvd.szValue=MF_GetAmxString(amx,params[2],0,NULL);
+	kvd.szValue=MF_GetAmxString(amx,params[2],0, nullptr);
 	kvd.fHandled=0;
 	//printf("\"%s\" \"%s\"\n",kvd.szKeyName,kvd.szValue);
 
@@ -218,7 +218,7 @@ static cell AMX_NATIVE_CALL ns_fire_partsys(AMX *amx, cell *params)
 
 static cell AMX_NATIVE_CALL ns_get_partsys_id(AMX *amx, cell *params)
 {
-	return ParticleMan.Find(MF_GetAmxString(amx,params[1],0,NULL));;
+	return ParticleMan.Find(MF_GetAmxString(amx,params[1],0, nullptr));;
 };
 
 AMX_NATIVE_INFO particle_natives[] = {
@@ -247,7 +247,7 @@ AMX_NATIVE_INFO particle_natives[] = {
 	{ "ns_fire_ps",					ns_fire_partsys },
 	{ "ns_get_ps_id",				ns_get_partsys_id },
 
-	{ NULL,								NULL }
+	{nullptr, nullptr}
 };
 void AddNatives_Particles()
 {

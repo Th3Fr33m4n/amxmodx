@@ -197,7 +197,7 @@ void OnWriteString(const char *value)
 	RETURN_META(MRES_IGNORED);
 }
 
-void OnMessageEnd(void)
+void OnMessageEnd()
 {
 	if (ShouldBlock)
 	{

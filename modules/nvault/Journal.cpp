@@ -40,8 +40,8 @@ int Journal::Replay(VaultMap *pMap)
 
 	uint8_t len8;
 	uint16_t len16;
-	char *key = NULL;
-	char *val = NULL;
+	char *key = nullptr;
+	char *val = nullptr;
 	ke::AString sKey;
 	ke::AString sVal;
 	time_t stamp;
@@ -118,9 +118,9 @@ int Journal::Replay(VaultMap *pMap)
 
 			//clean up
 			delete [] key;
-			key = NULL;
+			key = nullptr;
 			delete [] val;
-			val = NULL;
+			val = nullptr;
 		} else if (op == Journal_Remove) {
 		
 			if (!br.ReadUInt8(len8)) goto fail;
@@ -141,12 +141,12 @@ fail:
 	if (key)
 	{
 		delete [] key;
-		key = NULL;
+		key = nullptr;
 	}
 	if (val)
 	{
 		delete [] val;
-		val = NULL;
+		val = nullptr;
 	}
 //	}
 
@@ -160,7 +160,7 @@ bool Journal::Begin()
 {
 	m_fp = fopen(m_File.chars(), "wb");
 	m_Bw.SetFilePtr(m_fp);
-	return (m_fp != NULL);
+	return (m_fp != nullptr);
 }
 
 bool Journal::End()
@@ -168,7 +168,7 @@ bool Journal::End()
 	if (m_fp)
 		fclose(m_fp);
 
-	m_Bw.SetFilePtr(NULL);
+	m_Bw.SetFilePtr(nullptr);
 	return true;
 }
 

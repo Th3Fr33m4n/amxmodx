@@ -37,7 +37,8 @@ public:
 		m_iFlags=0;
 		m_iHidden=0;
 	};
-	const int NeedWritten() const
+
+	int NeedWritten() const
 	{
 		return m_iNeedWritten;
 	};
@@ -62,7 +63,7 @@ public:
 		return &m_strComment;
 	};
 
-	const int Flags() const
+	int Flags() const
 	{
 		return m_iFlags;
 	};
@@ -194,7 +195,7 @@ public:
 	 * Parse the file, and load all entries
 	 * Returns 1 on success, 0 on refusal (no need to), and -1 on error
 	 */
-	const int LoadFile(const int force=0);
+	int LoadFile(const int force = 0);
 
 	/**
 	 * Checks if the command exists in the list

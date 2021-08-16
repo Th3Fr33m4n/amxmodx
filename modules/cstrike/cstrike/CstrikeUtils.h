@@ -124,7 +124,7 @@ class CUnifiedSignals
 {
 	public:
 
-		void Update(void)
+		void Update()
 		{
 			m_flState = m_flSignal;
 			m_flSignal = 0;
@@ -135,12 +135,12 @@ class CUnifiedSignals
 			m_flSignal |= flags;
 		}
 
-		int GetSignal(void)
+		int GetSignal()
 		{
 			return m_flSignal;
 		}
 
-		int GetState(void)
+		int GetState()
 		{
 			return m_flState;
 		}

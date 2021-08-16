@@ -26,7 +26,7 @@
 NVault::NVault(const char *file)
 {
 	m_File = file;
-	m_Journal = NULL;
+	m_Journal = nullptr;
 	m_Open = false;
 
 	FILE *fp = fopen(m_File.chars(), "rb");
@@ -69,8 +69,8 @@ VaultError NVault::_ReadFromFile()
 	uint8_t keylen;
 	uint16_t vallen;
 	time_t stamp;
-	char *key = NULL;
-	char *val = NULL;
+	char *key = nullptr;
+	char *val = nullptr;
 
 //	try
 //	{
@@ -134,12 +134,12 @@ fail:
 	if (key)
 	{
 		delete [] key;
-		key = NULL;
+		key = nullptr;
 	}
 	if (val)
 	{
 		delete [] val;
-		val = NULL;
+		val = nullptr;
 	}
 	fclose(fp);
 	return Vault_Read;
@@ -241,7 +241,7 @@ bool NVault::Open()
 	if (!m_Journal->Begin())
 	{
 		delete m_Journal;
-		m_Journal = NULL;
+		m_Journal = nullptr;
 	}
 	
 	m_Open = true;
@@ -270,9 +270,9 @@ bool NVault::Close()
 void NVault::SetValue(const char *key, const char *val)
 {
 	if (m_Journal)
-		m_Journal->Write_Insert(key, val, time(NULL));
+		m_Journal->Write_Insert(key, val, time(nullptr));
 
-	ArrayInfo info; info.value = val; info.stamp = time(NULL);
+	ArrayInfo info; info.value = val; info.stamp = time(nullptr);
 	m_Hash.replace(key, info);
 }
 
@@ -350,7 +350,7 @@ void NVault::Touch(const char *key, time_t stamp)
 			return;
 		}
 
-		SetValue(key, "", time(NULL));
+		SetValue(key, "", time(nullptr));
 	}
 
 	i->value.stamp = stamp;
@@ -383,7 +383,7 @@ IVault *VaultMngr::OpenVault(const char *file)
 	if (!pVault->isValid())
 	{
 		delete pVault;
-		pVault = NULL;
+		pVault = nullptr;
 	}
 
 	return static_cast<IVault *>(pVault);

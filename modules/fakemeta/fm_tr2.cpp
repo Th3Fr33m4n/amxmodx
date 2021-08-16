@@ -1329,6 +1329,6 @@ AMX_NATIVE_INFO ext2_natives[] =
 	{"set_es",			set_es},
 	{"get_uc",			get_uc},
 	{"set_uc",			set_uc},
-	{NULL,				NULL},
+	{nullptr, nullptr},
 };
 

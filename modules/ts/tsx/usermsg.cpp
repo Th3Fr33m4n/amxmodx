@@ -92,7 +92,7 @@ void Client_TSHealth_End(void* mValue){
 	int weapon = 0;
 	mPlayer->pEdict->v.dmg_take = 0.0; 
 
-	CPlayer* pAttacker = NULL;
+	CPlayer* pAttacker = nullptr;
 	if ( enemy->v.flags & (FL_CLIENT | FL_FAKECLIENT) ){
 		pAttacker = GET_PLAYER_POINTER(enemy);
 		weapon = pAttacker->current;

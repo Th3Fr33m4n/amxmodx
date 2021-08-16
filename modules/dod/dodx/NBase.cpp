@@ -647,5 +647,5 @@ AMX_NATIVE_INFO base_Natives[] =
 	{"dod_set_weaponlist",	dod_weaponlist},
 
 	///*******************
-	{ NULL, NULL } 
+	{nullptr, nullptr} 
 };

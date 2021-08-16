@@ -149,12 +149,12 @@ AMX_NATIVE_INFO pdata_natives_safe[] =
 {
 	{ "get_pdata_cbase_safe",	get_pdata_cbase_safe },
 
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 };
 AMX_NATIVE_INFO pdata_natives[] =
 {
 	{ "get_pdata_cbase",		get_pdata_cbase },
 	{ "set_pdata_cbase",		set_pdata_cbase },
 
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 };

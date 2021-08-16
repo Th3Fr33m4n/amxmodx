@@ -32,7 +32,7 @@ class Vault
 
 public:
 
-	Vault() { head = 0; }
+	Vault() { head = nullptr; }
 	~Vault() { clear(); }
 
 	// Interface
@@ -64,7 +64,7 @@ public:
 	};
 
 	inline iterator begin() const { return iterator(head); }
-	inline iterator end() const { return iterator(0); }
+	inline iterator end() const { return iterator(nullptr); }
 };
 
 #endif //VAULT_CUSTOM_H

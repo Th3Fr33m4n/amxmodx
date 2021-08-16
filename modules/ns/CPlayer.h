@@ -71,15 +71,15 @@ public:
 		m_iIndex=ENTINDEX_NEW(Ent);
 	};
 
-	inline edict_t *GetEdict(void)
+	inline edict_t *GetEdict()
 	{
 		return m_pEdict;
 	};
-	inline entvars_t *GetPev(void)
+	inline entvars_t *GetPev()
 	{
 		return m_pev;
 	};
-	inline int IsBot(void)
+	inline int IsBot()
 	{
 		return m_iIsBot;
 	};
@@ -87,12 +87,12 @@ public:
 	{
 		m_iIsBot=onoff;
 	};
-	inline int IsConnected(void)
+	inline int IsConnected()
 	{
 		return m_iIsConnected;
 	};
 
-	inline BOOL HasPrivateData(void)
+	inline BOOL HasPrivateData()
 	{
 		if (m_pEdict && m_pEdict->pvPrivateData != NULL)
 		{
@@ -289,7 +289,7 @@ public:
 		return m_iIndex; 
 	};
 
-	inline int &GetSpeedChange(void)
+	inline int &GetSpeedChange()
 	{
 		return m_iSpeedChange;
 	};
@@ -347,7 +347,7 @@ public:
 	 * Called during pfnUpdateClientData()
 	 * Sets the player's FOV continuously
 	 */
-	inline void UpdateFOV(void)
+	inline void UpdateFOV()
 	{
 		if (m_iHasFOV)
 		{
@@ -391,7 +391,7 @@ public:
 	 * Returns 1 if this entity needs PreThink_Post hooked
 	 * (eg: this entity has custom max speeds)
 	 */
-	inline int NeedPreThink_Post(void)
+	inline int NeedPreThink_Post()
 	{
 		return m_iSpeedChange != 0;
 	};
@@ -400,7 +400,7 @@ public:
 	 * Returns 1 if this entity needs PostThink_Post
 	 * eg: This entity has a custom model/skin/body
 	 */
-	inline int NeedPostThink_Post(void)
+	inline int NeedPostThink_Post()
 	{
 		return (m_iHasCustomModel != 0 || m_iHasCustomSkin != 0 || m_iHasCustomBody != 0);
 	};
@@ -408,7 +408,7 @@ public:
 	 * Returns 1 if this entity needs UpdateClientData
 	 * eg: This entity has a custom FOV set
 	 */
-	inline int NeedUpdateClientData(void)
+	inline int NeedUpdateClientData()
 	{
 		return m_iHasFOV != 0;
 	};

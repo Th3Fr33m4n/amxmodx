@@ -339,7 +339,7 @@ void UTIL_FakeClientCommand(edict_t *pEdict, const char *cmd, const char *arg1, 
 	if (!arg1 && arg2)
 	{
 		arg1 = arg2;
-		arg2 = NULL;
+		arg2 = nullptr;
 	}
 
 	// store arguments
@@ -438,7 +438,7 @@ int UTIL_CheckValidChar(D *c)
 
 	for (count = 1; (*c & 0xC0) == 0x80; count++)
 	{
-		c--;
+		--c;
 	}
 
 	switch (*c & 0xF0)
@@ -503,7 +503,7 @@ size_t UTIL_ReplaceAll(char *subject, size_t maxlength, const char *search, size
 {
 	char *newptr, *ptr = subject;
 	unsigned int total = 0;
-	while ((newptr = UTIL_ReplaceEx(ptr, maxlength, search, searchLen, replace, replaceLen, caseSensitive)) != NULL)
+	while ((newptr = UTIL_ReplaceEx(ptr, maxlength, search, searchLen, replace, replaceLen, caseSensitive)) != nullptr)
 	{
 		total++;
 		maxlength -= newptr - ptr;
@@ -570,7 +570,7 @@ char *UTIL_ReplaceEx(char *subject, size_t maxLen, const char *search, size_t se
 	/* It's not possible to search or replace */
 	if (searchLen > textLen)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	/* Handle the case of one byte replacement.
@@ -588,7 +588,7 @@ char *UTIL_ReplaceEx(char *subject, size_t maxLen, const char *search, size_t se
 		}
 		else
 		{
-			return NULL;
+			return nullptr;
 		}
 	}
 
@@ -722,7 +722,7 @@ char *UTIL_ReplaceEx(char *subject, size_t maxLen, const char *search, size_t se
 		browsed++;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 // From Metamod:Source

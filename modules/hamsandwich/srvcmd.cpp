@@ -21,7 +21,7 @@
 extern hook_t hooklist[];
 extern ke::Vector<Hook *> hooks[HAM_LAST_ENTRY_DONT_USE_ME_LOL];
 
-void HamCommand(void)
+void HamCommand()
 {
 	const char *cmd=CMD_ARGV(1);
 

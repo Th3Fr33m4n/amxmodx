@@ -19,7 +19,7 @@
 IGameConfig *CommonConfig;
 IGameConfigManager *ConfigManager;
 
-int ReadConfig(void)
+int ReadConfig()
 {
 	ConfigManager = MF_GetConfigManager();
 

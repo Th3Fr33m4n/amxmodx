@@ -389,7 +389,7 @@ static cell AMX_NATIVE_CALL ns_remove_upgrade(AMX *amx, cell *params)
 	if (bfound)
 	{
 		void *pTechTree = reinterpret_cast<char*>(player->GetEdict()->pvPrivateData) + MAKE_OFFSET(COMBAT_TECHTREE);
-		(reinterpret_cast<GenericClass *>(pTechTree)->*(MFP_SetResearchDone))(params[2], false);
+		(static_cast<GenericClass *>(pTechTree)->*(MFP_SetResearchDone))(params[2], false);
 
 		if (afound)
 		{
@@ -432,7 +432,7 @@ AMX_NATIVE_INFO player_memory_natives[] = {
 
 	{ "ns_remove_upgrade",		ns_remove_upgrade },
 
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 };
 void AddNatives_PlayerMemory()
 {

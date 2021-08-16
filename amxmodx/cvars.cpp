@@ -105,7 +105,7 @@ static cell AMX_NATIVE_CALL get_cvar_pointer(AMX *amx, cell *params)
 
 	CvarInfo* info = g_CvarManager.FindCvar(name);
 
-	return reinterpret_cast<cell>(info ? info->var : 0);
+	return reinterpret_cast<cell>(info ? info->var : nullptr);
 }
 
 // hook_cvar_change(cvarHandle, const callback[])
@@ -668,7 +668,7 @@ static cell AMX_NATIVE_CALL query_client_cvar(AMX *amx, cell *params)
 		queryObject->params[queryObject->paramLen - 1] = 0;
 	}
 	else {
-		queryObject->params = NULL;
+		queryObject->params = nullptr;
 		queryObject->paramLen = 0;
 	}
 
@@ -725,5 +725,5 @@ AMX_NATIVE_INFO g_CvarNatives[] =
 
 	{"query_client_cvar",		query_client_cvar},
 
-	{NULL,						NULL}
+	{nullptr, nullptr}
 };

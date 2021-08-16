@@ -941,7 +941,7 @@ static cell AMX_NATIVE_CALL cs_get_hostage_follow(AMX *amx, cell *params)
 		GET_OFFSET("SimpleStateMachine", m_state); // +4 for virtual table pointer of IImprovEvent.
 		GET_OFFSET("HostageFollowState", m_leader);
 
-		if (get_pdata<void*>(pImprov, m_behavior + 4 + m_state) == reinterpret_cast<int8*>(pImprov) + m_followState)
+		if (get_pdata<void*>(pImprov, m_behavior + 4 + m_state) == static_cast<int8*>(pImprov) + m_followState)
 		{
 			pEntity = get_pdata<EHANDLE>(pImprov, m_followState + m_leader).Get();
 		}
@@ -986,14 +986,14 @@ static cell AMX_NATIVE_CALL cs_set_hostage_follow(AMX *amx, cell *params)
 
 		if (target)
 		{
-			set_pdata<void*>(pImprov, m_behavior + 4 + m_state, reinterpret_cast<int8*>(pImprov) + m_followState);
+			set_pdata<void*>(pImprov, m_behavior + 4 + m_state, static_cast<int8*>(pImprov) + m_followState);
 			set_pdata<float>(pImprov, m_behavior + 4 + m_stateTimer, gpGlobals->time);
 
 			get_pdata<EHANDLE>(pImprov, m_followState + m_leader).Set(TypeConversion.id_to_edict(target));
 		}
 		else
 		{
-			set_pdata<void*>(pImprov, m_behavior + 4 + m_state, reinterpret_cast<int8*>(pImprov) + m_idleState);
+			set_pdata<void*>(pImprov, m_behavior + 4 + m_state, static_cast<int8*>(pImprov) + m_idleState);
 			set_pdata<float>(pImprov, m_behavior + 4 + m_stateTimer, gpGlobals->time);
 
 			get_pdata<EHANDLE>(pImprov, m_followState + m_leader).Set(nullptr);

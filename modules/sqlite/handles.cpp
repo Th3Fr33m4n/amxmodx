@@ -54,15 +54,15 @@ unsigned int MakeHandle(void *ptr, HandleType type, FREEHANDLE f)
 void *GetHandle(unsigned int num, HandleType type)
 {
 	if (num == 0)
-		return NULL;
+		return nullptr;
 
 	num--;
 	if (num >= g_Handles.length())
-		return NULL;
+		return nullptr;
 
 	QHandle *h = g_Handles[num];
 	if (h->isfree || (h->type != type))
-		return NULL;
+		return nullptr;
 
 	return h->_ptr;
 }
@@ -83,8 +83,8 @@ bool FreeHandle(unsigned int num)
 		return false;
 
 	h->_func(h->_ptr, _num);
-	h->_ptr = NULL;
-	h->_func = NULL;
+	h->_ptr = nullptr;
+	h->_func = nullptr;
 	h->isfree = true;
 	
 	g_FreeHandles.push(num);

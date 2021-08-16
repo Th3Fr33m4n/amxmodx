@@ -42,15 +42,15 @@ public:
 	{
 		ke::AString** ret = m_Hash.find(input);
 
-		if (ret == NULL || *ret == NULL)
+		if (ret == nullptr || *ret == nullptr)
 		{
 			// was not found
-			return NULL;
+			return nullptr;
 		}
 
 		return (*ret)->chars();
 	};
-	void LoadTitles(void);
+	void LoadTitles();
 };
 
 extern TitleManager TitleMan;

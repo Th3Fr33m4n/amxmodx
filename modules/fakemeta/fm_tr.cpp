@@ -109,7 +109,7 @@ static cell AMX_NATIVE_CALL set_tr(AMX *amx, cell *params)
 static cell AMX_NATIVE_CALL get_tr(AMX *amx, cell *params)
 {
 	int type = params[1];
-	cell *ptr = 0;
+	cell *ptr = nullptr;
 
 	switch (type)
 	{
@@ -189,7 +189,7 @@ AMX_NATIVE_INFO tr_Natives[] =
 {
 	{"get_tr",			get_tr},
 	{"set_tr",			set_tr},
-	{NULL,				NULL},
+	{nullptr, nullptr},
 };
 
 

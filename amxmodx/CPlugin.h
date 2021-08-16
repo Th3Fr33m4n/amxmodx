@@ -120,7 +120,7 @@ private:
 	CPlugin *head;
 	int pCounter;
 public:
-	CPluginMngr() { head = 0; pCounter = 0; pNatives = NULL; m_Finalized=false;}
+	CPluginMngr() { head = nullptr; pCounter = 0; pNatives = nullptr; m_Finalized=false;}
 	~CPluginMngr() { clear(); InvalidateCache(); }
 
 	bool m_Finalized;
@@ -154,7 +154,7 @@ public:
 	};
 	
 	inline iterator begin() const { return iterator(head); }
-	inline iterator end() const { return iterator(0); }
+	inline iterator end() const { return iterator(nullptr); }
 public:
 	struct plcache_entry
 	{

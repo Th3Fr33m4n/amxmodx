@@ -39,7 +39,7 @@ public:
 		Clear();
 	};
 
-	inline void Clear(void)
+	inline void Clear()
 	{
 		m_LocationList.clear();
 		m_LocationList.ensure(32);
@@ -79,7 +79,7 @@ public:
 				}
 				else
 				{
-					if (m_LocationList[i-1].titlelookup!=NULL)
+					if (m_LocationList[i-1].titlelookup!= nullptr)
 					{
 						return m_LocationList[i-1].titlelookup;
 					}

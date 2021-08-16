@@ -42,7 +42,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	DialogBox(hInst, (LPCTSTR)IDD_WINCSXBOX, g_hWnd, (DLGPROC)WinCSXBox);
 
 	// Main message loop:
-	while (GetMessage(&msg, NULL, 0, 0)) 
+	while (GetMessage(&msg, nullptr, 0, 0)) 
 	{
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
 		{
@@ -80,7 +80,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 	wcex.cbWndExtra		= 0;
 	wcex.hInstance		= hInstance;
 	wcex.hIcon			= LoadIcon(hInstance, (LPCTSTR)IDI_WINCSX);
-	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
+	wcex.hCursor		= LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszMenuName	= (LPCTSTR)IDC_WINCSX;
 	wcex.lpszClassName	= g_szWindowClass;
@@ -228,7 +228,7 @@ void ListboxItemSelected(HWND hDlg) {
 	}
 	// Retrieve complete stats record of this position. Position in listbox should be same as rank in our records!
 	RankSystem::RankStats* stats = g_rank.findEntryInRankByPos((int)nItem + 1);
-	if (stats == NULL) {
+	if (stats == nullptr) {
 		char msg[] = "Error: Couldn't find the record by position! (nItem = %d)";
 		sprintf(msg, msg, nItem);
 		MessageBox(hDlg, msg, "Oh fiddlesticks!", MB_OK);
@@ -318,7 +318,7 @@ void SaveChanges(HWND hDlg) {
 	entry->bDefusions = defusions;
 	entry->bDefused = defused;
 
-	int newPosition = entry->updatePosition(NULL); // Updates rank (prolly just calculates "frags - deaths" and moves up/down in rank)
+	int newPosition = entry->updatePosition(nullptr); // Updates rank (prolly just calculates "frags - deaths" and moves up/down in rank)
 
 	g_rank.saveRank(STATS_FILENAME); // Save changes to file
 

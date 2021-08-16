@@ -36,7 +36,7 @@ public:
 	 * sh_list.h does not delete objects put into
 	 * the list, so I need to delete those and clear()
 	 */
-	inline void Clear(void)
+	inline void Clear()
 	{
 		ke::LinkedList<ke::AString *>::iterator		 end;
 		ke::LinkedList<ke::AString *>::iterator		 iter;

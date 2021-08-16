@@ -119,7 +119,7 @@ int CPluginMngr::loadPluginsFromFile(const char* filename, bool warn)
 		bool skip = false;
 		for (block_iter = m_BlockList.begin();
 			 block_iter != m_BlockList.end();
-			 block_iter++)
+			 ++block_iter)
 		{
 			if ((*block_iter)->compare(pluginName) == 0)
 			{
@@ -133,7 +133,7 @@ int CPluginMngr::loadPluginsFromFile(const char* filename, bool warn)
 			continue;
 		}
 
-		if (findPlugin(pluginName) != NULL)
+		if (findPlugin(pluginName) != nullptr)
 		{
 			continue;
 		}
@@ -215,7 +215,7 @@ void CPluginMngr::clear()
 	if (pNatives)
 	{
 		delete [] pNatives;
-		pNatives = NULL;
+		pNatives = nullptr;
 	}
 
 	List<ke::AString *>::iterator iter = m_BlockList.begin();
@@ -250,12 +250,12 @@ CPluginMngr::CPlugin* CPluginMngr::findPlugin(int index)
 CPluginMngr::CPlugin* CPluginMngr::findPlugin(const char* name)
 {
 	if (!name)
-		return 0;
+		return nullptr;
 
 	int len = strlen(name);
 
 	if (!len)
-		return 0;
+		return nullptr;
 
 	CPlugin*a = head;
 
@@ -311,7 +311,7 @@ CPluginMngr::CPlugin::CPlugin(int i, const char* p, const char* n, char* e, size
 
 	char file[PLATFORM_MAX_PATH];
 	char* path = build_pathname_r(file, sizeof(file), "%s/%s", p, n);
-	code = 0;
+	code = nullptr;
 	memset(&amx, 0, sizeof(AMX));
 	int err = load_amxscript_ex(&amx, &code, path, e, m, d);
 
@@ -324,7 +324,7 @@ CPluginMngr::CPlugin::CPlugin(int i, const char* p, const char* n, char* e, size
 
 	amx.userdata[UD_FINDPLUGIN] = this;
 	paused_fun = 0;
-	next = 0;
+	next = nullptr;
 	id = i;
 
 	if (status == ps_running)
@@ -389,7 +389,7 @@ static cell AMX_NATIVE_CALL invalid_native(AMX *amx, cell *params)
 	if (!pHandler->HandleNative(name, native, 1))
 	{
 		amx->usertags[UT_NATIVE] = (void *)native;
-		LogError(amx, AMX_ERR_INVNATIVE, NULL);
+		LogError(amx, AMX_ERR_INVNATIVE, nullptr);
 		return 0;
 	}
 
@@ -525,7 +525,7 @@ char *CPluginMngr::ReadIntoOrFromCache(const char *file, size_t &bufsize)
 	List<plcache_entry *>::iterator iter;
 	plcache_entry *pl;
 
-	for (iter=m_plcache.begin(); iter!=m_plcache.end(); iter++)
+	for (iter=m_plcache.begin(); iter!=m_plcache.end(); ++iter)
 	{
 		pl = (*iter);
 		if (pl->path.compare(file) == 0)
@@ -538,12 +538,12 @@ char *CPluginMngr::ReadIntoOrFromCache(const char *file, size_t &bufsize)
 	pl = new plcache_entry;
 
 	pl->file = new CAmxxReader(file, sizeof(cell));
-	pl->buffer = NULL;
+	pl->buffer = nullptr;
 	if (pl->file->GetStatus() != CAmxxReader::Err_None)
 	{
 		delete pl->file;
 		delete pl;
-		return NULL;
+		return nullptr;
 	}
 
 	pl->bufsize = pl->file->GetBufferSize();
@@ -558,7 +558,7 @@ char *CPluginMngr::ReadIntoOrFromCache(const char *file, size_t &bufsize)
 		delete [] pl->buffer;
 		delete pl->file;
 		delete pl;
-		return NULL;
+		return nullptr;
 	}
 
 	pl->path = file;
@@ -575,7 +575,7 @@ void CPluginMngr::InvalidateCache()
 	List<plcache_entry *>::iterator iter;
 	plcache_entry *pl;
 
-	for (iter=m_plcache.begin(); iter!=m_plcache.end(); iter++)
+	for (iter=m_plcache.begin(); iter!=m_plcache.end(); ++iter)
 	{
 		pl = (*iter);
 		delete [] pl->buffer;
@@ -591,7 +591,7 @@ void CPluginMngr::InvalidateFileInCache(const char *file, bool freebuf)
 	List<plcache_entry *>::iterator iter;
 	plcache_entry *pl;
 
-	for (iter=m_plcache.begin(); iter!=m_plcache.end(); iter++)
+	for (iter=m_plcache.begin(); iter!=m_plcache.end(); ++iter)
 	{
 		pl = (*iter);
 		if (pl->path.compare(file) == 0)
@@ -764,7 +764,7 @@ void CPluginMngr::CALMFromFile(const char *file)
 		/* HACK: see if there's a 'disabled' coming up
 		 * new block for scopying flexibility
 		 */
-		if (1)
+		if (true)
 		{
 			const char *_ptr = rline + strlen(pluginName);
 			while (*_ptr != '\0'  && isspace(*_ptr))

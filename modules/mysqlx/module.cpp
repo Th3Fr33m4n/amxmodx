@@ -21,7 +21,7 @@ SqlFunctions g_MysqlFuncs =
 {
 	&g_Mysql,
 	SetMysqlAffinity,
-	NULL
+	nullptr
 };
 
 int SetMysqlAffinity(AMX *amx)

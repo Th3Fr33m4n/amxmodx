@@ -505,5 +505,5 @@ AMX_NATIVE_INFO ReturnNatives[] =
 	{ "CreateHamItemInfo",			CreateHamItemInfo },
 	{ "FreeHamItemInfo",			FreeHamItemInfo },
 
-	{ NULL,							NULL },
+	{nullptr, nullptr},
 };

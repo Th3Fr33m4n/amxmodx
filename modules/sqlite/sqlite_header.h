@@ -23,7 +23,7 @@
 
 struct AmxQueryInfo
 {
-	AmxQueryInfo() : opt_ptr(NULL) { };
+	AmxQueryInfo() : opt_ptr(nullptr) { };
 	IQuery *pQuery;
 	QueryInfo info;
 	char error[255];

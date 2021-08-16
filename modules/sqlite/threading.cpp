@@ -17,9 +17,9 @@
 #include <amtl/am-string.h>
 
 MainThreader g_Threader;
-ThreadWorker *g_pWorker = NULL;
+ThreadWorker *g_pWorker = nullptr;
 extern DLL_FUNCTIONS *g_pFunctionTable;
-IMutex *g_QueueLock = NULL;
+IMutex *g_QueueLock = nullptr;
 CStack<MysqlThread *> g_ThreadQueue;
 CStack<MysqlThread *> g_FreeThreads;
 float g_lasttime = 0.0f;
@@ -32,7 +32,7 @@ void ShutdownThreading()
 		g_pWorker->SetMaxThreadsPerFrame(8192);
 		g_pWorker->Stop(true);
 		delete g_pWorker;
-		g_pWorker = NULL;
+		g_pWorker = nullptr;
 	}
 
 	g_QueueLock->Lock();
@@ -102,7 +102,7 @@ static cell AMX_NATIVE_CALL SQL_ThreadQuery(AMX *amx, cell *params)
 MysqlThread::MysqlThread()
 {
 	m_fwd = 0;
-	m_data = NULL;
+	m_data = nullptr;
 	m_datalen = 0;
 	m_maxdatalen = 0;
 }
@@ -116,7 +116,7 @@ MysqlThread::~MysqlThread()
 	}
 	
 	delete [] m_data;
-	m_data = NULL;
+	m_data = nullptr;
 }
 
 void MysqlThread::SetCellData(cell data[], ucell len)
@@ -167,7 +167,7 @@ void MysqlThread::RunThread(IThreadHandle *pHandle)
 	m_qrInfo.queue_time = save_time;
 
 	IDatabase *pDatabase = g_Sqlite.Connect(&info, &m_qrInfo.amxinfo.info.errorcode, m_qrInfo.amxinfo.error, 254);
-	IQuery *pQuery = NULL;
+	IQuery *pQuery = nullptr;
 	if (!pDatabase)
 	{
 		m_qrInfo.connect_success = false;
@@ -200,7 +200,7 @@ void MysqlThread::RunThread(IThreadHandle *pHandle)
 	if (pDatabase)
 	{
 		pDatabase->FreeHandle();
-		pDatabase = NULL;
+		pDatabase = nullptr;
 	}
 }
 
@@ -273,10 +273,10 @@ void MysqlThread::Execute()
 	if (m_qrInfo.amxinfo.pQuery)
 	{
 		m_qrInfo.amxinfo.pQuery->FreeHandle();
-		m_qrInfo.amxinfo.pQuery = NULL;
+		m_qrInfo.amxinfo.pQuery = nullptr;
 	}
 	delete [] m_qrInfo.amxinfo.opt_ptr;
-	m_qrInfo.amxinfo.opt_ptr = NULL;
+	m_qrInfo.amxinfo.opt_ptr = nullptr;
 }
 
 /*****************
@@ -299,7 +299,7 @@ void OnPluginsLoaded()
 	if (!g_pWorker->Start())
 	{
 		delete g_pWorker;
-		g_pWorker = NULL;
+		g_pWorker = nullptr;
 	}
 	g_pFunctionTable->pfnSpawn = NULL;
 
@@ -347,7 +347,7 @@ void OnPluginsUnloading()
 	g_pWorker->SetMaxThreadsPerFrame(8192);
 	g_pWorker->Stop(false);
 	delete g_pWorker;
-	g_pWorker = NULL;
+	g_pWorker = nullptr;
 
 	g_QueueLock->Lock();
 	size_t remaining = g_ThreadQueue.size();
@@ -378,7 +378,7 @@ AtomicResult::AtomicResult()
 	m_IsFree = true;
 	m_CurRow = 1;
 	m_RowCount = 0;
-	m_Table = NULL;
+	m_Table = nullptr;
 	m_AllocSize = 0;
 }
 
@@ -396,7 +396,7 @@ AtomicResult::~AtomicResult()
 
 	delete [] m_Table;
 
-	m_Table = NULL;
+	m_Table = nullptr;
 	m_IsFree = true;
 }
 
@@ -407,7 +407,7 @@ unsigned int AtomicResult::RowCount()
 
 bool AtomicResult::IsNull(unsigned int columnId)
 {
-	return (GetString(columnId) == NULL);
+	return (GetString(columnId) == nullptr);
 }
 
 unsigned int AtomicResult::FieldCount()
@@ -436,7 +436,7 @@ bool AtomicResult::FieldNameToNum(const char *name, unsigned int *columnId)
 const char *AtomicResult::FieldNumToName(unsigned int num)
 {
 	if (num >= m_FieldCount)
-		return NULL;
+		return nullptr;
 
 	assert(m_Table[num] != NULL);
 
@@ -475,7 +475,7 @@ const char *AtomicResult::GetStringSafe(unsigned int columnId)
 const char *AtomicResult::GetString(unsigned int columnId)
 {
 	if (columnId >= m_FieldCount)
-		return NULL;
+		return nullptr;
 
 	size_t idx = (m_CurRow * m_FieldCount) + columnId;
 
@@ -583,5 +583,5 @@ bool AtomicResult::NextResultSet()
 AMX_NATIVE_INFO g_ThreadSqlNatives[] =
 {
 	{"SQL_ThreadQuery",			SQL_ThreadQuery},
-	{NULL,						NULL},
+	{nullptr, nullptr},
 };

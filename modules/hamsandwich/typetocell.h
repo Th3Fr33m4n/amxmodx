@@ -45,7 +45,7 @@ inline cell TypeToCell(const int& value)
 
 inline cell TypeToCell(const edict_t*& value)
 {
-	if (value == NULL)
+	if (value == nullptr)
 	{
 		return -1;
 	}
@@ -55,7 +55,7 @@ inline cell TypeToCell(const edict_t*& value)
 
 inline cell TypeToCell(const entvars_t*& value)
 {
-	if (value == NULL)
+	if (value == nullptr)
 	{
 		return -1;
 	}

@@ -125,7 +125,7 @@ void Client_Damage(void* mValue){
 
 	aim = 0;
 	weapon = 0;
-	pAttacker = NULL;
+	pAttacker = nullptr;
 
 	if (enemy->v.flags & (FL_CLIENT | FL_FAKECLIENT) ) {
 		pAttacker = GET_PLAYER_POINTER(enemy);

@@ -94,7 +94,7 @@ struct sUserMsg
 	{"BarTime",		&gmsgBarTime,		Client_BarTime,		false},
 	{"DeathMsg",	&gmsgDeathMsg,		Client_DeathMsg,	false},
 
-	{0, 0, 0, false}
+	{nullptr, nullptr, nullptr, false}
 };
 
 int RegUserMsg_Post(const char *pszName, int iSize)
@@ -117,10 +117,10 @@ int RegUserMsg_Post(const char *pszName, int iSize)
 	RETURN_META_VALUE(MRES_IGNORED, 0);
 }
 
-const char* get_localinfo( const char* name , const char* def = 0 )
+const char* get_localinfo( const char* name , const char* def = nullptr )
 {
 	const char* b = LOCALINFO( (char*)name );
-	if (((b==0)||(*b==0)) && def )
+	if (((b==nullptr)||(*b==0)) && def )
 		SET_LOCALINFO((char*)name,(char*)(b = def) );
 	return b;
 }
@@ -227,7 +227,7 @@ void ClientPutInServer_Post( edict_t *pEntity )
 void ClientUserInfoChanged_Post( edict_t *pEntity, char *infobuffer ) {
 	CPlayer *pPlayer = GET_PLAYER_POINTER(pEntity);
 
-	if (pPlayer->pEdict == NULL)
+	if (pPlayer->pEdict == nullptr)
 	{
 		pPlayer->Init(ENTINDEX(pEntity), pEntity);
 	}
@@ -256,7 +256,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 		mPlayer = GET_PLAYER_POINTER_I(mPlayerIndex);
 	} else {
 		mPlayerIndex = 0;
-		mPlayer = 0;
+		mPlayer = nullptr;
 	}
 	mState = 0;
 	g_CurrentMsg = msg_type;
@@ -267,8 +267,8 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	RETURN_META(MRES_IGNORED);
 }
 
-void MessageEnd_Post(void) {
-	if (endfunction) (*endfunction)(NULL);
+void MessageEnd_Post() {
+	if (endfunction) (*endfunction)(nullptr);
 	RETURN_META(MRES_IGNORED);
 }
 

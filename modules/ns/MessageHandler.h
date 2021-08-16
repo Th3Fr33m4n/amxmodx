@@ -37,7 +37,7 @@ public:
 		return 0; 
 	};
 
-	virtual void End(void)
+	virtual void End()
 	{
 		return;
 	};
@@ -96,7 +96,7 @@ public:
 		return 1;
 	};
 
-	virtual void End(void)
+	virtual void End()
 	{
 		if (m_Count!=1) // invalid message?
 		{
@@ -125,7 +125,7 @@ public:
 		return 1;
 	};
 
-	virtual void End(void)
+	virtual void End()
 	{
 		GameMan.HandleGameStatus(FirstByte);
 	};
@@ -141,10 +141,10 @@ public:
 };
 
 
-void Initialize_MessageHandler(void);
+void Initialize_MessageHandler();
 
 void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t *ed);
-void MessageEnd_Post(void);
+void MessageEnd_Post();
 void WriteByte_Post(int iValue);
 void WriteChar_Post(int iValue);
 void WriteShort_Post(int iValue);

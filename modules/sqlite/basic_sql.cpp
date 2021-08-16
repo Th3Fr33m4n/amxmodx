@@ -522,7 +522,7 @@ static cell AMX_NATIVE_CALL SQL_NextResultSet(AMX *amx, cell *params)
 	}
 	else
 	{
-		qInfo->info.rs = NULL;
+		qInfo->info.rs = nullptr;
 		return 0;
 	}
 }
@@ -628,5 +628,5 @@ AMX_NATIVE_INFO g_BaseSqlNatives[] =
 	{"SQL_NextResultSet",	SQL_NextResultSet},
 	{"SQL_SetCharset",      SQL_SetCharset},
 
-	{NULL,					NULL},
+	{nullptr, nullptr},
 };

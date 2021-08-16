@@ -111,7 +111,7 @@ const char* stristr(const char* str, const char* substr)
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 bool lookupByIp(const char *ip, const char **path, MMDB_entry_data_s *result)
@@ -172,7 +172,7 @@ const char *lookupString(const char *ip, const char **path, int *length)
 			*length = 0;
 		}
 
-		return NULL;
+		return nullptr;
 	}
 
 	// Let's avoid a crash in case we go over the buffer size.
@@ -243,8 +243,8 @@ int getContinentId(const char *code)
 
 const char *getLang(int playerIndex)
 {
-	static cvar_t *amxmodx_language = NULL;
-	static cvar_t *amxmodx_cl_langs = NULL;
+	static cvar_t *amxmodx_language = nullptr;
+	static cvar_t *amxmodx_cl_langs = nullptr;
 
 	if (!amxmodx_language)
 		amxmodx_language = CVAR_GET_POINTER("amx_language");
@@ -272,7 +272,7 @@ const char *getLang(int playerIndex)
 			{
 				lang = LangList.at(i).chars();
 
-				if (stristr(lang, value) != NULL)
+				if (stristr(lang, value) != nullptr)
 				{
 					return lang;
 				}

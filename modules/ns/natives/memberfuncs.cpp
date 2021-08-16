@@ -28,7 +28,7 @@ extern int IsValidBuilding[AVH_USER3_MAX + 1];
 using namespace fastdelegate::detail;
 
 
-void *GameRules=NULL;
+void *GameRules= nullptr;
 
 
 mBOOL dlclose_handle_invalid; // Linking errors with metamod
@@ -109,11 +109,11 @@ static cell AMX_NATIVE_CALL ns_get_teamres(AMX *amx, cell *params)
 	{
 		return 0;
 	}
-	if (GameRules==NULL) // GameRules not initialized yet
+	if (GameRules== nullptr) // GameRules not initialized yet
 	{
 		GameRules=(*(FP_GetGameRules))();
 	}
-	if (GameRules==NULL) // Still null? Get out of here
+	if (GameRules== nullptr) // Still null? Get out of here
 	{
 		return 0;
 	}
@@ -141,11 +141,11 @@ static cell AMX_NATIVE_CALL ns_set_teamres(AMX *amx, cell *params)
 	{
 		return 0;
 	}
-	if (GameRules==NULL) // GameRules not initialized yet
+	if (GameRules== nullptr) // GameRules not initialized yet
 	{
 		GameRules=(*(FP_GetGameRules))();
 	}
-	if (GameRules==NULL) // Still null? Get out of here
+	if (GameRules== nullptr) // Still null? Get out of here
 	{
 		return 0;
 	}
@@ -175,11 +175,11 @@ static cell AMX_NATIVE_CALL ns_add_teamres(AMX *amx, cell *params)
 	{
 		return 0;
 	}
-	if (GameRules==NULL) // GameRules not initialized yet
+	if (GameRules== nullptr) // GameRules not initialized yet
 	{
 		GameRules=(*(FP_GetGameRules))();
 	}
-	if (GameRules==NULL) // Still null? Get out of here
+	if (GameRules== nullptr) // Still null? Get out of here
 	{
 		return 0;
 	}
@@ -226,7 +226,7 @@ AMX_NATIVE_INFO memberfunc_natives[] = {
 	{ "ns_get_teamres",			ns_get_teamres },
 	{ "ns_set_teamres",			ns_set_teamres },
 	{ "ns_add_teamres",			ns_add_teamres },
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 };
 
 void AddNatives_MemberFunc()

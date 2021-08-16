@@ -38,7 +38,7 @@ void FreeOldDb(void *ptr, unsigned int hndl)
 	if (old->pDatabase)
 	{
 		old->pDatabase->FreeHandle();
-		old->pDatabase = NULL;
+		old->pDatabase = nullptr;
 	}
 
 	delete old;
@@ -51,7 +51,7 @@ void FreeOldResult(void *ptr, unsigned int hndl)
 	if (oldres->pQuery)
 	{
 		oldres->pQuery->FreeHandle();
-		oldres->pQuery = NULL;
+		oldres->pQuery = nullptr;
 	}
 
 	delete oldres;
@@ -455,5 +455,5 @@ AMX_NATIVE_INFO g_OldCompatNatives[] =
 	{ "dbi_num_fields",		dbi_num_fields },
 	{ "dbi_field_name",		dbi_field_name },
 
-	{ NULL, NULL }
+	{nullptr, nullptr}
 };

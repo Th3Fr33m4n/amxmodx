@@ -412,7 +412,7 @@ int AMXAPI amx_Flags(AMX *amx,uint16_t *flags)
   AMX_HEADER *hdr;
 
   *flags=0;
-  if (amx==NULL)
+  if (amx== nullptr)
     return AMX_ERR_FORMAT;
   hdr=(AMX_HEADER *)amx->base;
   if (hdr->magic!=AMX_MAGIC)
@@ -509,7 +509,7 @@ static int amx_BrowseRelocate(AMX *amx)
   cell cip;
   long codesize;
   OPCODE op;
-  BROWSEHOOK hook = NULL;
+  BROWSEHOOK hook = nullptr;
   #if defined __GNUC__ || defined ASM32 || defined JIT
     cell *opcode_list;
   #endif
@@ -841,7 +841,7 @@ static void expand(unsigned char *code, long codesize, long memsize)
 int AMXAPI amx_Init(AMX *amx, void *program)
 {
   AMX_HEADER *hdr;
-  BROWSEHOOK hook = NULL;
+  BROWSEHOOK hook = nullptr;
 
   if ((amx->flags & AMX_FLAG_RELOC)!=0)
     return AMX_ERR_INIT;  /* already initialized (may not do so twice) */
@@ -894,14 +894,14 @@ int AMXAPI amx_Init(AMX *amx, void *program)
   amx->stp=hdr->stp - hdr->dat - sizeof(cell);
   amx->hea=amx->hlw;
   amx->stk=amx->stp;
-  if (amx->callback==NULL)
+  if (amx->callback== nullptr)
     amx->callback=amx_Callback;
-  amx->data=NULL;
+  amx->data= nullptr;
 
   /* relocate call and jump instructions */
   hook = (BROWSEHOOK)amx->usertags[UT_BROWSEHOOK];
   if (hook)
-	  hook(amx, NULL, NULL);
+	  hook(amx, nullptr, nullptr);
   amx_BrowseRelocate(amx);
 
   return AMX_ERR_NONE;
@@ -1063,9 +1063,9 @@ int AMXAPI amx_Clone(AMX *amxClone, AMX *amxSource, void *data)
   AMX_HEADER *hdr;
   unsigned char _FAR *dataSource;
 
-  if (amxSource==NULL)
+  if (amxSource== nullptr)
     return AMX_ERR_FORMAT;
-  if (amxClone==NULL)
+  if (amxClone== nullptr)
     return AMX_ERR_PARAMS;
   if ((amxSource->flags & AMX_FLAG_RELOC)==0)
     return AMX_ERR_INIT;
@@ -1081,16 +1081,16 @@ int AMXAPI amx_Clone(AMX *amxClone, AMX *amxSource, void *data)
   amxClone->stp=hdr->stp - hdr->dat - sizeof(cell);
   amxClone->hea=amxClone->hlw;
   amxClone->stk=amxClone->stp;
-  if (amxClone->callback==NULL)
+  if (amxClone->callback== nullptr)
     amxClone->callback=amxSource->callback;
-  if (amxClone->debug==NULL)
+  if (amxClone->debug== nullptr)
     amxClone->debug=amxSource->debug;
   amxClone->flags=amxSource->flags;
 
   /* copy the data segment; the stack and the heap can be left uninitialized */
   assert(data!=NULL);
   amxClone->data=(unsigned char _FAR *)data;
-  dataSource=(amxSource->data!=NULL) ? amxSource->data : amxSource->base+(int)hdr->dat;
+  dataSource=(amxSource->data!= nullptr) ? amxSource->data : amxSource->base+(int)hdr->dat;
   memcpy(amxClone->data,dataSource,(size_t)(hdr->hea-hdr->dat));
 
   /* Set a zero cell at the top of the stack, which functions
@@ -1107,7 +1107,7 @@ int AMXAPI amx_MemInfo(AMX *amx, long *codesize, long *datasize, long *stackheap
 {
   AMX_HEADER *hdr;
 
-  if (amx==NULL)
+  if (amx== nullptr)
     return AMX_ERR_FORMAT;
   hdr=(AMX_HEADER *)amx->base;
   if (hdr->magic!=AMX_MAGIC)
@@ -1115,11 +1115,11 @@ int AMXAPI amx_MemInfo(AMX *amx, long *codesize, long *datasize, long *stackheap
   if (hdr->file_version>CUR_FILE_VERSION || hdr->amx_version<MIN_FILE_VERSION)
     return AMX_ERR_VERSION;
 
-  if (codesize!=NULL)
+  if (codesize!= nullptr)
     *codesize=hdr->dat - hdr->cod;
-  if (datasize!=NULL)
+  if (datasize!= nullptr)
     *datasize=hdr->hea - hdr->dat;
-  if (stackheap!=NULL)
+  if (stackheap!= nullptr)
     *stackheap=hdr->stp - hdr->hea;
 
   return AMX_ERR_NONE;
@@ -1416,10 +1416,10 @@ static AMX_NATIVE findfunction(const char *name, const AMX_NATIVE_INFO *list, in
   int i;
 
   assert(list!=NULL);
-  for (i=0; list[i].name!=NULL && (i<number || number==-1); i++)
+  for (i=0; list[i].name!= nullptr && (i<number || number==-1); i++)
     if (strcmp(name,list[i].name)==0)
       return list[i].func;
-  return NULL;
+  return nullptr;
 }
 
 const char *no_function;
@@ -1496,8 +1496,8 @@ int AMXAPI amx_Reregister(AMX *amx, const AMX_NATIVE_INFO *list, int number)
   for (i=0; i<numnatives; i++) {
     if (func->address!=0) {
       /* this function is located */
-      funcptr=(list!=NULL) ? findfunction(GETENTRYNAME(hdr,func),list,number) : NULL;
-      if (funcptr!=NULL)
+      funcptr=(list!= nullptr) ? findfunction(GETENTRYNAME(hdr,func),list,number) : nullptr;
+      if (funcptr!= nullptr)
       {
         func->address=(ucell)funcptr;
         count++;
@@ -1526,8 +1526,8 @@ int AMXAPI amx_Register(AMX *amx, const AMX_NATIVE_INFO *list, int number)
   for (i=0; i<numnatives; i++) {
     if (func->address==0) {
       /* this function is not yet located */
-      funcptr=(list!=NULL) ? findfunction(GETENTRYNAME(hdr,func),list,number) : NULL;
-      if (funcptr!=NULL)
+      funcptr=(list!= nullptr) ? findfunction(GETENTRYNAME(hdr,func),list,number) : nullptr;
+      if (funcptr!= nullptr)
       {
         func->address=(ucell)funcptr;
       } else {
@@ -1565,7 +1565,7 @@ int AMXAPI amx_Push(AMX *amx, cell value)
   if (amx->hea+STKMARGIN>amx->stk)
     return AMX_ERR_STACKERR;
   hdr=(AMX_HEADER *)amx->base;
-  data=(amx->data!=NULL) ? amx->data : amx->base+(int)hdr->dat;
+  data=(amx->data!= nullptr) ? amx->data : amx->base+(int)hdr->dat;
   amx->stk-=sizeof(cell);
   amx->paramcount+=1;
   *(cell *)(data+(int)amx->stk)=value;
@@ -1583,7 +1583,7 @@ int AMXAPI amx_PushArray(AMX *amx, cell *amx_addr, cell **phys_addr, const cell 
 
   err=amx_Allot(amx,numcells,amx_addr,&paddr);
   if (err==AMX_ERR_NONE) {
-    if (phys_addr!=NULL)
+    if (phys_addr!= nullptr)
       *phys_addr=paddr;
     memcpy(paddr,array,numcells*sizeof(cell));
     err=amx_Push(amx,*amx_addr);
@@ -1609,7 +1609,7 @@ int AMXAPI amx_PushString(AMX *amx, cell *amx_addr, cell **phys_addr, const char
     numcells=(numcells+sizeof(cell)-1)/sizeof(cell);
   err=amx_Allot(amx,numcells,amx_addr,&paddr);
   if (err==AMX_ERR_NONE) {
-    if (phys_addr!=NULL)
+    if (phys_addr!= nullptr)
       *phys_addr=paddr;
     amx_SetString(paddr,string,pack,use_wchar,UNLIMITED);
     err=amx_Push(amx,*amx_addr);
@@ -2695,7 +2695,7 @@ int AMXAPI amx_Exec(AMX *amx, cell *retval, int index)
     } /* if */
   #endif
 
-  if (amx->callback==NULL)
+  if (amx->callback== nullptr)
     return AMX_ERR_CALLBACK;
   if (!(amx->flags & AMX_FLAG_PRENIT))
 	if ((amx->flags & AMX_FLAG_NTVREG)==0)
@@ -2709,7 +2709,7 @@ int AMXAPI amx_Exec(AMX *amx, cell *retval, int index)
   assert(hdr->magic==AMX_MAGIC);
   codesize=(ucell)(hdr->dat-hdr->cod);
   code=amx->base+(int)hdr->cod;
-  data=(amx->data!=NULL) ? amx->data : amx->base+(int)hdr->dat;
+  data=(amx->data!= nullptr) ? amx->data : amx->base+(int)hdr->dat;
   hea=amx->hea;
   stk=amx->stk;
   reset_stk=stk;
@@ -3690,11 +3690,11 @@ int AMXAPI amx_GetAddr(AMX *amx,cell amx_addr,cell **phys_addr)
   hdr=(AMX_HEADER *)amx->base;
   assert(hdr!=NULL);
   assert(hdr->magic==AMX_MAGIC);
-  data=(amx->data!=NULL) ? amx->data : amx->base+(int)hdr->dat;
+  data=(amx->data!= nullptr) ? amx->data : amx->base+(int)hdr->dat;
 
   assert(phys_addr!=NULL);
   if ((amx_addr>=amx->hea && amx_addr<amx->stk) || amx_addr<0 || amx_addr>=amx->stp) {
-    *phys_addr=NULL;
+    *phys_addr= nullptr;
     return AMX_ERR_MEMACCESS;
   } /* if */
 
@@ -3713,7 +3713,7 @@ int AMXAPI amx_Allot(AMX *amx,int cells,cell *amx_addr,cell **phys_addr)
   hdr=(AMX_HEADER *)amx->base;
   assert(hdr!=NULL);
   assert(hdr->magic==AMX_MAGIC);
-  data=(amx->data!=NULL) ? amx->data : amx->base+(int)hdr->dat;
+  data=(amx->data!= nullptr) ? amx->data : amx->base+(int)hdr->dat;
 
   if (amx->stk - amx->hea - cells*sizeof(cell) < STKMARGIN)
     return AMX_ERR_MEMORY;
@@ -3754,7 +3754,7 @@ int AMXAPI amx_StrLen(const cell *cstr, int *length)
   #endif
 
   assert(length!=NULL);
-  if (cstr==NULL) {
+  if (cstr== nullptr) {
     *length=0;
     return AMX_ERR_PARAMS;
   } /* if */

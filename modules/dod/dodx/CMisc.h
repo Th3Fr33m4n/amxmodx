@@ -166,7 +166,7 @@ class Grenades // : public CObject
 
 
 public:
-	Grenades() { head = 0; }
+	Grenades() { head = nullptr; }
 	~Grenades() { clear(); }
 	void put(edict_t* grenade, float time, int type, CPlayer* player);
 	bool find(edict_t* enemy, CPlayer** p, int& type);

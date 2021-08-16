@@ -282,7 +282,7 @@ static cell AMX_NATIVE_CALL ns_get_weapon(AMX *amx, cell *params)
 	{
 		edict_t *Weapon=private_to_edict(get_private_p<void *>(player->GetEdict(),MAKE_OFFSET(LAST_WEAPON)));
 
-		if (Weapon==NULL) // no weapon
+		if (Weapon== nullptr) // no weapon
 		{
 			return 0;
 		}
@@ -299,7 +299,7 @@ static cell AMX_NATIVE_CALL ns_get_weapon(AMX *amx, cell *params)
 	{
 		edict_t *Weapon=private_to_edict(get_private_p<void *>(player->GetEdict(),MAKE_OFFSET(CURRENT_WEAPON)));
 
-		if (Weapon==NULL) // no weapon
+		if (Weapon== nullptr) // no weapon
 		{
 			return 0;
 		}
@@ -339,15 +339,15 @@ static cell AMX_NATIVE_CALL ns_get_weapon(AMX *amx, cell *params)
 // ns_find_weapon_offset(idPlayer,"primweapon","lastinvweapon")
 static cell AMX_NATIVE_CALL ns_find_weapon_offset(AMX *amx, cell *params)
 {
-	char *SPrimWeapon=MF_GetAmxString(amx,params[2],0,NULL);
-	char *SLastInv=MF_GetAmxString(amx,params[3],1,NULL);
+	char *SPrimWeapon=MF_GetAmxString(amx,params[2],0, nullptr);
+	char *SLastInv=MF_GetAmxString(amx,params[3],1, nullptr);
 	edict_t *ePlayer=INDEXENT_NEW(params[1]);
 
 	// Locate entities by name
-	edict_t *PrimWeapon=NULL;
-	edict_t *LastInv=NULL;
+	edict_t *PrimWeapon= nullptr;
+	edict_t *LastInv= nullptr;
 
-	edict_t *Temp=NULL;
+	edict_t *Temp= nullptr;
 
 	while ((Temp=UTIL_FindEntityByString(Temp,"classname",SPrimWeapon))!=NULL)
 	{
@@ -367,13 +367,13 @@ static cell AMX_NATIVE_CALL ns_find_weapon_offset(AMX *amx, cell *params)
 		}
 	}
 
-	if (LastInv == NULL || PrimWeapon == NULL)
+	if (LastInv == nullptr || PrimWeapon == nullptr)
 	{
-		if (LastInv==NULL)
+		if (LastInv== nullptr)
 		{
 			MF_Log("LastInv==NULL");
 		}
-		if (PrimWeapon==NULL)
+		if (PrimWeapon== nullptr)
 		{
 			MF_Log("PrimWeapon=NULL");
 		}
@@ -451,7 +451,7 @@ AMX_NATIVE_INFO weapon_natives[] = {
 	{ "ns_find_weapon_offset",	ns_find_weapon_offset},
 #endif
 
-	{ NULL,						NULL }
+	{nullptr, nullptr}
 };
 void AddNatives_Weapons()
 {

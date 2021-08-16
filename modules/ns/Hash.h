@@ -145,7 +145,7 @@ public:
 	}
 	inline bool exists(const K& key)
 	{
-		return this->find(key) != NULL;
+		return this->find(key) != nullptr;
 	}
 	inline D* find(const K& key)
 	{
@@ -171,7 +171,7 @@ public:
 			}
 		}
 
-		return NULL;
+		return nullptr;
 	};
 };
 

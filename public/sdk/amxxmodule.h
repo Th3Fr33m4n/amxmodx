@@ -539,7 +539,7 @@ void FN_PlayerPostThink(edict_t *pEntity);
 #endif // FN_PlayerPostThink
 
 #ifdef FN_StartFrame
-void FN_StartFrame(void);
+void FN_StartFrame();
 #endif // FN_StartFrame
 
 #ifdef FN_ParmsNewLevel
@@ -2055,11 +2055,11 @@ void FN_AMXX_PLUGINSLOADED();
 #endif // FN_AMXX_PLUGINSLOADED
 
 #ifdef FN_AMXX_PLUGINSUNLOADING
-void FN_AMXX_PLUGINSUNLOADING(void);
+void FN_AMXX_PLUGINSUNLOADING();
 #endif // FN_AMXX_PLUGINSUNLOADING
 
 #ifdef FN_AMXX_PLUGINSUNLOADED
-void FN_AMXX_PLUGINSUNLOADED(void);
+void FN_AMXX_PLUGINSUNLOADED();
 #endif // FN_AMXX_PLUGINSUNLOADED
 
 // *** Types ***

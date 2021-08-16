@@ -20,9 +20,9 @@
 /**
  * Scans through all hives and finds the one currently building
  */
-int UTIL_FindBuildingHive(void)
+int UTIL_FindBuildingHive()
 {
-	edict_t			*Entity=NULL;
+	edict_t			*Entity= nullptr;
 
 	while ((Entity = UTIL_FindEntityByString(Entity,"classname","team_hive")))
 	{
@@ -46,7 +46,7 @@ edict_t *UTIL_FindEntityByString(edict_t *Start, const char *Keyword, const char
 		return Entity;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /**
@@ -63,7 +63,7 @@ BOOL UTIL_CheckForNative(const char *NativeName)
 	strncpy(blah,NativeName,63);
 
 	// Loop through all running scripts
-	while((amx=MF_GetScriptAmx(i++))!=NULL)
+	while((amx=MF_GetScriptAmx(i++))!= nullptr)
 	{ 
 		// Scan for native
 		if (MF_AmxFindNative(amx, blah, &FunctionIndex) == AMX_ERR_NONE)
@@ -90,7 +90,7 @@ BOOL UTIL_CheckForPublic(const char *publicname)
 	strncpy(blah,publicname,63);
 
 	// Loop through all running scripts
-	while((amx=MF_GetScriptAmx(i++))!=NULL)
+	while((amx=MF_GetScriptAmx(i++))!= nullptr)
 	{ 
 		// Scan for public
 		if (MF_AmxFindPublic(amx, blah, &FunctionIndex) == AMX_ERR_NONE)
@@ -115,7 +115,7 @@ CPlayer *UTIL_PlayerByCID(int CID)
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /**

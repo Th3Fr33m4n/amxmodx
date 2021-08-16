@@ -85,7 +85,7 @@ cell match(AMX *amx, cell *params, bool all)
 	int id = GetPEL();
 	RegEx *x = PEL[id];
 
-	char *flags = NULL;
+	char *flags = nullptr;
 	cell *errorCode;
 	int result = 0;
 
@@ -233,7 +233,7 @@ static cell AMX_NATIVE_CALL regex_substr(AMX *amx, cell *params)
 
 	const char *ret = x->GetSubstring(params[2], buffer, maxLength, &length);
 
-	if (ret == NULL)
+	if (ret == nullptr)
 	{
 		return 0;
 	}
@@ -313,7 +313,7 @@ AMX_NATIVE_INFO regex_Natives[] = {
 	{"regex_substr",			regex_substr},
 	{"regex_replace",			regex_replace},
 	{"regex_free",				regex_free},
-	{NULL,						NULL},
+	{nullptr, nullptr},
 };
 
 void OnAmxxAttach()
@@ -328,7 +328,7 @@ void OnAmxxDetach()
 		if (PEL[i])
 		{
 			delete PEL[i];
-			PEL[i] = 0;
+			PEL[i] = nullptr;
 		}
 	}
 

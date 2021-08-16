@@ -425,7 +425,7 @@ static cell AMX_NATIVE_CALL strip_user_weapons(AMX *amx, cell *params)
 	MDLL_Use(pEntity, pPlayer);
 	REMOVE_ENTITY(pEntity);
 
-	*reinterpret_cast<int *>(MF_PlayerPropAddr(index, Player_CurrentWeapon)) = 0;
+	*static_cast<int *>(MF_PlayerPropAddr(index, Player_CurrentWeapon)) = 0;
 
 	return 1;
 }

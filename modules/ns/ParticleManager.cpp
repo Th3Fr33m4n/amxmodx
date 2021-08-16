@@ -15,7 +15,7 @@
 #include "ns.h"
 #include "ParticleManager.h"
 
-void ParticleManager::ReadFile(void)
+void ParticleManager::ReadFile()
 {
 	this->Prune();
 	if (m_iFileLoaded!=0)

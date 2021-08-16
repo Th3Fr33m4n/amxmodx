@@ -50,13 +50,13 @@ struct sUserMsg {
 } g_user_msg[] = {
 	{ "InitObj",&gmsgInitObj,Client_InitObj,false},
 	{ "CurWeapon",&gmsgCurWeapon,Client_CurWeapon,false },
-	{ "ScoreShort",&gmsgScoreShort,NULL,false },
-	{ "PTeam",&gmsgPTeam,NULL,false },
+	{ "ScoreShort",&gmsgScoreShort, nullptr,false },
+	{ "PTeam",&gmsgPTeam, nullptr,false },
 	{ "SetObj",&gmsgSetObj,Client_SetObj,false },
-	{ "Frags",&gmsgFrags,NULL,false },
-	{ "ObjScore", &gmsgObjScore, NULL, false },
+	{ "Frags",&gmsgFrags, nullptr,false },
+	{ "ObjScore", &gmsgObjScore, nullptr, false },
 
-	{ 0,0,0,false }
+	{ nullptr,nullptr,nullptr,false }
 };
 
 int RegUserMsg_Post(const char *pszName, int iSize){
@@ -128,7 +128,7 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 		mPlayer = GET_PLAYER_POINTER_I(mPlayerIndex);
 	} else {
 		mPlayerIndex = 0;
-		mPlayer = NULL;
+		mPlayer = nullptr;
 	}
 	mState = 0;
 	mDest = msg_dest;
@@ -139,8 +139,8 @@ void MessageBegin_Post(int msg_dest, int msg_type, const float *pOrigin, edict_t
 	RETURN_META(MRES_IGNORED);
 }
 
-void MessageEnd_Post(void) {
-	if (endfunction) (*endfunction)(NULL);
+void MessageEnd_Post() {
+	if (endfunction) (*endfunction)(nullptr);
 	RETURN_META(MRES_IGNORED);
 }
 
@@ -272,7 +272,7 @@ void SetModel_Post(edict_t *e, const char *m) {
 
 		MF_ExecuteForward(iFRocket, gPlayerRocket->index, ENTINDEX(e), w_id);	// Call rocket_shoot() event
 
-		gPlayerRocket = NULL;
+		gPlayerRocket = nullptr;
 	}
 
 	RETURN_META(MRES_IGNORED);

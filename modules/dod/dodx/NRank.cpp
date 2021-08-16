@@ -281,6 +281,6 @@ AMX_NATIVE_INFO stats_Natives[] = {
 	{ "get_user_wstats",  get_user_wstats},
 	{ "reset_user_wstats",  reset_user_wstats },
 
-	{ NULL, NULL }
+	{nullptr, nullptr}
 };
 

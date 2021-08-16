@@ -16,7 +16,7 @@
 #include "TitleManager.h"
 #include "utilfunctions.h"
 
-void TitleManager::LoadTitles(void)
+void TitleManager::LoadTitles()
 {
 	if (m_Loaded!=0) // already loaded?
 	{

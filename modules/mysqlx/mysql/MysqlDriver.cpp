@@ -50,7 +50,7 @@ IDatabase *MysqlDriver::_Connect(DatabaseInfo *info, int *errcode, char *error, 
 		{
 			ke::SafeSprintf(error, maxlength, "Initialization failed");
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	decltype(info->max_timeout) timeout = atoi(LOCALINFO("mysql_timeout"));
@@ -92,7 +92,7 @@ IDatabase *MysqlDriver::_Connect(DatabaseInfo *info, int *errcode, char *error, 
 		{
 			ke::SafeSprintf(error, maxlength, "%s", mysql_error(mysql));
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	MysqlDatabase *pMysql = new MysqlDatabase(mysql, this);

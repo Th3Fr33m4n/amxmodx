@@ -21,7 +21,7 @@ edict_t *FindEntityByString(edict_t *pentStart, const char *szKeyword, const cha
 	pentEntity=FIND_ENTITY_BY_STRING(pentStart, szKeyword, szValue);
 	if(!FNullEnt(pentEntity))
 		return pentEntity;
-	return NULL;
+	return nullptr;
 }
 
 edict_t *FindEntityByClassname(edict_t *pentStart, const char *szName)

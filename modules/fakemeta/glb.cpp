@@ -186,5 +186,5 @@ static cell AMX_NATIVE_CALL amx_glb(AMX *amx, cell *params)
 AMX_NATIVE_INFO glb_natives[] = 
 {
 	{"global_get",		amx_glb}, 
-	{NULL,				NULL},
+	{nullptr, nullptr},
 };

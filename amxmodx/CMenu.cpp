@@ -18,7 +18,7 @@ MenuMngr::MenuCommand::MenuCommand(CPluginMngr::CPlugin *a, int mi, int k, int f
 	plugin = a;
 	keys = k;
 	menuid = mi;
-	next = 0;
+	next = nullptr;
 	is_new_menu = new_menu;
 
 	function = f;

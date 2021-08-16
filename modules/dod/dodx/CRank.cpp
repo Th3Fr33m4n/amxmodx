@@ -40,14 +40,14 @@ void Stats::commit(Stats* a){
 // class RankSystem
 // *****************************************************
 RankSystem::RankStats::RankStats( const char* uu, const char* nn, RankSystem* pp ) {
-	name = 0;
+	name = nullptr;
 	namelen = 0;
-	unique = 0;
+	unique = nullptr;
 	uniquelen = 0;
 	score = 0;
 	parent = pp;
 	id = ++parent->rankNum;
-	next = prev = 0;
+	next = prev = nullptr;
 	setName( nn );
 	setUnique( uu );
 }
@@ -76,10 +76,10 @@ void RankSystem::RankStats::setUnique( const char* nn  )	{
 }
 
 RankSystem::RankSystem() { 
-	head = 0; 
-	tail = 0; 
+	head = nullptr; 
+	tail = nullptr; 
 	rankNum = 0;
-	calc.code = 0;
+	calc.code = nullptr;
 }
 
 RankSystem::~RankSystem() {
@@ -192,8 +192,8 @@ RankSystem::RankStats* RankSystem::findEntryInRank(const char* unique, const cha
 		}
 	}
 	a = new RankStats( unique ,name,this );
-	if ( a == 0 ) return 0;
-	put_after( a  , 0 );
+	if ( a == nullptr ) return nullptr;
+	put_after( a  , nullptr );
 	return a;
 }
 

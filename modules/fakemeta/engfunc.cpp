@@ -45,7 +45,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 //	float fTemp[3];
 	int index;
 	unsigned char *pset;
-	edict_t *pRet=NULL;
+	edict_t *pRet= nullptr;
 	// Now start calling.. :/
 	switch (type)
 	{
@@ -181,7 +181,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		index=cRet[0];
 		temp = MF_GetAmxString(amx,params[3],0,&len);
 		temp2 = MF_GetAmxString(amx,params[4],1,&len);
-		pRet = (*g_engfuncs.pfnFindEntityByString)(index == -1 ? NULL : TypeConversion.id_to_edict(index),temp,temp2);
+		pRet = (*g_engfuncs.pfnFindEntityByString)(index == -1 ? nullptr : TypeConversion.id_to_edict(index),temp,temp2);
 		if (pRet)
 			return ENTINDEX(pRet);
 		return -1;
@@ -205,7 +205,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		Vec1[2]=amx_ctof(cRet[2]);
 		cRet = MF_GetAmxAddr(amx,params[4]);
 		fparam1 = amx_ctof(cRet[0]);
-		pRet = (*g_engfuncs.pfnFindEntityInSphere)(index == -1 ? NULL : TypeConversion.id_to_edict(index),Vec1,fparam1);
+		pRet = (*g_engfuncs.pfnFindEntityInSphere)(index == -1 ? nullptr : TypeConversion.id_to_edict(index),Vec1,fparam1);
 		if (pRet)
 				return ENTINDEX(pRet);
 		return -1;
@@ -408,7 +408,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		} else {
 			tr = &g_tr;
 		}
-		(*g_engfuncs.pfnTraceLine)(Vec1,Vec2,iparam1,index != -1 ? TypeConversion.id_to_edict(index) : NULL, tr);
+		(*g_engfuncs.pfnTraceLine)(Vec1,Vec2,iparam1,index != -1 ? TypeConversion.id_to_edict(index) : nullptr, tr);
 		return 1;
 
 
@@ -429,7 +429,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		} else {
 			tr = &g_tr;
 		}
-		(*g_engfuncs.pfnTraceToss)(TypeConversion.id_to_edict(index),iparam1 == -1 ? NULL : TypeConversion.id_to_edict(iparam1),tr);
+		(*g_engfuncs.pfnTraceToss)(TypeConversion.id_to_edict(index),iparam1 == -1 ? nullptr : TypeConversion.id_to_edict(iparam1),tr);
 		return 1;
 
 
@@ -460,7 +460,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		} else {
 			tr = &g_tr;
 		}
-		(*g_engfuncs.pfnTraceMonsterHull)(TypeConversion.id_to_edict(index),Vec1,Vec2,iparam1,iparam2 == 0 ? NULL : TypeConversion.id_to_edict(iparam2),tr);
+		(*g_engfuncs.pfnTraceMonsterHull)(TypeConversion.id_to_edict(index),Vec1,Vec2,iparam1,iparam2 == 0 ? nullptr : TypeConversion.id_to_edict(iparam2),tr);
 		return 1;
 
 
@@ -490,7 +490,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		} else {
 			tr = &g_tr;
 		}
-		(*g_engfuncs.pfnTraceHull)(Vec1,Vec2,iparam1,iparam2,iparam3 == 0 ? 0 : TypeConversion.id_to_edict(iparam3),tr);
+		(*g_engfuncs.pfnTraceHull)(Vec1,Vec2,iparam1,iparam2,iparam3 == 0 ? nullptr : TypeConversion.id_to_edict(iparam3),tr);
 		return 1;
 
 
@@ -518,7 +518,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		} else {
 			tr = &g_tr;
 		}
-		(*g_engfuncs.pfnTraceModel)(Vec1,Vec2,iparam1,iparam2 == 0 ? NULL : TypeConversion.id_to_edict(iparam2),tr);
+		(*g_engfuncs.pfnTraceModel)(Vec1,Vec2,iparam1,iparam2 == 0 ? nullptr : TypeConversion.id_to_edict(iparam2),tr);
 		return 1;
 
 
@@ -537,8 +537,8 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		Vec2[2]=amx_ctof(cRet[2]);
 		temp = (char*)(*g_engfuncs.pfnTraceTexture)(TypeConversion.id_to_edict(index),Vec1,Vec2);
 		cRet = MF_GetAmxAddr(amx,params[6]);
-		MF_SetAmxString(amx, params[5], temp == NULL ? "NoTexture" : temp, cRet[0]);
-		return temp != NULL;
+		MF_SetAmxString(amx, params[5], temp == nullptr ? "NoTexture" : temp, cRet[0]);
+		return temp != nullptr;
 
 		
 		// pfnTraceSphere
@@ -557,7 +557,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		fparam1 = amx_ctof(cRet[0]);
 		cRet = MF_GetAmxAddr(amx,params[6]);
 		index = cRet[0];
-		(*g_engfuncs.pfnTraceSphere)(Vec1,Vec2,iparam1,fparam1,index == 0 ? NULL : TypeConversion.id_to_edict(index),&g_tr);
+		(*g_engfuncs.pfnTraceSphere)(Vec1,Vec2,iparam1,fparam1,index == 0 ? nullptr : TypeConversion.id_to_edict(index),&g_tr);
 		return 1;
 
 
@@ -769,7 +769,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 	case	EngFunc_CreateFakeClient:	// edict)		(const char *netname);	// returns NULL if fake client can't be created
 		temp = MF_GetAmxString(amx,params[2],0,&len);
 		pRet = (*g_engfuncs.pfnCreateFakeClient)(STRING(ALLOC_STRING(temp)));
-		if (pRet == 0)
+		if (pRet == nullptr)
 			return 0;
 		return ENTINDEX(pRet);
 
@@ -855,7 +855,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		/* don't check, it might not be included 
 		CHECK_ENTITY(iparam5); 
 		*/
-		(*g_engfuncs.pfnBuildSoundMsg)(TypeConversion.id_to_edict(index),iparam1,temp,fparam1,fparam2,iparam2,iparam3,iparam4,iparam5,Vec1,iparam6 == 0 ? NULL : TypeConversion.id_to_edict(iparam6));
+		(*g_engfuncs.pfnBuildSoundMsg)(TypeConversion.id_to_edict(index),iparam1,temp,fparam1,fparam2,iparam2,iparam3,iparam4,iparam5,Vec1,iparam6 == 0 ? nullptr : TypeConversion.id_to_edict(iparam6));
 		return 1;
 
 
@@ -1004,7 +1004,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 		Vec1[2]=amx_ctof(cRet[2]);
 		cRet = MF_GetAmxAddr(amx,params[5]);
 		index = cRet[0];
-		(*g_engfuncs.pfnMessageBegin)(iparam1,iparam2,Vec1,index == 0 ? NULL : TypeConversion.id_to_edict(index));
+		(*g_engfuncs.pfnMessageBegin)(iparam1,iparam2,Vec1,index == 0 ? nullptr : TypeConversion.id_to_edict(index));
 		return 1;
 
 
@@ -1078,7 +1078,7 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 			CHECK_ENTITY(index);
 		}
 
-		temp = (*g_engfuncs.pfnGetInfoKeyBuffer)(index == -1 ? NULL : TypeConversion.id_to_edict(index));
+		temp = (*g_engfuncs.pfnGetInfoKeyBuffer)(index == -1 ? nullptr : TypeConversion.id_to_edict(index));
 		return reinterpret_cast<cell>(temp);
 	case EngFunc_AlertMessage:			// void )			(ALERT_TYPE atype, char *szFmt, ...);
 		cRet = MF_GetAmxAddr(amx, params[2]);
@@ -1111,6 +1111,6 @@ static cell AMX_NATIVE_CALL engfunc(AMX *amx, cell *params)
 
 AMX_NATIVE_INFO engfunc_natives[] = {
 	{"engfunc",			engfunc},
-	{NULL,				NULL},
+	{nullptr, nullptr},
 };
 

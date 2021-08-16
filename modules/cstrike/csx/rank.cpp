@@ -443,6 +443,6 @@ AMX_NATIVE_INFO stats_Natives[] = {
 	//{ "get_weaponname", get_wpnname },
 
 	///*******************
-	{ NULL, NULL }
+	{nullptr, nullptr}
 };
 

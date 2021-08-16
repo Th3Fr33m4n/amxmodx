@@ -37,12 +37,12 @@ CRegisterHamParams::~CRegisterHamParams()
 
 CHamSpecialBotHandler::CHamSpecialBotHandler()
 {
-	m_specialbot_vtable = NULL;
+	m_specialbot_vtable = nullptr;
 }
 
 void CHamSpecialBotHandler::CheckClientKeyValue(int &clientIndex, char *infobuffer, const char *key, const char *value)
 {
-	if(m_specialbot_vtable != NULL)
+	if(m_specialbot_vtable != nullptr)
 		return;
 
 	edict_t *pEdict = MF_GetPlayerEdict(clientIndex);
@@ -73,7 +73,7 @@ void CHamSpecialBotHandler::CheckClientKeyValue(int &clientIndex, char *infobuff
 
 void CHamSpecialBotHandler::RegisterHamSpecialBot(AMX *amx, int &func, const char *function, int &post, Forward *pfwd)
 {	
-	if(m_specialbot_vtable == NULL)
+	if(m_specialbot_vtable == nullptr)
 	{
 		m_RHP_list.append(new CRegisterHamParams(amx, func, function, post, pfwd));
 		return;

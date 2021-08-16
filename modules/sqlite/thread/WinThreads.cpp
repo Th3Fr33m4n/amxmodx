@@ -16,10 +16,10 @@ void WinThreader::ThreadSleep(unsigned int ms)
 
 IMutex *WinThreader::MakeMutex()
 {
-	HANDLE mutex = CreateMutexA(NULL, FALSE, NULL);
+	HANDLE mutex = CreateMutexA(nullptr, FALSE, nullptr);
 
-	if (mutex == NULL)
-		return NULL;
+	if (mutex == nullptr)
+		return nullptr;
 
 	WinMutex *pMutex = new WinMutex(mutex);
 
@@ -49,7 +49,7 @@ void WinThreader::MakeThread(IThread *pThread)
 DWORD WINAPI Win32_ThreadGate(LPVOID param)
 {
 	WinThreader::ThreadHandle *pHandle = 
-		reinterpret_cast<WinThreader::ThreadHandle *>(param);
+		static_cast<WinThreader::ThreadHandle *>(param);
 
 	pHandle->m_run->RunThread(pHandle);
 
@@ -75,20 +75,20 @@ void WinThreader::GetPriorityBounds(ThreadPriority &max, ThreadPriority &min)
 ThreadParams g_defparams;
 IThreadHandle *WinThreader::MakeThread(IThread *pThread, const ThreadParams *params)
 {
-	if (params == NULL)
+	if (params == nullptr)
 		params = &g_defparams;
 
 	WinThreader::ThreadHandle *pHandle = 
-		new WinThreader::ThreadHandle(this, NULL, pThread, params);
+		new WinThreader::ThreadHandle(this, nullptr, pThread, params);
 
 	DWORD tid;
 	pHandle->m_thread = 
-		CreateThread(NULL, 0, &Win32_ThreadGate, (LPVOID)pHandle, CREATE_SUSPENDED, &tid);
+		CreateThread(nullptr, 0, &Win32_ThreadGate, (LPVOID)pHandle, CREATE_SUSPENDED, &tid);
 
 	if (!pHandle->m_thread)
 	{
 		delete pHandle;
-		return NULL;
+		return nullptr;
 	}
 
 	if (pHandle->m_params.prio != ThreadPrio_Normal)
@@ -106,10 +106,10 @@ IThreadHandle *WinThreader::MakeThread(IThread *pThread, const ThreadParams *par
 
 IEventSignal *WinThreader::MakeEventSignal()
 {
-	HANDLE event = CreateEventA(NULL, FALSE, FALSE, NULL);
+	HANDLE event = CreateEventA(nullptr, FALSE, FALSE, nullptr);
 
 	if (!event)
-		return NULL;
+		return nullptr;
 
 	WinEvent *pEvent = new WinEvent(event);
 
@@ -125,7 +125,7 @@ WinThreader::WinMutex::~WinMutex()
 	if (m_mutex)
 	{
 		CloseHandle(m_mutex);
-		m_mutex = NULL;
+		m_mutex = nullptr;
 	}
 }
 
@@ -177,14 +177,14 @@ WinThreader::ThreadHandle::~ThreadHandle()
 	if (m_thread)
 	{
 		CloseHandle(m_thread);
-		m_thread = NULL;
+		m_thread = nullptr;
 	}
 	DeleteCriticalSection(&m_crit);
 }
 
 bool WinThreader::ThreadHandle::WaitForThread()
 {
-	if (m_thread == NULL)
+	if (m_thread == nullptr)
 		return false;
 
 	if (WaitForSingleObject(m_thread, INFINITE) != 0)

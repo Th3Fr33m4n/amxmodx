@@ -202,7 +202,7 @@ namespace Trampolines
 			int orig=m_size;
 			m_size+=size;
 
-			if (m_buffer==NULL)
+			if (m_buffer== nullptr)
 			{
 				m_maxsize=512;
 				m_buffer=(unsigned char *)malloc(m_maxsize);
@@ -226,7 +226,7 @@ namespace Trampolines
 	public:
 		TrampolineMaker()
 		{
-			m_buffer=NULL;
+			m_buffer= nullptr;
 			m_size=0;
 			m_mystack=0;
 			m_calledstack=0;
@@ -385,7 +385,7 @@ namespace Trampolines
 		/**
 		 * Frees what is estimated as the stack usage of the trampoline.
 		 */
-		void FreeMyStack(void)
+		void FreeMyStack()
 		{
 
 			this->FreeStack(m_mystack);
@@ -394,7 +394,7 @@ namespace Trampolines
 		/**
 		 * Frees the estimated stack usage of the callee.
 		 */
-		void FreeTargetStack(void)
+		void FreeTargetStack()
 		{
 			this->FreeStack(m_calledstack);
 		};
@@ -403,7 +403,7 @@ namespace Trampolines
 		/**
 		 * Frees the estimated stack usage of the callee and the trampoline.
 		 */
-		void FreeBothStacks(void)
+		void FreeBothStacks()
 		{
 			this->FreeStack(m_calledstack + m_mystack);
 		};
@@ -558,7 +558,7 @@ namespace Trampolines
 
 			// Reallocate with proper flags
 #if defined(_WIN32)
-			void *ret=VirtualAlloc(NULL, m_size, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+			void *ret=VirtualAlloc(nullptr, m_size, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 #elif defined(__GNUC__)
 # if defined(__APPLE__)
 			void *ret = valloc(m_size);
@@ -574,7 +574,7 @@ namespace Trampolines
 
 			free(m_buffer);
 
-			m_buffer=NULL; // so we don't accidentally rewrite!
+			m_buffer= nullptr; // so we don't accidentally rewrite!
 			m_mystack=0;
 			m_calledstack=0;
 			m_maxsize=512;
