@@ -17,7 +17,7 @@
 
 
 int damage;
-int TA; //Not required? [APG]RoboCop[CL]
+int TA;
 int weapon;
 int aim;
 CPlayer *pAttacker;
@@ -62,14 +62,14 @@ void Client_WeaponList(void* mValue){
 }
 */
 
-int get_pdata_ehandle(edict_t* pEntity, const int offset)
+int get_pdata_ehandle(edict_t* pEntity, int offset)
 {
 	if (FNullEnt(pEntity) || !pEntity->pvPrivateData)
 	{
 		return 0;
 	}
 
-	edict_t* pEdict = *(edict_t**)(static_cast<char*>(pEntity->pvPrivateData) + offset);
+	edict_t* pEdict = *(edict_t **)((char *)(pEntity->pvPrivateData) + offset);
 
 	if (!pEdict)
 	{
@@ -82,8 +82,8 @@ int get_pdata_ehandle(edict_t* pEntity, const int offset)
 	{
 		pWorld = INDEXENT(0);
 	}
-
-	const int index = pEdict - pWorld;
+		
+	int index = pEdict - pWorld;
 
 	if (index < 0 || index > gpGlobals->maxEntities)
 	{
@@ -95,7 +95,7 @@ int get_pdata_ehandle(edict_t* pEntity, const int offset)
 		return 0;
 	}
 
-	const int serialnumber = *(int*)(static_cast<char*>(pEntity->pvPrivateData) + offset + 4);
+	int serialnumber = *(int *)((char *)pEntity->pvPrivateData + offset + 4);
 
 	if (pEdict->serialnumber != serialnumber)
 	{
@@ -108,7 +108,7 @@ int get_pdata_ehandle(edict_t* pEntity, const int offset)
 void Client_Damage(void* mValue){
   switch (mState++) {
   case 1: 
-    damage = *static_cast<int*>(mValue);
+    damage = *(int*)mValue;
     break;
 
   case 2:
@@ -121,10 +121,23 @@ void Client_Damage(void* mValue){
 	if ( FNullEnt( enemy ) )
 		break;
 
+#ifdef _DEBUG_TFCX	
+	ALERT(at_logged, "Clinet_damage Called with state-%d dmg-%d Netname'%s'(Class'%s') slno-'%d'\n",
+		mState, damage, STRING(mPlayer->pEdict->v.netname),
+		STRING(mPlayer->pEdict->v.classname), mPlayer->pEdict->serialnumber);
+
+	ALERT(at_logged, "   Called with enemy-slno-%d Netname:'%s'(Class'%s')\n", mPlayer->pEdict->serialnumber, 
+		STRING(enemy->v.netname), STRING(enemy->v.classname));
+#endif // _DEBUG_TFCX
+
 	if (enemy->v.flags & (FL_CLIENT | FL_FAKECLIENT) ) { // attacker is player and his active weapon
 
 		pAttacker = GET_PLAYER_POINTER(enemy);
-		
+
+#ifdef _DEBUG_TFCX
+		ALERT(at_logged, "   attacker is player and his active weapon id-%d, has flags - (FL_CLIENT | FL_FAKECLIENT)\n\n", pAttacker->current);
+#endif // _DEBUG_TFCX	
+
 		aim = pAttacker->aiming;
 		weapon = pAttacker->current;
 
@@ -140,13 +153,89 @@ void Client_Damage(void* mValue){
 				ignoreDamage = true;
 			pAttacker->saveShot(weapon); // melee , save shot too
 			break;
-		default: ;
 		}
 	
 		pAttacker->saveHit( mPlayer , weapon , damage, aim);
 
 	}
-	else if ( FNullEnt( enemy->v.owner ) ){ // nailgrenade , mirvgrenade , normalgrenade , rockets
+	else if ( !FNullEnt( enemy->v.owner ) ){
+		if ( enemy->v.owner->v.flags & (FL_CLIENT | FL_FAKECLIENT)  ){ // caltrop, empgrenade, gasgrenade, napalmgrenade
+
+			pAttacker = GET_PLAYER_POINTER(enemy->v.owner);
+
+#ifdef _DEBUG_TFCX
+			ALERT(at_logged, "   attacker is Class'%s'(with its enmy as Netname'%s'[Class'%s']) and his owner is '%s(%s)' enemy->owner has flags - FL_CLIENT | FL_FAKECLIENT\n\n", 
+				(enemy ? STRING(enemy->v.classname) : "Null"), 
+				(enemy->v.enemy ? STRING(enemy->v.enemy->v.netname) : "Null"),
+				(enemy->v.enemy ? STRING(enemy->v.enemy->v.classname) : "Null"),
+				(enemy->v.owner ? STRING(enemy->v.owner->v.netname) : "Null"),
+				(enemy->v.owner ? STRING(enemy->v.owner->v.classname) : "Null"));
+#endif // _DEBUG_TFCX	
+
+			const char *szClass = STRING(enemy->v.classname);
+			
+			switch(szClass[10]){
+				case 'c':
+					weapon = TFC_WPN_CALTROP;
+					break;
+				case 'e':
+					weapon = TFC_WPN_EMPGRENADE;
+					break;
+				case 'g':
+					weapon = TFC_WPN_GASGRENADE;
+					break;
+				case 'm':
+					weapon = TFC_WPN_MEDIKIT;
+					if ( pAttacker->teamId == mPlayer->teamId ) // ???
+						ignoreDamage = true;
+					pAttacker->saveShot(weapon);
+					break;
+				case 'n':
+					weapon = TFC_WPN_NAPALMGRENADE;
+					break;
+				case 'a':
+				case 's':
+				case '_': // hmm...nailgun_nail, fastswitch and this one may not be true...
+					//PRINT_CONSOLE("Nail! Class:%d wpn:%d\n",pAttacker->classId,pAttacker->current);
+					weapon = pAttacker->current;
+					aim = pAttacker->aiming;
+					break;
+				case 'r':
+					weapon = TFC_WPN_FLAMETHROWER;
+					break;
+			}
+			if ( !weapon ) {
+				switch(szClass[3]){
+				case 'e':
+					weapon = TFC_WPN_TIMER; // TFC_WPN_MEDKIT ?? //ShootingKing: Class - "timer"					
+					pAttacker = GET_PLAYER_POINTER(enemy->v.enemy);
+
+					if (pAttacker->teamId == mPlayer->teamId) // ???
+					{
+						ignoreDamage = true;
+					}
+
+					pAttacker->saveShot(weapon); // ??? save shot too
+					break;
+				case 'f':
+					weapon = TFC_WPN_FLAMES; // tf_fire
+					break;
+				}
+			}
+
+			if ( weapon )
+				pAttacker->saveHit( mPlayer , weapon , damage, aim );
+			//else 
+			//	PRINT_CONSOLE("*** DMG! Att:%d Vic:%d unknown weapon %s\n",pAttacker->index,mPlayer->index,STRING(enemy->v.classname));
+		}
+		// nailgrenadenail->nailgrenade->player :))) I'm the best !
+		else if ( !FNullEnt(enemy->v.owner->v.owner) && enemy->v.owner->v.owner->v.flags & (FL_CLIENT | FL_FAKECLIENT ) ){
+			pAttacker = GET_PLAYER_POINTER(enemy->v.owner->v.owner);
+			weapon = TFC_WPN_NAILGRENADE;
+			pAttacker->saveHit( mPlayer , weapon , damage, aim );
+		}
+	}
+    else { // nailgrenade , mirvgrenade , normalgrenade , rockets
 		if ( strstr("sentrygun",STRING(enemy->v.classname)) )
 		{
 			tempInt = get_pdata_ehandle(mPlayer->pEdict, pdSentryGunOwner * 4); // function is char-based.
@@ -170,86 +259,7 @@ void Client_Damage(void* mValue){
 			pAttacker->saveHit( mPlayer , weapon , damage, aim );
 		}
 	}
-    else {
-		if ( enemy->v.owner->v.flags & (FL_CLIENT | FL_FAKECLIENT)  ){ // caltrop, empgrenade, gasgrenade, napalmgrenade
-
-			pAttacker = GET_PLAYER_POINTER(enemy->v.owner);
-
-			const char *szClass = STRING(enemy->v.classname);
-			
-			switch(szClass[10]){
-			case 'c':
-				weapon = TFC_WPN_CALTROP;
-				break;
-			case 'e':
-				weapon = TFC_WPN_EMPGRENADE;
-				break;
-			case 'g':
-				weapon = TFC_WPN_GASGRENADE;
-				break;
-			case 'm':
-				weapon = TFC_WPN_MEDIKIT;
-				if ( pAttacker->teamId == mPlayer->teamId ) // ???
-					ignoreDamage = true;
-				pAttacker->saveShot(weapon);
-				break;
-			case 'n':
-				weapon = TFC_WPN_NAPALMGRENADE;
-				break;
-			case 'a':
-			case 's':
-			case '_': // hmm...nailgun_nail, fastswitch and this one may not be true...
-				//PRINT_CONSOLE("Nail! Class:%d wpn:%d\n",pAttacker->classId,pAttacker->current);
-				weapon = pAttacker->current;
-				aim = pAttacker->aiming;
-				break;
-			case 'r':
-				weapon = TFC_WPN_FLAMETHROWER;
-				break;
-			default: ;
-			}
-			if ( !weapon ) {
-				switch(szClass[3]){
-				case 'e':
-					weapon = TFC_WPN_TIMER; // TFC_WPN_MEDKIT ??
-
-					//tempInt = get_pdata_ehandle(mPlayer->pEdict, pdTimerOwner * 4); // function is char-based. // Rogue Code? [APG]RoboCop[CL]
-
-					if (tempInt < 1 || tempInt > gpGlobals->maxClients)
-					{
-						break;
-					}
-
-					//pAttacker = GET_PLAYER_POINTER_I(tempInt); // Rogue Code? [APG]RoboCop[CL]
-
-					if (pAttacker->teamId == mPlayer->teamId) // ???
-					{
-						ignoreDamage = true;
-					}
-
-					pAttacker->saveShot(weapon); // ??? save shot too
-					break;
-				case 'f':
-					weapon = TFC_WPN_FLAMES; // tf_fire
-					break;
-				default: ;
-				}
-			}
-
-			if ( weapon )
-				pAttacker->saveHit( mPlayer , weapon , damage, aim );
-			//else 
-			//	PRINT_CONSOLE("*** DMG! Att:%d Vic:%d unknown weapon %s\n",pAttacker->index,mPlayer->index,STRING(enemy->v.classname));
-		}
-			// nailgrenadenail->nailgrenade->player :))) I'm the best !
-		else if ( !FNullEnt(enemy->v.owner->v.owner) && enemy->v.owner->v.owner->v.flags & (FL_CLIENT | FL_FAKECLIENT ) ){
-			pAttacker = GET_PLAYER_POINTER(enemy->v.owner->v.owner);
-			weapon = TFC_WPN_NAILGRENADE;
-			pAttacker->saveHit( mPlayer , weapon , damage, aim );
-		}
-	}
 	break;
-	default: ;
   }
   
 }
@@ -279,92 +289,93 @@ void Client_Damage_End(void* mValue){
 	damage = 0;
 	aim = 0;
 	weapon = 0;
-	pAttacker = nullptr;
+	pAttacker = NULL;
 	ignoreDamage = false;
 
 }
 
 void Client_CurWeapon(void* mValue){
-	switch (mState++) {
-		static int iId;
-		static int iState;
-	case 0:
-		iState = *static_cast<int*>(mValue);
-		break;
-	case 1:
-		if (!iState) break;
-		iId = *static_cast<int*>(mValue);
-		break;
-	case 2:
-		if (!mPlayer || !iState) break;
-		int iClip = *static_cast<int*>(mValue);
-
-		if ((iClip > -1) && (iClip < mPlayer->weapons[iId].clip)) {
-			mPlayer->saveShot(iId);
-		}
-
-		mPlayer->weapons[iId].clip = iClip;
-		mPlayer->current = iId;
+  
+  static int iState;
+  static int iId;
+  switch (mState++){
+  case 0: 
+    iState = *(int*)mValue;
+    break;
+  case 1:
+    if (!iState) break; 
+    iId = *(int*)mValue;
+    break;
+  case 2:
+	if (!mPlayer || !iState ) break;
+    int iClip = *(int*)mValue;
+    
+	if ((iClip > -1) && (iClip < mPlayer->weapons[iId].clip)){
+		mPlayer->saveShot(iId);
 	}
+	
+    mPlayer->weapons[iId].clip = iClip;
+	mPlayer->current = iId;
+  }
 }
 
 void Client_AmmoX(void* mValue){
-	switch (mState++){
-		static int iAmmo;
-	case 0:
-    iAmmo = *static_cast<int*>(mValue);
+  
+  static int iAmmo;
+  switch (mState++){
+  case 0:
+    iAmmo = *(int*)mValue;
     break;
   case 1:
 	if (!mPlayer ) break;
 
 	// SniperRifle, AC and AutoRifle ...
 	if ( mPlayer->classId == TFC_PC_HWGUY ){
-		if ( mPlayer->current == TFC_WPN_AC && mPlayer->weapons[mPlayer->current].ammo > *static_cast<int*>(mValue)  && iAmmo == weaponData[mPlayer->current].ammoSlot )
+		if ( mPlayer->current == TFC_WPN_AC && mPlayer->weapons[mPlayer->current].ammo > *(int*)mValue  && iAmmo == weaponData[mPlayer->current].ammoSlot )
 			mPlayer->saveShot(mPlayer->current);
 	}
-  else if ( mPlayer->classId == TFC_PC_SNIPER ){
-		if ( (mPlayer->current == TFC_WPN_SNIPERRIFLE || mPlayer->current == TFC_WPN_AUTORIFLE) && mPlayer->weapons[mPlayer->current].ammo > *static_cast<int*>(mValue) && iAmmo == weaponData[mPlayer->current].ammoSlot )
+	else if ( mPlayer->classId == TFC_PC_SNIPER ){
+		if ( (mPlayer->current == TFC_WPN_SNIPERRIFLE || mPlayer->current == TFC_WPN_AUTORIFLE) && mPlayer->weapons[mPlayer->current].ammo > *(int*)mValue && iAmmo == weaponData[mPlayer->current].ammoSlot )
 			mPlayer->saveShot(mPlayer->current);
 	}
 	//
 
     for(int i = 1; i < MAX_WEAPONS ; ++i) 
       if (iAmmo == weaponData[i].ammoSlot)
-        mPlayer->weapons[i].ammo = *static_cast<int*>(mValue);
-  default: ;
+        mPlayer->weapons[i].ammo = *(int*)mValue;
   }
 }
 
 void Client_AmmoPickup(void* mValue){
-	switch (mState++){
-		static int iSlot;
-	case 0:
-    iSlot = *static_cast<int*>(mValue);
+  
+  static int iSlot;
+  switch (mState++){
+  case 0:
+    iSlot = *(int*)mValue;
     break;
   case 1:
 	if (!mPlayer ) break;
     for(int i = 1; i < MAX_WEAPONS ; ++i)
       if (weaponData[i].ammoSlot == iSlot)
-        mPlayer->weapons[i].ammo += *static_cast<int*>(mValue);
-  default: ;
+        mPlayer->weapons[i].ammo += *(int*)mValue;
   }
 }
 
 void Client_ScoreInfo(void* mValue){
-	switch (mState++){
-		static int iClass;
-		static int iIndex;
+  static int iIndex;
+  static int iClass;
+  switch (mState++){
   case 0:
-    iIndex = *static_cast<int*>(mValue);
+    iIndex = *(int*)mValue;
     break;
   case 3:
-	  iClass = *static_cast<int*>(mValue);
+	  iClass = *(int*)mValue;
 	  break;
   case 4:
 	  if ( iIndex > 0 && iIndex <= gpGlobals->maxClients ){
-		  GET_PLAYER_POINTER_I( iIndex )->teamId = *static_cast<int*>(mValue);
+		  GET_PLAYER_POINTER_I( iIndex )->teamId = *(int*)mValue;
 		  GET_PLAYER_POINTER_I( iIndex )->classId = iClass;
 	  }
-  default: ;
+
   }
 }
