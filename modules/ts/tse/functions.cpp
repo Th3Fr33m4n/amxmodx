@@ -113,7 +113,6 @@ static cell AMX_NATIVE_CALL tse_getusercurritems(AMX *amx, cell *params)
 			return 2;
 		case 16842752:
 			return 3;
-		default: ;
 	}
 	return 0;
 }
@@ -140,7 +139,6 @@ static cell AMX_NATIVE_CALL tse_setusercurritems(AMX *amx, cell *params)
 			Player(pid)->SetPDataInt(462, 16842752);
 			break;
 		}
-	default: ;
 	}
 	return 1;
 }
