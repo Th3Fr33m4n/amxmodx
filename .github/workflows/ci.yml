@@ -109,7 +109,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          python3 ../configure.py --enable-optimize --metamod=${{ env.DEPENDENCIES_ROOT_WIN }}/metamod-bu --hlsdk=${{ env.DEPENDENCIES_ROOT_WIN }}/hlsdk-bu --mysql=${{ env.DEPENDENCIES_ROOT }}/mysql-5.5
+          python3 ../configure.py --enable-optimize --metamod=${{ env.DEPENDENCIES_ROOT }}/metamod-bu --hlsdk=${{ env.DEPENDENCIES_ROOT }}/hlsdk-bu --mysql=${{ env.DEPENDENCIES_ROOT }}/mysql-5.5
           ambuild
       - uses: ilammy/msvc-dev-cmd@v1
         with:
