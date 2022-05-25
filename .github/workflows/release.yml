@@ -28,8 +28,8 @@ jobs:
         - name: version
           id: version
           uses: dolittle/read-version-from-file-action@v2
-            with:
-              path: ./product.version
+          with:
+            path: ./product.version
         - name: release_add
           uses: actions/action-gh-release@v1
           id: create_release
