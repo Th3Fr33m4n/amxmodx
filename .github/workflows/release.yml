@@ -1,9 +1,6 @@
 name: "Release version"
 on: 
   workflow_dispatch:
-  push:
-    branches:    
-      - 'master'
   
 jobs:
   multirelease:
@@ -31,12 +28,12 @@ jobs:
           with:
             path: ./product.version
         - name: release_add
-          uses: actions/action-gh-release@v1
           id: create_release
+          uses: actions/action-gh-release@v1
           with:
             draft: false
             prerelease: false
-            name: [AMXX] ${{ steps.version.outputs.version }}-APG
+            name: '[AMXX] ${{ steps.version.outputs.version }}-APG'
             tag_name: ${{ steps.version.outputs.version }}-APG
         - uses: actions/checkout@v2
           with:
