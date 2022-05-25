@@ -1,6 +1,9 @@
 name: "Release version"
 on: 
   workflow_dispatch:
+  push:
+    branches:    
+      - 'master'
   
 jobs:
   multirelease:
